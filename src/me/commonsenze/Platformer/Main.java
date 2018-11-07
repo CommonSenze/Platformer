@@ -16,7 +16,6 @@ public class Main extends Canvas implements Runnable {
 	private boolean running = false;
 	
 	public Main() {
-		https://docs.google.com/document/d/1g1IAnJSUscQqH6TbVwyPAqKj3QPquQEwSiWIJaWcMMI/edit
 	}
 	
 	public static void main(String[] args) {
