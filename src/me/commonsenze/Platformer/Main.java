@@ -1,8 +1,6 @@
 package me.commonsenze.Platformer;
 
 import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -13,13 +11,9 @@ public class Main extends Canvas implements Runnable {
 	 */
 	private static final long serialVersionUID = 2197924032874913024L;
 
-	public static final int FIELD_SIZE = 100;
-	public static final int WIDTH = FIELD_SIZE * 8+(FIELD_SIZE/16), HEIGHT = (int)(FIELD_SIZE * 8+(FIELD_SIZE/3.5));
-	public static boolean PAUSED = false;
+	public static final int WIDTH = 1000, HEIGHT = WIDTH *16/9;
 	private Thread thread;
 	private boolean running = false;
-	private int frames = 0;
-	private long timer;
 	
 	public Main() {
 		
@@ -49,8 +43,6 @@ public class Main extends Canvas implements Runnable {
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
-		int frames = 0;
-		timer = System.currentTimeMillis();
 		while (running) {
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
@@ -60,13 +52,6 @@ public class Main extends Canvas implements Runnable {
 			}
 			if (running)
 				render();
-			frames++;
-
-			if (System.currentTimeMillis() - timer > 1000) {
-				timer += 1000;
-				this.frames = frames;
-				frames = 0;
-			}
 		}
 		stop();
 	}
@@ -79,27 +64,6 @@ public class Main extends Canvas implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		
-
-		Font defaultFont = new Font("Helvetica", 100, 25);
-
-		Font titleFont = new Font("Arial Black", 100, 25);
-
-		g.setColor(Color.YELLOW);
-		g.setFont(titleFont);
-
-		g.drawString("FPS: "+frames, WIDTH-150, 40);
-
-		g.setFont(defaultFont);
-
-		
-		
-		if (PAUSED) {
-			titleFont = new Font("Arial Black", 100, 50);
-			g.setFont(titleFont);
-			g.setColor(Color.RED);
-			g.drawString("Paused", WIDTH/2-110, HEIGHT/2-20);
-		}
 
 		g.dispose();
 		bs.show();
