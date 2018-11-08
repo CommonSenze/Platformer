@@ -1,8 +1,13 @@
 package me.commonsenze.Platformer;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+
+import me.commonsenze.Platformer.Levels.Util.LevelManager;
+import me.commonsenze.Platformer.Util.KeyInput;
+import me.commonsenze.Platformer.Util.Window;
 
 public class Main extends Canvas implements Runnable {
 
@@ -11,11 +16,19 @@ public class Main extends Canvas implements Runnable {
 	 */
 	private static final long serialVersionUID = 2197924032874913024L;
 
-	public static final int WIDTH = 1000, HEIGHT = WIDTH *16/9;
+	public static final int WIDTH = 1000, HEIGHT = WIDTH /16*9;
 	private Thread thread;
+	private Handler handler;
 	private boolean running = false;
 	
 	public Main() {
+		this.handler = new Handler();
+		
+		this.addKeyListener(new KeyInput(handler));
+		
+		new LevelManager(handler);
+		
+		new Window(WIDTH, HEIGHT, "Test", this);
 	}
 	
 	public static void main(String[] args) {
@@ -47,12 +60,17 @@ public class Main extends Canvas implements Runnable {
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			while (delta >= 1) {
+				tick();
 				delta--;
 			}
 			if (running)
 				render();
 		}
 		stop();
+	}
+	
+	private void tick() {
+		handler.tick();
 	}
 	
 	private void render() {
@@ -64,6 +82,11 @@ public class Main extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 
+		
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		handler.render(g);
+		
 		g.dispose();
 		bs.show();
 	}
