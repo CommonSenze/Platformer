@@ -25,4 +25,8 @@ public class LevelOne extends Level {
 	public void render(Graphics g) {
 		walls.render(g);
 	}
+
+	public Walls getWalls() {
+		return walls;
+	}
 }
