@@ -43,8 +43,5 @@ public class LevelManager implements Renderable {
 	@Override
 	public void render(Graphics g) {
 		level.render(g);
-		for (GameObject object : handler.getObjects()) {
-			object.floorCheck(level.getWalls());
-		}
 	}
 }

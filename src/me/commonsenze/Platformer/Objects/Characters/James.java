@@ -12,30 +12,36 @@ import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class James extends GameObject implements Renderable {
 
-	private Walls walls;
-	
 	public James() {
 		super(Role.JAMES, new Rectangle(20, 30));
 		setX(Main.WIDTH/2);
-		setY(70);
+		setY(80);
 		rebuild();
 	}
 
 	@Override
 	public void gravity(Walls walls) {
-		if (this.walls == null)this.walls = walls;
-		if (!walls.onFloor(getCharacter())) setUpY(getUpY()-0.5F);
+		if (!walls.insideWall(getCharacter())) {
+			setUpY(getUpY()+0.5F);
+			setOnFloor(false);
+			setJumping(true);
+		}
+		setY(getY()-getUpY());
+		rebuild();
+		if (walls.insideWall(getCharacter())) {
+			setUpY(1);
+			setY(walls.getCeilingY());
+//			setY(walls.getFloorY()-getHeight());
+			setOnFloor(true);
+			setJumping(false);
+		}
+		rebuild();
 	}
 
 	@Override
 	public void tick() {
-		setY(getY()-getUpY());
-		if (walls != null) {
-			if (walls.touchingFloor(getCharacter())){
-				setY(walls.getFloorY()-getHeight());
-			}
-		}
 		setX(getX()+getVelocity());
+		System.out.println(getX()+" "+getY());
 		
 		rebuild();
 	}
@@ -44,5 +50,9 @@ public class James extends GameObject implements Renderable {
 	public void render(Graphics g) {
 		g.setColor(Color.GREEN);
 		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
+	}
+	
+	public void jump() {
+		setUpY(-10);
 	}
 }

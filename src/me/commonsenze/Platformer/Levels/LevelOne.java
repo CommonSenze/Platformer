@@ -12,7 +12,8 @@ public class LevelOne extends Level {
 	
 	public LevelOne() {
 		walls = new Walls();
-		walls.createFloor(0, Main.HEIGHT-200);
+		walls.createFloor(0, Main.HEIGHT-100);
+		walls.createCeiling(0, 70);
 	}
 
 	@Override

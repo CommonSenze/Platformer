@@ -21,7 +21,10 @@ public class KeyInput extends KeyAdapter {
 			GameObject object = handler.getObjects().get(i);
 			if (object.getRole() == GameData.getSelectedCharacter()) {
 				if (key == KeyEvent.VK_W) {
-					if (!object.isJumping())object.setUpY(5);
+					if (!object.isJumping()) {
+						object.jump();
+						object.setJumping(true);
+					}
 				}
 
 				if (key == KeyEvent.VK_A) {

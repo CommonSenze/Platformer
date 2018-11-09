@@ -31,21 +31,33 @@ public class Walls implements Renderable {
 		rectanlges.put("Floor",rect);
 	}
 	
-	public boolean touchingFloor(Rectangle rectangle) {
-		if (!rectanlges.containsKey("Floor"))return false;
-		Rectangle rect = rectanlges.get("Floor");
-		return (rectangle.y+rectangle.height) >= (rect.y);
-	}
-	
-	public boolean onFloor(Rectangle rectangle) {
-		if (!rectanlges.containsKey("Floor"))return false;
-		Rectangle rect = rectanlges.get("Floor");
-		return (rectangle.y+rectangle.height+2) >= (rect.y);
+	public boolean insideWall(Rectangle rectangle) {
+		for (Rectangle rect : rectanlges.values()) {
+			if (rect.intersects(rectangle))return true;
+		}
+		return false;
 	}
 	
 	public int getFloorY() {
-		if (!rectanlges.containsKey("Floor"))return 0;
+		if (!rectanlges.containsKey("Floor"))return Main.HEIGHT;
 		Rectangle rect = rectanlges.get("Floor");
 		return rect.y;
+	}
+	
+	public void createCeiling(int x, int y) {
+		Rectangle rect = new Rectangle(x,0, Main.WIDTH-x, y);
+		rectanlges.put("Ceiling",rect);
+	}
+	
+	public boolean touchingCeiling(Rectangle rectangle) {
+		if (!rectanlges.containsKey("Ceiling"))return false;
+		Rectangle rect = rectanlges.get("Ceiling");
+		return rect.intersects(rectangle);
+	}
+	
+	public int getCeilingY() {
+		if (!rectanlges.containsKey("Ceiling"))return Main.HEIGHT;
+		Rectangle rect = rectanlges.get("Ceiling");
+		return rect.y+rect.height;
 	}
 }

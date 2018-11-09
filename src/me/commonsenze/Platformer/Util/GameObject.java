@@ -10,7 +10,7 @@ public abstract class GameObject {
 	private Role role;
 	private float x, y, upY, velocity = 0;
 	private Rectangle character;
-	private boolean jumping;
+	private boolean jumping, onFloor;
 
 	public GameObject(Role role, Rectangle character) {
 		this.role = role;
@@ -72,14 +72,19 @@ public abstract class GameObject {
 	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
 	}
+	
+	public boolean onFloor() {
+		return onFloor;
+	}
+
+	public void setOnFloor(boolean onFloor) {
+		this.onFloor = onFloor;
+	}
 
 	public void rebuild() {
 		getCharacter().setLocation((int)x, (int)y);
 	}
-	
-	public void floorCheck(Walls walls) {
-		if (walls.touchingFloor(getCharacter()))setUpY(0);
-	}
 
 	public abstract void gravity(Walls walls);
+	public abstract void jump();
 }
