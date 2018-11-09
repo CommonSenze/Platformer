@@ -52,6 +52,14 @@ public abstract class GameObject {
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
 	}
+	
+	public int getHeight() {
+		return character.height;
+	}
+	
+	public int getWidth() {
+		return character.width;
+	}
 
 	public Rectangle getCharacter() {
 		return character;

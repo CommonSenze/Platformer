@@ -34,6 +34,18 @@ public class Walls implements Renderable {
 	public boolean touchingFloor(Rectangle rectangle) {
 		if (!rectanlges.containsKey("Floor"))return false;
 		Rectangle rect = rectanlges.get("Floor");
-		return rectangle.intersects(rect);
+		return (rectangle.y+rectangle.height) >= (rect.y);
+	}
+	
+	public boolean onFloor(Rectangle rectangle) {
+		if (!rectanlges.containsKey("Floor"))return false;
+		Rectangle rect = rectanlges.get("Floor");
+		return (rectangle.y+rectangle.height+2) >= (rect.y);
+	}
+	
+	public int getFloorY() {
+		if (!rectanlges.containsKey("Floor"))return 0;
+		Rectangle rect = rectanlges.get("Floor");
+		return rect.y;
 	}
 }

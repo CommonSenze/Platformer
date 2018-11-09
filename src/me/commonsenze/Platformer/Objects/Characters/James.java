@@ -12,6 +12,8 @@ import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class James extends GameObject implements Renderable {
 
+	private Walls walls;
+	
 	public James() {
 		super(Role.JAMES, new Rectangle(20, 30));
 		setX(Main.WIDTH/2);
@@ -21,12 +23,18 @@ public class James extends GameObject implements Renderable {
 
 	@Override
 	public void gravity(Walls walls) {
-		if (!walls.touchingFloor(getCharacter())) setUpY(getUpY()-0.5F);
+		if (this.walls == null)this.walls = walls;
+		if (!walls.onFloor(getCharacter())) setUpY(getUpY()-0.5F);
 	}
 
 	@Override
 	public void tick() {
 		setY(getY()-getUpY());
+		if (walls != null) {
+			if (walls.touchingFloor(getCharacter())){
+				setY(walls.getFloorY()-getHeight());
+			}
+		}
 		setX(getX()+getVelocity());
 		
 		rebuild();
