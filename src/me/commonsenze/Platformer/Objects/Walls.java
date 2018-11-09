@@ -8,7 +8,7 @@ import java.util.HashMap;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Util.Renderable;
 
-public class Walls implements Renderable {
+public class Walls implements Renderable, Obsticales {
 
 	private HashMap<String, Rectangle> rectanlges = new HashMap<>();
 	
@@ -60,4 +60,7 @@ public class Walls implements Renderable {
 		Rectangle rect = rectanlges.get("Ceiling");
 		return rect.y+rect.height;
 	}
+
+	@Override
+	public void gravity(Walls walls) {}
 }

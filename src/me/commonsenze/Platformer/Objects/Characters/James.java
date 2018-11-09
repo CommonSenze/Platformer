@@ -23,12 +23,11 @@ public class James extends GameObject implements Renderable {
 	public void gravity(Walls walls) {
 		// If James is not in the wall, allows him to jump and moves him down by .5
 		if (!walls.insideWall(getCharacter())) {
-			setUpY(getUpY()-0.5F);
+			setUpY(getUpY()+0.5F);
 			setOnFloor(false);
-			setJumping(true);
 		}
 		// Moves James 
-		setY(getY()+getUpY());
+		setY(getY()-getUpY());
 		rebuild();
 		if (walls.insideWall(getCharacter())) {
 			setUpY(1);

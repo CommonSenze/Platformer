@@ -2,10 +2,10 @@ package me.commonsenze.Platformer.Util;
 
 import java.awt.Rectangle;
 
-import me.commonsenze.Platformer.Objects.Walls;
+import me.commonsenze.Platformer.Objects.Obsticales;
 import me.commonsenze.Platformer.Util.Enums.Role;
 
-public abstract class GameObject {
+public abstract class GameObject implements Obsticales {
 
 	private Role role;
 	private float x, y, upY, velocity = 0;
@@ -85,6 +85,5 @@ public abstract class GameObject {
 		getCharacter().setLocation((int)x, (int)y);
 	}
 
-	public abstract void gravity(Walls walls);
 	public abstract void jump();
 }
