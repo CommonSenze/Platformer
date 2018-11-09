@@ -33,7 +33,7 @@ public abstract class GameObject implements Obsticales {
 		return y;
 	}
 
-	public float getUpY() {
+	public float getVertical() {
 		return upY;
 	}
 
@@ -41,7 +41,7 @@ public abstract class GameObject implements Obsticales {
 		this.y = y;
 	}
 
-	public void setUpY(float upY) {
+	public void setVertical(float upY) {
 		this.upY = upY;
 	}
 

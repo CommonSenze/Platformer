@@ -21,37 +21,42 @@ public class James extends GameObject implements Renderable {
 	
 	@Override
 	public void gravity(Walls walls) {
-		// If James is not in the wall, allows him to jump and moves him down by .5
+		// If James is not in the wall, jump is true and moves him to the floor by .5
 		if (!walls.insideWall(getCharacter())) {
-			setUpY(getUpY()+0.5F);
+			setVertical(getVertical()-0.5F);
 			setOnFloor(false);
 		}
-		// Moves James 
-		setY(getY()-getUpY());
+		// Moves James by (Y - upY)
+		setY(getY()+getVertical());
+		// Renders James' movements onto the JFrame
 		rebuild();
+		//If James is in the wall, he will move out until he isn't in the wall anymore
 		if (walls.insideWall(getCharacter())) {
-			setUpY(1);
+			setVertical(1);
 			setY(walls.getCeilingY());
 //			setY(walls.getFloorY()-getHeight());
 			setOnFloor(true);
 			setJumping(false);
 		}
+		// Renders James' movements onto the JFrame
 		rebuild();
 	}
 
 	@Override
 	public void tick() {
+		// Renders James' x-axis movement to the Jframe
 		setX(getX()+getVelocity());
 		rebuild();
 	}
 
 	@Override
 	public void render(Graphics g) {
+		// James' color set to green and creates his rectangle
 		g.setColor(Color.GREEN);
 		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
 	}
-	
+	// James' move speed up by 10 on the y-axis (jumps down)
 	public void jump() {
-		setUpY(-10);
+		setVertical(10);
 	}
 }
