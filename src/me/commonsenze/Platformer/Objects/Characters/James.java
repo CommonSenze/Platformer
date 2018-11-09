@@ -11,21 +11,23 @@ import me.commonsenze.Platformer.Util.Renderable;
 import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class James extends GameObject implements Renderable {
-
+	// Constructor for James the character
 	public James() {
 		super(Role.JAMES, new Rectangle(20, 30));
 		setX(Main.WIDTH/2);
 		setY(80);
 		rebuild();
 	}
-
+	
 	@Override
 	public void gravity(Walls walls) {
+		// If James is not in the wall, allows him to jump and moves him down by .5
 		if (!walls.insideWall(getCharacter())) {
 			setUpY(getUpY()-0.5F);
 			setOnFloor(false);
 			setJumping(true);
 		}
+		// Moves James 
 		setY(getY()+getUpY());
 		rebuild();
 		if (walls.insideWall(getCharacter())) {
