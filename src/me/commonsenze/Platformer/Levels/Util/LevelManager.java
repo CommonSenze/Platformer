@@ -4,7 +4,8 @@ import java.awt.Graphics;
 
 import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Levels.LevelOne;
-import me.commonsenze.Platformer.Util.GameObject;
+import me.commonsenze.Platformer.Objects.Block;
+import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Util.Renderable;
 
 public class LevelManager implements Renderable {
@@ -20,6 +21,8 @@ public class LevelManager implements Renderable {
 	
 	public void start() {
 		level = new LevelOne();
+		for (Block block : level.getBlocks())
+			handler.addHitBox(block);
 	}
 	
 	public Level getLevel() {
@@ -35,8 +38,9 @@ public class LevelManager implements Renderable {
 	@Override
 	public void tick() {
 		level.tick();
-		for (GameObject object : handler.getObjects()) {
-			object.gravity(level.getWalls());
+		for (HitBox object : handler.getHitBoxes()) {
+			object.gravity(level.getBlocks());
+			object.walk(level.getBlocks());
 		}
 	}
 

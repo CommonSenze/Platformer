@@ -4,16 +4,17 @@ import java.awt.Graphics;
 
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Level;
-import me.commonsenze.Platformer.Objects.Walls;
+import me.commonsenze.Platformer.Objects.Block;
 
 public class LevelOne extends Level {
 
-	private Walls walls;
-	
 	public LevelOne() {
-		walls = new Walls();
-		walls.createFloor(0, Main.HEIGHT-100);
-		walls.createCeiling(0, 70);
+		// floor
+		add(new Block(-2000, Main.HEIGHT-100, Main.WIDTH+2000, 100));
+		// ceiling
+		add(new Block(-2000, 0, Main.WIDTH+2000, 70));
+		
+		add(new Block(400, 80, 20, 20));
 	}
 
 	@Override
@@ -24,10 +25,8 @@ public class LevelOne extends Level {
 
 	@Override
 	public void render(Graphics g) {
-		walls.render(g);
-	}
-
-	public Walls getWalls() {
-		return walls;
+		for (Block block : getBlocks()) {
+			block.render(g);
+		}
 	}
 }

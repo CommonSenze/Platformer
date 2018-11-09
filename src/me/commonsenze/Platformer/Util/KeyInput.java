@@ -33,9 +33,12 @@ public class KeyInput extends KeyAdapter {
 				if (key == KeyEvent.VK_D) {
 					object.setVelocity(5);
 				}
-				if (object.getX() > 900) {
-					
-				}
+				
+//				Extended level movement
+//				
+//				if (object.getX() > 900) {
+//					
+//				}
 			}
 		}
 	}

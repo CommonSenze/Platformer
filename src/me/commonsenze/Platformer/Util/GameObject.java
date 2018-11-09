@@ -2,67 +2,22 @@ package me.commonsenze.Platformer.Util;
 
 import java.awt.Rectangle;
 
-import me.commonsenze.Platformer.Objects.Obsticales;
+import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Util.Enums.Role;
 
-public abstract class GameObject implements Obsticales {
+public abstract class GameObject extends HitBox {
 
 	private Role role;
-	private float x, y, upY, velocity = 0;
-	private Rectangle character;
+	private float vertical, velocity = 0;
 	private boolean jumping, onFloor;
 
 	public GameObject(Role role, Rectangle character) {
+		super(character);
 		this.role = role;
-		this.character = character;
 	}
 
 	public Role getRole() {
 		return role;
-	}
-
-	public void setX(float x) {
-		this.x = x;
-	}
-
-	public float getX() {
-		return x;
-	}
-
-	public float getY() {
-		return y;
-	}
-
-	public float getVertical() {
-		return upY;
-	}
-
-	public void setY(float y) {
-		this.y = y;
-	}
-
-	public void setVertical(float upY) {
-		this.upY = upY;
-	}
-
-	public float getVelocity() {
-		return velocity;
-	}
-	
-	public void setVelocity(float velocity) {
-		this.velocity = velocity;
-	}
-	
-	public int getHeight() {
-		return character.height;
-	}
-	
-	public int getWidth() {
-		return character.width;
-	}
-
-	public Rectangle getCharacter() {
-		return character;
 	}
 
 	public boolean isJumping() {
@@ -80,9 +35,21 @@ public abstract class GameObject implements Obsticales {
 	public void setOnFloor(boolean onFloor) {
 		this.onFloor = onFloor;
 	}
+	
+	public float getVertical() {
+		return vertical;
+	}
+	
+	public void setVertical(float vertical) {
+		this.vertical = vertical;
+	}
 
-	public void rebuild() {
-		getCharacter().setLocation((int)x, (int)y);
+	public float getVelocity() {
+		return velocity;
+	}
+	
+	public void setVelocity(float velocity) {
+		this.velocity = velocity;
 	}
 
 	public abstract void jump();
