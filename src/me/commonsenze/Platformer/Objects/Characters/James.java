@@ -22,11 +22,11 @@ public class James extends GameObject implements Renderable {
 	@Override
 	public void gravity(Walls walls) {
 		if (!walls.insideWall(getCharacter())) {
-			setUpY(getUpY()+0.5F);
+			setUpY(getUpY()-0.5F);
 			setOnFloor(false);
 			setJumping(true);
 		}
-		setY(getY()-getUpY());
+		setY(getY()+getUpY());
 		rebuild();
 		if (walls.insideWall(getCharacter())) {
 			setUpY(1);
@@ -41,8 +41,6 @@ public class James extends GameObject implements Renderable {
 	@Override
 	public void tick() {
 		setX(getX()+getVelocity());
-		System.out.println(getX()+" "+getY());
-		
 		rebuild();
 	}
 

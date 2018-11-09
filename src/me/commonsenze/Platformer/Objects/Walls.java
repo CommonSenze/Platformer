@@ -27,7 +27,7 @@ public class Walls implements Renderable {
 	}
 	
 	public void createFloor(int x, int y) {
-		Rectangle rect = new Rectangle(x, y, Main.WIDTH-x, Main.HEIGHT-y);
+		Rectangle rect = new Rectangle(-200, y, 20000, Main.HEIGHT-y);
 		rectanlges.put("Floor",rect);
 	}
 	
@@ -45,7 +45,7 @@ public class Walls implements Renderable {
 	}
 	
 	public void createCeiling(int x, int y) {
-		Rectangle rect = new Rectangle(x,0, Main.WIDTH-x, y);
+		Rectangle rect = new Rectangle(-200,0, 20000, y);
 		rectanlges.put("Ceiling",rect);
 	}
 	
