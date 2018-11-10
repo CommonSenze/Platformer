@@ -39,8 +39,8 @@ public class LevelManager implements Renderable {
 	public void tick() {
 		level.tick();
 		for (HitBox object : handler.getHitBoxes()) {
-			object.gravity(level.getBlocks());
 			object.walk(level.getBlocks());
+			object.gravity(level.getBlocks());
 		}
 	}
 

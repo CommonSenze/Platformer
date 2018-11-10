@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.Block;
+import me.commonsenze.Platformer.Util.GameData;
 import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Renderable;
 import me.commonsenze.Platformer.Util.Enums.Role;
@@ -44,7 +45,7 @@ public class James extends GameObject implements Renderable {
 					//			setY(walls.getFloorY()-getHeight());
 					setOnFloor(true);
 					setJumping(false);
-				} else if (prevY+getHeight() <= block.getY()) {
+				} else if (prevY+getHeight() <= block.getIntY()) {
 					setVertical(-1);
 					setY(prevY);
 				}
@@ -74,14 +75,31 @@ public class James extends GameObject implements Renderable {
 
 	@Override
 	public void walk(ArrayList<Block> blocks) {
-		// Renders James' x-axis movement to the JFrame
-		setX(getX()+getVelocity());
+		if (getRole() != GameData.getSelectedCharacter())return;
+		
+		float prevX = getX();
+		
+		// Extended level movement
+		if (getX()+getWidth() >= 900&&getVelocity() >0) {
+			Main.CAMERA.setSpeed(2);
+		} else if (getX() < 100&&getVelocity()<0) {
+			Main.CAMERA.setSpeed(-2);
+		} else {
+			// Renders James' x-axis movement to the JFrame
+			setX(getX()+getVelocity());
+			Main.CAMERA.setSpeed(0);
+		}
+		
 		rebuild();
 
 		for (Block block : blocks) {
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (block.insideBlock(getCharacter())) {
-				setX(getX()-getVelocity());
+				if (prevX > block.getX()) {
+					setX(block.getX()+block.getWidth());
+				} else if (prevX+getWidth() <= block.getX()) {
+					setX(prevX);
+				}
 			}
 		}
 
