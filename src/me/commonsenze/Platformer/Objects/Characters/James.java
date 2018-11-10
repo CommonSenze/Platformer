@@ -44,6 +44,9 @@ public class James extends GameObject implements Renderable {
 					//			setY(walls.getFloorY()-getHeight());
 					setOnFloor(true);
 					setJumping(false);
+				} else if (prevY+getHeight() <= block.getY()) {
+					setVertical(-1);
+					setY(prevY);
 				}
 			}
 		}

@@ -14,7 +14,7 @@ public class LevelOne extends Level {
 		// ceiling
 		add(new Block(-2000, 0, Main.WIDTH+2000, 70));
 		
-		add(new Block(400, 80, 20, 20));
+		add(new Block(400, 150, 20, 20));
 	}
 
 	@Override
