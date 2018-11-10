@@ -10,7 +10,7 @@ public class LevelOne extends Level {
 
 	public LevelOne() {
 		// floor
-		add(new Block(0, Main.HEIGHT, Main.WIDTH+2000, -100));
+		add(new Block(0, Main.HEIGHT-100, Main.WIDTH+2000, 100));
 		// ceiling
 		add(new Block(0, 0, Main.WIDTH+2000, 70));
 		// Left wall
