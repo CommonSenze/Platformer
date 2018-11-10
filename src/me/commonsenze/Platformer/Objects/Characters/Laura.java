@@ -15,8 +15,10 @@ import me.commonsenze.Platformer.Util.Enums.Role;
 public class Laura extends GameObject implements Renderable{
 
 	public Laura(Role role, Rectangle character) {
-		super(role, character);
-		// TODO Auto-generated constructor stub
+		super(Role.LAURA, new Rectangle(50, 20)); // Laura's length == 50, height == 20
+		setX(Main.WIDTH/3); // Spawn Laura on the left third
+		setY(890); // Spawn Laura above the floor
+		rebuild();
 	}
 
 	@Override
