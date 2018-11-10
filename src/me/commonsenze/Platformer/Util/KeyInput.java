@@ -4,6 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import me.commonsenze.Platformer.Handler;
+import me.commonsenze.Platformer.Main;
 
 public class KeyInput extends KeyAdapter {
 
@@ -29,16 +30,22 @@ public class KeyInput extends KeyAdapter {
 
 				if (key == KeyEvent.VK_A) {
 					object.setVelocity(-5);
+					
+					// Extended level movement					
+					if (object.getX() <= 100) {
+						Main.CAMERA.setSpeed(-2);
+						object.setVelocity(0);
+					}
 				}
 				if (key == KeyEvent.VK_D) {
 					object.setVelocity(5);
+					
+					// Extended level movement					
+					if (object.getX() >= 900) {
+						Main.CAMERA.setSpeed(2);
+						object.setVelocity(0);
+					}
 				}
-				
-//				Extended level movement
-//				
-//				if (object.getX() > 900) {
-//					
-//				}
 			}
 		}
 	}
@@ -56,6 +63,10 @@ public class KeyInput extends KeyAdapter {
 				}
 				if (key == KeyEvent.VK_D) {
 					if (object.getVelocity() == 5) object.setVelocity(0);
+				}
+				
+				if (Main.CAMERA.getSpeed() != 0) {
+					Main.CAMERA.setSpeed(0);
 				}
 			}
 		}

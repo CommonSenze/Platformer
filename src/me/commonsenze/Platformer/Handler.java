@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Objects.Characters.James;
+import me.commonsenze.Platformer.Util.GameData;
 import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Renderable;
 
@@ -30,6 +31,13 @@ public class Handler {
 	public void tick() {
 		for (Renderable renderable : renderables) {
 			renderable.tick();
+		}
+		for (HitBox hitBox : hitBoxes) {
+			if (hitBox instanceof GameObject) {
+				GameObject object = (GameObject) hitBox;
+				if (object.getRole() == GameData.getSelectedCharacter())continue;
+			}
+			hitBox.setX(hitBox.getX()-Main.CAMERA.getSpeed());
 		}
 	}
 	

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import me.commonsenze.Platformer.Levels.Util.LevelManager;
+import me.commonsenze.Platformer.Util.Camera;
 import me.commonsenze.Platformer.Util.KeyInput;
 import me.commonsenze.Platformer.Util.Window;
 
@@ -19,14 +20,14 @@ public class Main extends Canvas implements Runnable {
 	public static final int WIDTH = 1000, HEIGHT = WIDTH /16*9;
 	private Thread thread;
 	private Handler handler;
-	private boolean running = false;
+	public static boolean running = false;
+	public static final Camera CAMERA = new Camera(0, 0);
 	
 	public Main() {
 		this.handler = new Handler();
+		new LevelManager(handler);
 		
 		this.addKeyListener(new KeyInput(handler));
-		
-		new LevelManager(handler);
 		
 		new Window(WIDTH, HEIGHT, "Test", this);
 	}

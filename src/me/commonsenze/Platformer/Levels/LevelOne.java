@@ -10,17 +10,18 @@ public class LevelOne extends Level {
 
 	public LevelOne() {
 		// floor
-		add(new Block(-2000, Main.HEIGHT-100, Main.WIDTH+2000, 100));
+		add(new Block(0, Main.HEIGHT-100, Main.WIDTH+2000, 100));
 		// ceiling
-		add(new Block(-2000, 0, Main.WIDTH+2000, 70));
+		add(new Block(0, 0, Main.WIDTH+2000, 70));
 		
 		add(new Block(400, 150, 20, 20));
 	}
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-		
+		for (Block block : getBlocks()) {
+			block.tick();
+		}
 	}
 
 	@Override
