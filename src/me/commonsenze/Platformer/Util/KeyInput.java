@@ -30,21 +30,9 @@ public class KeyInput extends KeyAdapter {
 
 				if (key == KeyEvent.VK_A) {
 					object.setVelocity(-5);
-					
-					// Extended level movement					
-					if (object.getX() <= 100) {
-						Main.CAMERA.setSpeed(-2);
-						object.setVelocity(0);
-					}
 				}
 				if (key == KeyEvent.VK_D) {
 					object.setVelocity(5);
-					
-					// Extended level movement					
-					if (object.getX() >= 900) {
-						Main.CAMERA.setSpeed(2);
-						object.setVelocity(0);
-					}
 				}
 			}
 		}

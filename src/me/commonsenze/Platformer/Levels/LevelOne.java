@@ -13,6 +13,8 @@ public class LevelOne extends Level {
 		add(new Block(0, Main.HEIGHT-100, Main.WIDTH+2000, 100));
 		// ceiling
 		add(new Block(0, 0, Main.WIDTH+2000, 70));
+		// Left wall
+		add(new Block(-2, 0, 102, Main.HEIGHT));
 		
 		add(new Block(400, 150, 20, 20));
 	}
