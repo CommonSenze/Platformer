@@ -27,6 +27,15 @@ public class KeyInput extends KeyAdapter {
 						object.setJumping(true);
 					}
 				}
+				
+				if (key == KeyEvent.VK_Q) {
+					GameData.setCharacter(handler.getObject(object.getIntX(), "Left").getRole());
+				}
+				
+				if (key == KeyEvent.VK_E) {
+					GameData.setCharacter(handler.getObject(object.getIntX(), "Right").getRole());
+//					handler.getObject(object.getIntX(), "Right");
+				}
 
 				if (key == KeyEvent.VK_A) {
 					object.setVelocity(-5);
@@ -34,6 +43,7 @@ public class KeyInput extends KeyAdapter {
 				if (key == KeyEvent.VK_D) {
 					object.setVelocity(5);
 				}
+				break;
 			}
 		}
 	}
@@ -56,7 +66,7 @@ public class KeyInput extends KeyAdapter {
 				if (Main.CAMERA.getSpeed() != 0) {
 					Main.CAMERA.setSpeed(0);
 				}
-			}
+			} else object.setVelocity(0);
 		}
 	}
 }

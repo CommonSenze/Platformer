@@ -1,5 +1,6 @@
 package me.commonsenze.Platformer.Util;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 
 import me.commonsenze.Platformer.Objects.HitBox;
@@ -8,11 +9,13 @@ import me.commonsenze.Platformer.Util.Enums.Role;
 public abstract class GameObject extends HitBox {
 
 	private Role role;
+	private Color color;
 	private float vertical, velocity = 0;
 	private boolean jumping, onFloor;
 
-	public GameObject(Role role, Rectangle character) {
+	public GameObject(Role role, Rectangle character, Color color) {
 		super(character);
+		this.color = color;
 		this.role = role;
 	}
 
@@ -26,6 +29,14 @@ public abstract class GameObject extends HitBox {
 
 	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
+	}
+	
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 	
 	public boolean onFloor() {

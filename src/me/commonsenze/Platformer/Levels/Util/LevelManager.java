@@ -20,9 +20,9 @@ public class LevelManager implements Renderable {
 	}
 	
 	public void start() {
-		level = new LevelOne();
+		level = new LevelOne(handler);
 		for (Block block : level.getBlocks())
-			handler.addHitBox(block);
+			Handler.addHitBox(block);
 	}
 	
 	public Level getLevel() {
@@ -38,9 +38,9 @@ public class LevelManager implements Renderable {
 	@Override
 	public void tick() {
 		level.tick();
-		for (HitBox object : handler.getHitBoxes()) {
-			object.walk(level.getBlocks());
-			object.gravity(level.getBlocks());
+		for (HitBox object : Handler.getHitBoxes()) {
+			object.walk();
+			object.gravity();
 		}
 	}
 

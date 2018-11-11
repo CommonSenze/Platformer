@@ -3,7 +3,6 @@ package me.commonsenze.Platformer.Objects;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 
 import me.commonsenze.Platformer.Util.Renderable;
 
@@ -26,11 +25,12 @@ public class Block extends HitBox implements Renderable {
 	public void render(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
+		
 	}
 
 	@Override
-	public void gravity(ArrayList<Block> blocks) {}
+	public void gravity() {}
 
 	@Override
-	public void walk(ArrayList<Block> blocks) {}
+	public void walk() {}
 }

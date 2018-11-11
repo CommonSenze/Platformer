@@ -4,7 +4,7 @@ import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class GameData {
 
-	private static Role selectedCharacter = Role.LAURA;
+	private static Role selectedCharacter = Role.THOMAS;
 	
 	public static void setCharacter(Role character) {
 		selectedCharacter = character;

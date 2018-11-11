@@ -12,13 +12,13 @@ import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Renderable;
 import me.commonsenze.Platformer.Util.Enums.Role;
 
-public class James extends GameObject implements Renderable {
+public class Thomas extends GameObject implements Renderable {
 
 	// Constructor for James the character
-	public James() {
-		super(Role.JAMES, new Rectangle(20, 30), Color.GREEN);
+	public Thomas() {
+		super(Role.THOMAS, new Rectangle(20, 30), Color.RED);
 		setX(Main.WIDTH/2);
-		setY(80);
+		setY(120);
 		rebuild();
 	}
 
@@ -31,7 +31,7 @@ public class James extends GameObject implements Renderable {
 		float prevY = getY();
 
 		// Moves James by (Y - upY)
-		setY(getY()+getVertical());
+		setY(getY()-getVertical());
 
 		// Realigns getCharacter()'s x and y to GameObject's x and y.
 		rebuild();
@@ -40,14 +40,13 @@ public class James extends GameObject implements Renderable {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevY > hitBox.getY()) {
-					setVertical(1);
-					setY(hitBox.getY()+hitBox.getHeight());
-					//			setY(walls.getFloorY()-getHeight());
+				if (prevY-getHeight() <= hitBox.getY()) {
+					setVertical(-1);
+					setY(hitBox.getY()-getHeight());
 					setOnFloor(true);
 					setJumping(false);
-				} else if (prevY+getHeight() <= hitBox.getIntY()) {
-					setVertical(-1);
+				} else if (prevY+getHeight() > hitBox.getIntY()) {
+					setVertical(1);
 					setY(prevY);
 				}
 			}
