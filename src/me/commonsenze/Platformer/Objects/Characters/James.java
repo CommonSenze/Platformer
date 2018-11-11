@@ -16,9 +16,16 @@ public class James extends GameObject implements Renderable {
 
 	// Constructor for James the character
 	public James() {
+		// This super constructor sets the Role of the character to individualize the class, set the rectangle of the character
+		// so we can render his body and hit box, and set the color of what we want the rectangle to be.
 		super(Role.JAMES, new Rectangle(20, 30), Color.GREEN);
+		
+		// While in the constructor, we set the X and Y of the character as the starting positions
+		// Keep in mind, positive X is from left to right, positive Y is from TOP TO BOTTOM
 		setX(Main.WIDTH/2);
 		setY(80);
+		
+		// After we set the location, we rebuild the character
 		rebuild();
 	}
 

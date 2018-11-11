@@ -99,7 +99,7 @@ public class Thomas extends GameObject implements Renderable {
 				if (prevX > hitBox.getX()) {
 					setX(hitBox.getX()+hitBox.getWidth());
 				} else if (prevX+getWidth() <= hitBox.getX()) {
-					setX(prevX);
+					setX(hitBox.getX()-getWidth());
 				}
 			}
 		}
