@@ -31,11 +31,10 @@ public class Laura extends GameObject implements Renderable {
 
 	@Override
 	public void render(Graphics g) {
-		rebuild();
+		// Claire' color set to green and creates his rectangle
 		g.setColor(getColor());
-		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
+		g.fillRect(getIntX(), getIntY(), getCharacter().width, getCharacter().height);
 	}
-
 	@Override
 	public void gravity() {
 		// If James is not in the wall, jump is true and moves him to the floor by .5

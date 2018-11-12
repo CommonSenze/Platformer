@@ -72,7 +72,7 @@ public class Claire extends GameObject implements Renderable {
 	public void render(Graphics g) {
 		// Claire' color set to green and creates his rectangle
 		g.setColor(getColor());
-		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
+		g.fillRect(getIntX(), getIntY(), getCharacter().width, getCharacter().height);
 	}
 
 	// Claire' move speed up by 10 on the y-axis (jumps down)
