@@ -31,13 +31,13 @@ public class Claire extends GameObject implements Renderable {
 
 	@Override
 	public void gravity() {
-		// If Claire is not in the wall, jump is true and moves him to the floor by .5
+		// If James is not in the wall, jump is true and moves him to the floor by .5
 		setVertical(getVertical()-0.5F);
 		setOnFloor(false);
 
 		float prevY = getY();
 
-		// Moves Claire by (Y - upY)
+		// Moves James by (Y - upY)
 		setY(getY()-getVertical());
 
 		// Realigns getCharacter()'s x and y to GameObject's x and y.
@@ -45,16 +45,16 @@ public class Claire extends GameObject implements Renderable {
 
 		for (HitBox hitBox : Handler.getHitBoxes()) {
 			if (hitBox == this)continue;
-			// If Claire is in the wall, he will move out until he isn't in the wall anymore
+			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevY-getHeight() <= hitBox.getY()) {
+				if (prevY+getHeight() <= hitBox.getY()) {
 					setVertical(-1);
 					setY(hitBox.getY()-getHeight());
 					setOnFloor(true);
 					setJumping(false);
 				} else if (prevY+getHeight() > hitBox.getIntY()) {
-					setVertical(1);
-					setY(prevY);
+					setVertical(-1);
+					setY(hitBox.getIntY()+hitBox.getHeight());
 				}
 			}
 		}
