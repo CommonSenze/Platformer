@@ -46,6 +46,7 @@ public class Handler {
 				if (object.getRole() == GameData.getSelectedCharacter())continue;
 			}
 			hitBox.setX(hitBox.getX()-Main.CAMERA.getSpeed());
+			Main.CAMERA.setPosition(Main.CAMERA.getPosition()+Main.CAMERA.getSpeed());
 		}
 	}
 
