@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 import me.commonsenze.Platformer.Levels.Util.LevelManager;
 import me.commonsenze.Platformer.Util.Camera;
 import me.commonsenze.Platformer.Util.KeyInput;
+import me.commonsenze.Platformer.Util.MouseInput;
 import me.commonsenze.Platformer.Util.Window;
 
 public class Main extends Canvas implements Runnable {
@@ -20,6 +21,7 @@ public class Main extends Canvas implements Runnable {
 	public static final int WIDTH = 1000, HEIGHT = WIDTH /16*9;
 	private Thread thread;
 	private Handler handler;
+	private MouseInput mouse;
 	public static boolean running = false;
 	public static final Camera CAMERA = new Camera(0, 0);
 	
@@ -28,6 +30,7 @@ public class Main extends Canvas implements Runnable {
 		new LevelManager(handler);
 		
 		this.addKeyListener(new KeyInput(handler));
+		this.addMouseListener(mouse = new MouseInput());
 		
 		new Window(WIDTH, HEIGHT, "Test", this);
 	}
@@ -87,6 +90,7 @@ public class Main extends Canvas implements Runnable {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		handler.render(g);
+		mouse.render(g);
 		
 		g.dispose();
 		bs.show();
