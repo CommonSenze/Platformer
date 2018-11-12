@@ -44,7 +44,7 @@ public class Laura extends GameObject implements Renderable {
 
 		float prevY = getY();
 
-		// Moves James by (Y - upY)
+		// Moves James by (Y - Vertical)
 		setY(getY()-getVertical());
 
 		// Realigns getCharacter()'s x and y to GameObject's x and y.
@@ -59,7 +59,7 @@ public class Laura extends GameObject implements Renderable {
 					setY(hitBox.getY()-getHeight());
 					setOnFloor(true);
 					setJumping(false);
-				} else if (prevY+getHeight() > hitBox.getIntY()) {
+				} else if (prevY > hitBox.getIntY()) {
 					setVertical(-1);
 					setY(hitBox.getIntY()+hitBox.getHeight());
 				}
