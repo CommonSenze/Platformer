@@ -18,7 +18,7 @@ public class Claire extends GameObject implements Renderable {
 	public Claire() {
 		// This super constructor sets the Role of the character to individualize the class, set the rectangle of the character
 		// so we can render his body and hit box, and set the color of what we want the rectangle to be.
-		super(Role.CLAIRE, new Rectangle(20, 30), Color.CYAN);
+		super(Role.CLAIRE, new Rectangle(50, 50), Color.CYAN);
 		
 		// While in the constructor, we set the X and Y of the character as the starting positions
 		// Keep in mind, positive X is from left to right, positive Y is from TOP TO BOTTOM
