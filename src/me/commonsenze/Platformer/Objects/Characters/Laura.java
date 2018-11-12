@@ -17,7 +17,7 @@ public class Laura extends GameObject implements Renderable {
 
 
 	public Laura() {
-		super(Role.LAURA, new Rectangle(50, 20), Color.PINK); // Laura's length == 50, height == 20
+		super(Role.LAURA, new Rectangle(70, 15), new Color(200, 150, 150)); // Laura's length == 50, height == 20
 		setX(Main.WIDTH/3); // Spawn Laura on the left third
 		setY(Main.HEIGHT/2); // Spawn Laura above the floor
 		rebuild();

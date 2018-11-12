@@ -18,12 +18,12 @@ public class Claire extends GameObject implements Renderable {
 	public Claire() {
 		// This super constructor sets the Role of the character to individualize the class, set the rectangle of the character
 		// so we can render his body and hit box, and set the color of what we want the rectangle to be.
-		super(Role.CLAIRE, new Rectangle(50, 50), Color.CYAN);
+		super(Role.CLAIRE, new Rectangle(60, 60), Color.CYAN);
 		
 		// While in the constructor, we set the X and Y of the character as the starting positions
 		// Keep in mind, positive X is from left to right, positive Y is from TOP TO BOTTOM
-		setX(Main.WIDTH/2);
-		setY(80);
+		setX(Main.WIDTH/2+70);
+		setY(100);
 		
 		// After we set the location, we rebuild the character
 		rebuild();
@@ -38,7 +38,7 @@ public class Claire extends GameObject implements Renderable {
 		float prevY = getY();
 
 		// Moves Claire by (Y - upY)
-		setY(getY()+getVertical());
+		setY(getY()-getVertical());
 
 		// Realigns getCharacter()'s x and y to GameObject's x and y.
 		rebuild();
@@ -47,14 +47,13 @@ public class Claire extends GameObject implements Renderable {
 			if (hitBox == this)continue;
 			// If Claire is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevY > hitBox.getY()) {
-					setVertical(1);
-					setY(hitBox.getY()+hitBox.getHeight());
-					//			setY(walls.getFloorY()-getHeight());
+				if (prevY-getHeight() <= hitBox.getY()) {
+					setVertical(-1);
+					setY(hitBox.getY()-getHeight());
 					setOnFloor(true);
 					setJumping(false);
-				} else if (prevY+getHeight() <= hitBox.getIntY()) {
-					setVertical(-1);
+				} else if (prevY+getHeight() > hitBox.getIntY()) {
+					setVertical(1);
 					setY(prevY);
 				}
 			}
@@ -78,7 +77,7 @@ public class Claire extends GameObject implements Renderable {
 
 	// Claire' move speed up by 10 on the y-axis (jumps down)
 	public void jump() {
-		setVertical(10);
+		setVertical(5);
 	}
 
 	@Override
