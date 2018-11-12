@@ -92,7 +92,7 @@ public class Claire extends GameObject implements Renderable {
 		} else if (getX() < 100&&getVelocity()<0) {
 			Main.CAMERA.setSpeed(-5);
 		} else {
-			// Renders Claire' x-axis movement to the JFrame
+			// Renders Claire' x-axis movement to the JFramea
 			setX(getX()+getVelocity());
 			Main.CAMERA.setSpeed(0);
 		}

@@ -4,11 +4,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import me.commonsenze.Platformer.Objects.HitBox;
-<<<<<<< HEAD
 import me.commonsenze.Platformer.Objects.Characters.Chris;
-=======
 import me.commonsenze.Platformer.Objects.Characters.Claire;
->>>>>>> fef9c12b92ef04e8391c2eb5b662a0f2f5b63623
 import me.commonsenze.Platformer.Objects.Characters.James;
 import me.commonsenze.Platformer.Objects.Characters.Laura;
 import me.commonsenze.Platformer.Objects.Characters.Thomas;
@@ -26,11 +23,8 @@ public class Handler {
 		gameObjects.add(new Thomas());
 		gameObjects.add(new Laura());
 		gameObjects.add(new James());
-<<<<<<< HEAD
 		gameObjects.add(new Chris());
-=======
 		gameObjects.add(new Claire());
->>>>>>> fef9c12b92ef04e8391c2eb5b662a0f2f5b63623
 
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject instanceof Renderable) {
