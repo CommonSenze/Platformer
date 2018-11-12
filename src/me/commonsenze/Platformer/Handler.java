@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import me.commonsenze.Platformer.Objects.HitBox;
+import me.commonsenze.Platformer.Objects.Characters.Claire;
 import me.commonsenze.Platformer.Objects.Characters.James;
 import me.commonsenze.Platformer.Objects.Characters.Laura;
 import me.commonsenze.Platformer.Objects.Characters.Thomas;
@@ -21,6 +22,7 @@ public class Handler {
 		gameObjects.add(new Thomas());
 		gameObjects.add(new Laura());
 		gameObjects.add(new James());
+		gameObjects.add(new Claire());
 
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject instanceof Renderable) {
