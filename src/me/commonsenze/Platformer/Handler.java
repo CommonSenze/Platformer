@@ -7,6 +7,7 @@ import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Objects.Characters.Chris;
 import me.commonsenze.Platformer.Objects.Characters.Claire;
 import me.commonsenze.Platformer.Objects.Characters.James;
+import me.commonsenze.Platformer.Objects.Characters.John;
 import me.commonsenze.Platformer.Objects.Characters.Laura;
 import me.commonsenze.Platformer.Objects.Characters.Thomas;
 import me.commonsenze.Platformer.Util.GameData;
@@ -24,6 +25,7 @@ public class Handler {
 		gameObjects.add(new Laura());
 		gameObjects.add(new James());
 		gameObjects.add(new Chris());
+		gameObjects.add(new John());
 		gameObjects.add(new Claire());
 
 		for (GameObject gameObject : gameObjects) {
