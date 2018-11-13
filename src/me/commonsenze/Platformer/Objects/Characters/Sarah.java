@@ -17,7 +17,7 @@ public class Sarah extends GameObject implements Renderable {
 
 
 	public Sarah() {
-		super(Role.SARAH, new Rectangle(70, 15), new Color(200, 150, 150)); // Sarah's length == 50, height == 20
+		super(Role.SARAH, new Rectangle(15, 15), new Color(200, 150, 150)); // Sarah's length == 50, height == 20
 		setX(Main.WIDTH/3); // Spawn Sarah on the left third
 		setY(Main.HEIGHT/2); // Spawn Sarah above the floor
 		rebuild();

@@ -9,6 +9,7 @@ import me.commonsenze.Platformer.Objects.Characters.Claire;
 import me.commonsenze.Platformer.Objects.Characters.James;
 import me.commonsenze.Platformer.Objects.Characters.John;
 import me.commonsenze.Platformer.Objects.Characters.Laura;
+import me.commonsenze.Platformer.Objects.Characters.Sarah;
 import me.commonsenze.Platformer.Objects.Characters.Thomas;
 import me.commonsenze.Platformer.Util.GameData;
 import me.commonsenze.Platformer.Util.GameObject;
@@ -27,6 +28,7 @@ public class Handler {
 		gameObjects.add(new Chris());
 		gameObjects.add(new John());
 		gameObjects.add(new Claire());
+		gameObjects.add(new Sarah());
 
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject instanceof Renderable) {
