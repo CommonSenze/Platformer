@@ -3,10 +3,12 @@ package me.commonsenze.Platformer;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import me.commonsenze.Platformer.Levels.Util.LevelManager;
 import me.commonsenze.Platformer.Util.Camera;
+import me.commonsenze.Platformer.Util.HUD;
 import me.commonsenze.Platformer.Util.KeyInput;
 import me.commonsenze.Platformer.Util.MouseInput;
 import me.commonsenze.Platformer.Util.Window;
@@ -22,11 +24,13 @@ public class Main extends Canvas implements Runnable {
 	private Thread thread;
 	private Handler handler;
 	private MouseInput mouse;
+	private HUD hud;
 	public static boolean running = false;
 	public static final Camera CAMERA = new Camera(0, 0);
 	
 	public Main() {
 		this.handler = new Handler();
+		this.hud = new HUD(handler);
 		new LevelManager(handler);
 		
 		this.addKeyListener(new KeyInput(handler));
@@ -85,12 +89,20 @@ public class Main extends Canvas implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-
 		
-		g.setColor(Color.WHITE);
+		g.setColor(new Color(20, 30, 100));
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		Graphics2D g2 = (Graphics2D) g;
+		g2.translate(WIDTH/2, HEIGHT/2);
+		g2.scale(1-CAMERA.getZoom(), 1-CAMERA.getZoom());
+		g2.translate(-WIDTH/2, -HEIGHT/2);
 		handler.render(g);
 		mouse.render(g);
+		g2.translate(WIDTH/2, HEIGHT/2);
+		g2.scale(1.0/g2.getTransform().getScaleX(),1.0/g2.getTransform().getScaleY());
+		g2.translate(-WIDTH/2, -HEIGHT/2);
+		hud.render(g);
 		
 		g.dispose();
 		bs.show();

@@ -2,7 +2,8 @@ package me.commonsenze.Platformer.Util;
 
 public class Camera {
 
-	private int position, speed, zoom;
+	private int position, speed;
+	private double zoom;
 	
 	public Camera(int position, int speed) {
 		this.position = position;
@@ -25,11 +26,11 @@ public class Camera {
 		this.speed = speed;
 	}
 	
-	public int getZoom() {
+	public double getZoom() {
 		return zoom;
 	}
 
-	public void setZoom(int zoom) {
+	public void setZoom(double zoom) {
 		this.zoom = zoom;
 	}
 }

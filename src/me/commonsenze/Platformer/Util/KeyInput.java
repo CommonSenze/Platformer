@@ -34,7 +34,6 @@ public class KeyInput extends KeyAdapter {
 				
 				if (key == KeyEvent.VK_E) {
 					GameData.setCharacter(handler.getObject(object.getIntX(), "Right").getRole());
-//					handler.getObject(object.getIntX(), "Right");
 				}
 
 				if (key == KeyEvent.VK_A) {
@@ -42,6 +41,12 @@ public class KeyInput extends KeyAdapter {
 				}
 				if (key == KeyEvent.VK_D) {
 					object.setVelocity(5);
+				}
+				if (key == KeyEvent.VK_F) {
+					Main.CAMERA.setZoom((Main.CAMERA.getZoom()+0.1));
+				}
+				if (key == KeyEvent.VK_R) {
+					Main.CAMERA.setZoom((Main.CAMERA.getZoom()-0.1));
 				}
 				break;
 			}
