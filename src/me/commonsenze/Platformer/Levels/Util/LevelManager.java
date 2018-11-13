@@ -38,10 +38,6 @@ public class LevelManager implements Renderable {
 	@Override
 	public void tick() {
 		level.tick();
-		for (HitBox object : Handler.getHitBoxes()) {
-			object.walk();
-			object.gravity();
-		}
 	}
 
 	@Override

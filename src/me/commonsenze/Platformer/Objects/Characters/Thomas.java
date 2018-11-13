@@ -40,7 +40,7 @@ public class Thomas extends GameObject implements Renderable {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevY+getHeight() <= hitBox.getY()) {
+				if (((int)(prevY))+getHeight() <= hitBox.getIntY()) {
 					setVertical(-1);
 					setY(hitBox.getY()-getHeight());
 					setOnFloor(true);
@@ -58,7 +58,8 @@ public class Thomas extends GameObject implements Renderable {
 
 	@Override
 	public void tick() {
-
+		gravity();
+		walk();
 	}
 
 	@Override
@@ -76,9 +77,9 @@ public class Thomas extends GameObject implements Renderable {
 	@Override
 	public void walk() {
 		if (getRole() != GameData.getSelectedCharacter())return;
-		
+
 		float prevX = getX();
-		
+
 		// Extended level movement
 		if (getX()+getWidth() >= 900&&getVelocity() >0) {
 			Main.CAMERA.setSpeed(5);
@@ -89,14 +90,14 @@ public class Thomas extends GameObject implements Renderable {
 			setX(getX()+getVelocity());
 			Main.CAMERA.setSpeed(0);
 		}
-		
+
 		rebuild();
 
 		for (HitBox hitBox : Handler.getHitBoxes()) {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevX > hitBox.getX()) {
+				if (prevX > hitBox.getX()+hitBox.getWidth()) {
 					setX(hitBox.getX()+hitBox.getWidth());
 				} else if (prevX+getWidth() <= hitBox.getX()) {
 					setX(hitBox.getX()-getWidth());
