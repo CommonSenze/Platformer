@@ -35,7 +35,7 @@ public class James extends GameObject implements Renderable {
 		setVertical(getVertical()-0.5F);
 		setOnFloor(false);
 
-		float prevY = getY();
+		int prevY = getIntY();
 
 		// Moves James by (Y - upY)
 		setY(getY()+getVertical());
@@ -85,9 +85,9 @@ public class James extends GameObject implements Renderable {
 	@Override
 	public void walk() {
 		if (getRole() != GameData.getSelectedCharacter())return;
-		
-		float prevX = getX();
-		
+
+		int prevX = getIntX();
+
 		// Extended level movement
 		if (getX()+getWidth() >= 900&&getVelocity() >0) {
 			Main.CAMERA.setSpeed(5);
@@ -98,17 +98,17 @@ public class James extends GameObject implements Renderable {
 			setX(getX()+getVelocity());
 			Main.CAMERA.setSpeed(0);
 		}
-		
+
 		rebuild();
 
 		for (HitBox hitBox : Handler.getHitBoxes()) {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevX > hitBox.getX()) {
+				if (prevX >= hitBox.getX()+hitBox.getWidth()) {
 					setX(hitBox.getX()+hitBox.getWidth());
 				} else if (prevX+getWidth() <= hitBox.getX()) {
-					setX(prevX);
+					setX(hitBox.getX()-getWidth());
 				}
 			}
 		}

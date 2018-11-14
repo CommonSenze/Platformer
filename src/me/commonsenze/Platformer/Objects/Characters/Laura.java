@@ -18,7 +18,7 @@ public class Laura extends GameObject implements Renderable {
 
 	public Laura() {
 		super(Role.LAURA, new Rectangle(70, 15), new Color(200, 150, 150)); // Laura's length == 50, height == 20
-		setX(Main.WIDTH/3); // Spawn Laura on the left third
+		setX(Main.WIDTH/3+40); // Spawn Laura on the left third
 		setY(Main.HEIGHT/2); // Spawn Laura above the floor
 		rebuild();
 	}
@@ -41,7 +41,7 @@ public class Laura extends GameObject implements Renderable {
 		setVertical(getVertical()-0.5F);
 		setOnFloor(false);
 
-		float prevY = getY();
+		int prevY = getIntY();
 
 		// Moves James by (Y - Vertical)
 		setY(getY()-getVertical());
@@ -53,7 +53,7 @@ public class Laura extends GameObject implements Renderable {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevY+getHeight() <= hitBox.getY()) {
+				if (prevY+getHeight() <= hitBox.getIntY()) {
 					setVertical(-1);
 					setY(hitBox.getY()-getHeight());
 					setOnFloor(true);
@@ -78,7 +78,7 @@ public class Laura extends GameObject implements Renderable {
 	public void walk() {
 		if (getRole() != GameData.getSelectedCharacter())return;
 
-		float prevX = getX();
+		int prevX = getIntX();
 
 		// Extended level movement
 		if (getX()+getWidth() >= 900&&getVelocity() >0) {
@@ -97,7 +97,7 @@ public class Laura extends GameObject implements Renderable {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevX > hitBox.getX()+hitBox.getWidth()) {
+				if (prevX >= hitBox.getX()+hitBox.getWidth()) {
 					setX(hitBox.getX()+hitBox.getWidth());
 				} else if (prevX+getWidth() <= hitBox.getX()) {
 					setX(hitBox.getX()-getWidth());

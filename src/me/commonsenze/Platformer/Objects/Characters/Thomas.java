@@ -28,7 +28,7 @@ public class Thomas extends GameObject implements Renderable {
 		setVertical(getVertical()-0.5F);
 		setOnFloor(false);
 
-		float prevY = getY();
+		int prevY = getIntY();
 
 		// Moves James by (Y - Vertical)
 		setY(getY()-getVertical());
@@ -40,7 +40,7 @@ public class Thomas extends GameObject implements Renderable {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (((int)(prevY))+getHeight() <= hitBox.getIntY()) {
+				if (prevY+getHeight() <= hitBox.getIntY()) {
 					setVertical(-1);
 					setY(hitBox.getY()-getHeight());
 					setOnFloor(true);
@@ -73,12 +73,12 @@ public class Thomas extends GameObject implements Renderable {
 	public void jump() {
 		setVertical(10);
 	}
-
+	
 	@Override
 	public void walk() {
 		if (getRole() != GameData.getSelectedCharacter())return;
 
-		float prevX = getX();
+		int prevX = getIntX();
 
 		// Extended level movement
 		if (getX()+getWidth() >= 900&&getVelocity() >0) {
@@ -97,7 +97,7 @@ public class Thomas extends GameObject implements Renderable {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevX > hitBox.getX()+hitBox.getWidth()) {
+				if (prevX >= hitBox.getX()+hitBox.getWidth()) {
 					setX(hitBox.getX()+hitBox.getWidth());
 				} else if (prevX+getWidth() <= hitBox.getX()) {
 					setX(hitBox.getX()-getWidth());
