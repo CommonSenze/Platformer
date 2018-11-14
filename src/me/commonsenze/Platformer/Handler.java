@@ -41,16 +41,17 @@ public class Handler {
 	}
 
 	public void tick() {
-		for (Renderable renderable : renderables) {
-			renderable.tick();
-		}
 		for (HitBox hitBox : hitBoxes) {
 			if (hitBox instanceof GameObject) {
 				GameObject object = (GameObject) hitBox;
 				if (object.getRole() == GameData.getSelectedCharacter())continue;
 			}
 			hitBox.setX(hitBox.getX()-Main.CAMERA.getSpeed());
+			hitBox.rebuild();
 			Main.CAMERA.setPosition(Main.CAMERA.getPosition()+Main.CAMERA.getSpeed());
+		}
+		for (Renderable renderable : renderables) {
+			renderable.tick();
 		}
 	}
 

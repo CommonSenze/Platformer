@@ -3,6 +3,8 @@ package me.commonsenze.Platformer.Util;
 import java.awt.Color;
 import java.awt.Rectangle;
 
+import me.commonsenze.Platformer.Handler;
+import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Util.Enums.Role;
 
@@ -19,6 +21,10 @@ public abstract class GameObject extends HitBox {
 		this.role = role;
 	}
 
+	public String getName() {
+		return role.name().substring(0, 1) + role.name().substring(1, role.name().length()).toLowerCase();
+	}
+
 	public Role getRole() {
 		return role;
 	}
@@ -30,7 +36,7 @@ public abstract class GameObject extends HitBox {
 	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
 	}
-	
+
 	public Color getColor() {
 		return color;
 	}
@@ -38,7 +44,7 @@ public abstract class GameObject extends HitBox {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	public boolean onFloor() {
 		return onFloor;
 	}
@@ -46,11 +52,11 @@ public abstract class GameObject extends HitBox {
 	public void setOnFloor(boolean onFloor) {
 		this.onFloor = onFloor;
 	}
-	
+
 	public float getVertical() {
 		return vertical;
 	}
-	
+
 	public void setVertical(float vertical) {
 		this.vertical = vertical;
 	}
@@ -58,9 +64,70 @@ public abstract class GameObject extends HitBox {
 	public float getVelocity() {
 		return velocity;
 	}
-	
+
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
+	}
+
+	@Override
+	public void walk() {
+		int prevX = getIntX();
+
+		// Extended level movement
+		if (getX()+getWidth() >= 900&&getVelocity() >0&&getRole() == GameData.getSelectedCharacter()) {
+			Main.CAMERA.setSpeed(5);
+		} else if (getX() < 100&&getVelocity()<0&&getRole() == GameData.getSelectedCharacter()) {
+			Main.CAMERA.setSpeed(-5);
+		} else {
+			// Renders James' x-axis movement to the JFrame
+			setX(getX()+getVelocity());
+			if(getRole() == GameData.getSelectedCharacter())Main.CAMERA.setSpeed(0);
+		}
+
+		rebuild();
+
+		boolean collide = false;
+
+		for (HitBox hitBox : Handler.getHitBoxes()) {
+			if (hitBox == this)continue;
+			// If James is in the wall, he will move out until he isn't in the wall anymore
+			if (hitBox.insideBlock(getCharacter())) {
+				if (Main.CAMERA.getSpeed() != 0) {
+					if (prevX+5 >= hitBox.getIntX()+hitBox.getWidth()) {
+						setX(hitBox.getX()+hitBox.getWidth());
+						Main.CAMERA.setSpeed(0);
+						collide = true;
+					} else if (prevX+getWidth()-5 <= hitBox.getIntX()) {
+						setX(hitBox.getX()-getWidth());
+						Main.CAMERA.setSpeed(0);
+						collide = true;
+					}
+				} else {
+					if (prevX >= hitBox.getIntX()+hitBox.getWidth()) {
+						setX(hitBox.getX()+hitBox.getWidth());
+						collide = true;
+					} else if (prevX+getWidth() <= hitBox.getIntX()) {
+						setX(hitBox.getX()-getWidth());
+						collide = true;
+					}
+				}
+			}
+		}
+
+		if (getRole() == GameData.getSelectedCharacter()) {
+
+			for (HitBox hitBox : Handler.getHitBoxes()) {
+				if (!(hitBox instanceof GameObject)||hitBox == this)continue;
+				if (prevX <= hitBox.getX()+hitBox.getWidth()&&prevX+getWidth() >= hitBox.getX()&&
+						getIntY() == hitBox.getIntY()+hitBox.getHeight()) {
+					GameObject object = (GameObject) hitBox;
+					if (!collide)object.setVelocity(getVelocity());
+				}
+			}
+		}
+
+		// Realigns getCharacter()'s x and y to GameObject's x and y.
+		rebuild();
 	}
 
 	public abstract void jump();

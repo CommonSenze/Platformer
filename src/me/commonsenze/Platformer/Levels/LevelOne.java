@@ -18,6 +18,8 @@ public class LevelOne extends Level {
 		add(new Block(-2, 0, 102, Main.HEIGHT));
 		
 		add(new Block(400, 150, 20, 20));
+		
+		add(new Block(Main.WIDTH+20, Main.HEIGHT-150, 200, 200));
 	}
 
 	@Override

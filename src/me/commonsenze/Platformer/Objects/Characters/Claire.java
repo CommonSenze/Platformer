@@ -7,7 +7,6 @@ import java.awt.Rectangle;
 import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.HitBox;
-import me.commonsenze.Platformer.Util.GameData;
 import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Renderable;
 import me.commonsenze.Platformer.Util.Enums.Role;
@@ -79,40 +78,5 @@ public class Claire extends GameObject implements Renderable {
 	// Claire' move speed up by 10 on the y-axis (jumps down)
 	public void jump() {
 		setVertical(5);
-	}
-
-	@Override
-	public void walk() {
-		if (getRole() != GameData.getSelectedCharacter())return;
-
-		int prevX = getIntX();
-
-		// Extended level movement
-		if (getX()+getWidth() >= 900&&getVelocity() >0) {
-			Main.CAMERA.setSpeed(5);
-		} else if (getX() < 100&&getVelocity()<0) {
-			Main.CAMERA.setSpeed(-5);
-		} else {
-			// Renders James' x-axis movement to the JFrame
-			setX(getX()+getVelocity());
-			Main.CAMERA.setSpeed(0);
-		}
-
-		rebuild();
-
-		for (HitBox hitBox : Handler.getHitBoxes()) {
-			if (hitBox == this)continue;
-			// If James is in the wall, he will move out until he isn't in the wall anymore
-			if (hitBox.insideBlock(getCharacter())) {
-				if (prevX >= hitBox.getX()+hitBox.getWidth()) {
-					setX(hitBox.getX()+hitBox.getWidth());
-				} else if (prevX+getWidth() <= hitBox.getX()) {
-					setX(hitBox.getX()-getWidth());
-				}
-			}
-		}
-
-		// Realigns getCharacter()'s x and y to GameObject's x and y.
-		rebuild();
 	}
 }
