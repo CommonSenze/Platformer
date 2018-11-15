@@ -24,8 +24,8 @@ public class Sarah extends GameObject implements Renderable {
 
 	@Override
 	public void tick() {
-		gravity();
 		walk();
+		gravity();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class Sarah extends GameObject implements Renderable {
 
 	// James' move speed up by 10 on the y-axis (jumps down)
 	public void jump() {
-		setVertical(6);
+		setVertical(10);
 	}
 
 }

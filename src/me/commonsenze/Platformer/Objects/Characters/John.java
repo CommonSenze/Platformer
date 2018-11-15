@@ -57,8 +57,8 @@ public class John extends GameObject implements Renderable {
 
 	@Override
 	public void tick() {
-		gravity();
 		walk();
+		gravity();
 	}
 
 	@Override

@@ -26,6 +26,7 @@ public class Laura extends GameObject implements Renderable {
 	public void tick() {
 		walk();
 		gravity();
+		special();
 	}
 
 	@Override
@@ -75,5 +76,16 @@ public class Laura extends GameObject implements Renderable {
 	// James' move speed up by 10 on the y-axis (jumps down)
 	public void jump() {
 		setVertical(6);
+	}
+	
+	public void special() {
+		for (HitBox hitBox : Handler.getHitBoxes()) {
+			if (!(hitBox instanceof GameObject)||hitBox == this)continue;
+			if (getIntX() <= hitBox.getX()+hitBox.getWidth()&&getIntX()+getWidth() >= hitBox.getX()) {
+				GameObject object = (GameObject) hitBox;
+				if (object.getFeet() == getIntY())
+					object.setVertical(15);
+			}
+		}
 	}
 }
