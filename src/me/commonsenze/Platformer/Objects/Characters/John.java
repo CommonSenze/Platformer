@@ -15,7 +15,7 @@ public class John extends GameObject implements Renderable {
 
 	// Constructor for James the character
 	public John() {
-		super(Role.JOHN, new Rectangle(20, 60), Color.YELLOW);
+		super(Role.JOHN, new Rectangle(20, 65), Color.YELLOW);
 		setX(Main.WIDTH/3-10);
 		setY(20);
 		rebuild();
@@ -66,6 +66,10 @@ public class John extends GameObject implements Renderable {
 		// James' color set to green and creates his rectangle
 		g.setColor(getColor());
 		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
+	}
+	
+	public int getFeet() {
+		return getIntY()+getHeight();
 	}
 
 	// James' move speed up by 10 on the y-axis (jumps down)

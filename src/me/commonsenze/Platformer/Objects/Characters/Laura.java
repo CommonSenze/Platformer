@@ -67,6 +67,10 @@ public class Laura extends GameObject implements Renderable {
 		// Realigns getCharacter()'s x and y to GameObject's x and y.
 		rebuild();
 	}
+	
+	public int getFeet() {
+		return getIntY()+getHeight();
+	}
 
 	// James' move speed up by 10 on the y-axis (jumps down)
 	public void jump() {

@@ -75,6 +75,10 @@ public class James extends GameObject implements Renderable {
 		g.setColor(getColor());
 		g.fillRect(getIntX(), getIntY(), getCharacter().width, getCharacter().height);
 	}
+	
+	public int getFeet() {
+		return getIntY();
+	}
 
 	// James' move speed up by 10 on the y-axis (jumps down)
 	public void jump() {

@@ -118,10 +118,10 @@ public abstract class GameObject extends HitBox {
 
 			for (HitBox hitBox : Handler.getHitBoxes()) {
 				if (!(hitBox instanceof GameObject)||hitBox == this)continue;
-				if (prevX <= hitBox.getX()+hitBox.getWidth()&&prevX+getWidth() >= hitBox.getX()&&
-						getIntY() == hitBox.getIntY()+hitBox.getHeight()) {
+				if (prevX <= hitBox.getX()+hitBox.getWidth()&&prevX+getWidth() >= hitBox.getX()) {
 					GameObject object = (GameObject) hitBox;
-					if (!collide)object.setVelocity(getVelocity());
+					if (object.getFeet() == getIntY()&&onFloor())
+						if (!collide)object.setVelocity(getVelocity());
 				}
 			}
 		}
@@ -129,6 +129,8 @@ public abstract class GameObject extends HitBox {
 		// Realigns getCharacter()'s x and y to GameObject's x and y.
 		rebuild();
 	}
+
+	public abstract int getFeet();
 
 	public abstract void jump();
 }
