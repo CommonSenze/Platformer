@@ -3,14 +3,12 @@ package me.commonsenze.Platformer.Levels.Util;
 import java.awt.Graphics;
 
 import me.commonsenze.Platformer.Handler;
-import me.commonsenze.Platformer.Levels.LevelOne;
 import me.commonsenze.Platformer.Objects.Block;
-import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Util.Renderable;
 
 public class LevelManager implements Renderable {
 
-	private Level level;
+	private Levels currentLevel;
 	private Handler handler;
 	
 	public LevelManager(Handler handler) {
@@ -20,28 +18,28 @@ public class LevelManager implements Renderable {
 	}
 	
 	public void start() {
-		level = new LevelOne(handler);
-		for (Block block : level.getBlocks())
+		currentLevel = Levels.ONE;
+		for (Block block : currentLevel.getLevel().getBlocks())
 			Handler.addHitBox(block);
 	}
 	
-	public Level getLevel() {
-		return level;
+	public Levels getLevel() {
+		return currentLevel;
 	}
 	
-	public void changeLevel(Level level) {
-		handler.removeRenderable(this.level);
-		this.level = level;
-		handler.addRenderable(level);
+	public void changeLevel(Levels currentLevel) {
+		handler.removeRenderable(this.currentLevel.getLevel());
+		this.currentLevel = currentLevel;
+		handler.addRenderable(currentLevel.getLevel());
 	}
 
 	@Override
 	public void tick() {
-		level.tick();
+		currentLevel.getLevel().tick();
 	}
 
 	@Override
 	public void render(Graphics g) {
-		level.render(g);
+		currentLevel.getLevel().render(g);
 	}
 }

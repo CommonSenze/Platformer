@@ -52,7 +52,7 @@ public class Claire extends GameObject implements Renderable {
 					setOnFloor(true);
 					setJumping(false);
 				} else if (prevY > hitBox.getIntY()) {
-					setVertical(-1);
+					setVertical(0);
 					setY(hitBox.getIntY()+hitBox.getHeight());
 				}
 			}
