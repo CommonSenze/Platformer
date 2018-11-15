@@ -5,9 +5,11 @@ import java.awt.event.KeyEvent;
 
 import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Main;
+import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class KeyInput extends KeyAdapter {
-
+	//setting a global double jump variable (maybe we can use it for challenges later, but also so it's only defined once.
+	int doubleJump;
 	private Handler handler;
 	
 	public KeyInput(Handler handler) {
@@ -17,7 +19,6 @@ public class KeyInput extends KeyAdapter {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-
 		for (int i = 0; i < handler.getObjects().size(); i++) {
 			GameObject object = handler.getObjects().get(i);
 			if (object.getRole() == GameData.getSelectedCharacter()) {
@@ -25,7 +26,18 @@ public class KeyInput extends KeyAdapter {
 					if (!object.isJumping()) {
 						object.jump();
 						object.setJumping(true);
+						doubleJump = 1;
+					}else if (object.getRole()== Role.SARAH)
+						{
+						if (!(doubleJump==0))
+						{
+					
+						
+						object.jump();
+						doubleJump = 0;
 					}
+						}
+					
 				}
 				
 				if (key == KeyEvent.VK_Q) {
