@@ -53,13 +53,15 @@ public class Sarah extends GameObject implements Renderable {
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
 				if (prevY+getHeight() <= hitBox.getIntY()) {
-					setVertical(-1);
+					setVertical(0);
 					setY(hitBox.getY()-getHeight());
 					setOnFloor(true);
 					setJumping(false);
 				} else if (prevY > hitBox.getIntY()) {
-					setVertical(-1);
+					setVertical(0);
 					setY(hitBox.getIntY()+hitBox.getHeight());
+				} else {
+					setY(prevY);
 				}
 			}
 		}

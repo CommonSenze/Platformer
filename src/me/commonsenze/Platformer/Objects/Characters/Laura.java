@@ -48,19 +48,21 @@ public class Laura extends GameObject implements Renderable {
 
 		// Realigns getCharacter()'s x and y to GameObject's x and y.
 		rebuild();
-
+		
 		for (HitBox hitBox : Handler.getHitBoxes()) {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevY+getHeight() <= hitBox.getIntY()) {
-					setVertical(-1);
+				if (prevY >= hitBox.getIntY()) {
+					setVertical(0);
+					setY(hitBox.getY()+hitBox.getHeight());
+				} else if (prevY+getHeight() <= hitBox.getIntY()) {
+					setVertical(0);
 					setY(hitBox.getY()-getHeight());
 					setOnFloor(true);
 					setJumping(false);
-				} else if (prevY > hitBox.getIntY()) {
-					setVertical(-1);
-					setY(hitBox.getIntY()+hitBox.getHeight());
+				} else {
+					setY(prevY);
 				}
 			}
 		}
@@ -68,7 +70,7 @@ public class Laura extends GameObject implements Renderable {
 		// Realigns getCharacter()'s x and y to GameObject's x and y.
 		rebuild();
 	}
-	
+
 	public int getFeet() {
 		return getIntY()+getHeight();
 	}
@@ -77,14 +79,22 @@ public class Laura extends GameObject implements Renderable {
 	public void jump() {
 		setVertical(6);
 	}
-	
+
 	public void special() {
 		for (HitBox hitBox : Handler.getHitBoxes()) {
 			if (!(hitBox instanceof GameObject)||hitBox == this)continue;
 			if (getIntX() < hitBox.getX()+hitBox.getWidth()&&getIntX()+getWidth() > hitBox.getX()) {
 				GameObject object = (GameObject) hitBox;
-				if (object.getFeet() == getIntY())
-					object.setVertical(15);
+				if (object.getFeet() == getIntY()) {
+					object.setY(getIntY()-object.getHeight());
+					object.setJumping(true);
+					int velocity = 15;
+					for (HitBox hB : Handler.getHitBoxes()) {
+						if (hB.getIntY() + hB.getHeight() == object.getIntY())
+							velocity = 0;
+					}
+					object.setVertical(velocity);
+				}
 			}
 		}
 	}

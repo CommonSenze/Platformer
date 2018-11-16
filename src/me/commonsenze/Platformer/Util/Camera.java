@@ -1,29 +1,50 @@
 package me.commonsenze.Platformer.Util;
 
+import java.awt.Point;
+
 public class Camera {
 
-	private int position, speed;
+	private int positionX, positionY, speedX,speedY;
 	private double zoom;
 	
-	public Camera(int position, int speed) {
-		this.position = position;
-		this.speed = speed;
+	public Camera(int positionX, int positionY, int speedX, int speedY) {
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.speedX = speedX;
+		this.speedY = speedY;
 	}
 
-	public int getPosition() {
-		return position;
+	public Point getPosition() {
+		return new Point(positionX, positionY);
 	}
 
-	public void setPosition(int position) {
-		this.position = position;
+	public void setPosition(Point point) {
+		this.positionX = point.x;
+		this.positionY = point.y;
+	}
+	
+	public void setX(int x) {
+		this.positionX = x;
+	}
+	
+	public void setY(int y) {
+		this.positionY = y;
 	}
 
-	public int getSpeed() {
-		return speed;
+	public int getXSpeed() {
+		return speedX;
 	}
 
-	public void setSpeed(int speed) {
-		this.speed = speed;
+	public void setXSpeed(int speedX) {
+		this.speedX = speedX;
+	}
+	
+	public int getYSpeed() {
+		return speedY;
+	}
+
+	public void setYSpeed(int speedY) {
+		this.speedY = speedY;
 	}
 	
 	public double getZoom() {

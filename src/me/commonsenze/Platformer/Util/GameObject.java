@@ -75,13 +75,13 @@ public abstract class GameObject extends HitBox {
 
 		// Extended level movement
 		if (getX()+getWidth() >= 900&&getVelocity() >0&&getRole() == GameData.getSelectedCharacter()) {
-			Main.CAMERA.setSpeed(5);
+			Main.CAMERA.setXSpeed(5);
 		} else if (getX() < 100&&getVelocity()<0&&getRole() == GameData.getSelectedCharacter()) {
-			Main.CAMERA.setSpeed(-5);
+			Main.CAMERA.setXSpeed(-5);
 		} else {
 			// Renders James' x-axis movement to the JFrame
 			setX(getX()+getVelocity());
-			if(getRole() == GameData.getSelectedCharacter())Main.CAMERA.setSpeed(0);
+			if(getRole() == GameData.getSelectedCharacter())Main.CAMERA.setXSpeed(0);
 		}
 
 		rebuild();
@@ -92,14 +92,14 @@ public abstract class GameObject extends HitBox {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
 			if (hitBox.insideBlock(getCharacter())) {
-				if (Main.CAMERA.getSpeed() != 0) {
+				if (Main.CAMERA.getXSpeed() != 0) {
 					if (prevX+5 >= hitBox.getIntX()+hitBox.getWidth()) {
 						setX(hitBox.getX()+hitBox.getWidth());
-						Main.CAMERA.setSpeed(0);
+						Main.CAMERA.setXSpeed(0);
 						collide = true;
 					} else if (prevX+getWidth()-5 <= hitBox.getIntX()) {
 						setX(hitBox.getX()-getWidth());
-						Main.CAMERA.setSpeed(0);
+						Main.CAMERA.setXSpeed(0);
 						collide = true;
 					}
 				} else {

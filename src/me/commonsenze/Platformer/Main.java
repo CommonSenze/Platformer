@@ -21,12 +21,13 @@ public class Main extends Canvas implements Runnable {
 	private static final long serialVersionUID = 2197924032874913024L;
 
 	public static final int WIDTH = 1000, HEIGHT = WIDTH /16*9;
+	public static final boolean DEV_MODE = true;
 	private Thread thread;
 	private Handler handler;
 	private MouseInput mouse;
 	private HUD hud;
 	public static boolean running = false;
-	public static final Camera CAMERA = new Camera(0, 0);
+	public static final Camera CAMERA = new Camera(0, 0, 0, 0);
 	
 	public Main() {
 		this.handler = new Handler();

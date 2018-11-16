@@ -22,13 +22,15 @@ public class Handler {
 	private ArrayList<Renderable> renderables = new ArrayList<>(), removeRend = new ArrayList<>();
 
 	public Handler() {
-		gameObjects.add(new Thomas());
-		gameObjects.add(new Laura());
-		gameObjects.add(new James());
-		gameObjects.add(new Chris());
-		gameObjects.add(new John());
-		gameObjects.add(new Claire());
-		gameObjects.add(new Sarah());
+		if (!Main.DEV_MODE) {
+			gameObjects.add(new Thomas());
+			gameObjects.add(new Laura());
+			gameObjects.add(new James());
+			gameObjects.add(new Chris());
+			gameObjects.add(new John());
+			gameObjects.add(new Claire());
+			gameObjects.add(new Sarah());
+		}
 
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject instanceof Renderable) {
@@ -46,9 +48,11 @@ public class Handler {
 				GameObject object = (GameObject) hitBox;
 				if (object.getRole() == GameData.getSelectedCharacter())continue;
 			}
-			hitBox.setX(hitBox.getX()-Main.CAMERA.getSpeed());
+			hitBox.setX(hitBox.getX()-Main.CAMERA.getXSpeed());
+			hitBox.setY(hitBox.getY()-Main.CAMERA.getYSpeed());
 			hitBox.rebuild();
-			Main.CAMERA.setPosition(Main.CAMERA.getPosition()+Main.CAMERA.getSpeed());
+			Main.CAMERA.setX(Main.CAMERA.getPosition().x+Main.CAMERA.getXSpeed());
+			Main.CAMERA.setY(Main.CAMERA.getPosition().y+Main.CAMERA.getYSpeed());
 		}
 		for (Renderable renderable : renderables) {
 			renderable.tick();
@@ -88,14 +92,14 @@ public class Handler {
 
 	public GameObject getObject(int x, String direction){
 		boolean right = direction.equalsIgnoreCase("Right");
-		
+
 		for (int i = 0; i < gameObjects.size(); i++) {
 			int slot = (right ? i+1:i-1);
 			if (slot == gameObjects.size())slot = 0;
 			if (slot == -1)slot = gameObjects.size()-1;
 			if (gameObjects.get(i).getRole() == GameData.getSelectedCharacter())return gameObjects.get(slot);
 		}
-		
+
 		return null;
 	}
 

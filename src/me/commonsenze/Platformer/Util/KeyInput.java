@@ -24,14 +24,16 @@ public class KeyInput extends KeyAdapter {
 			GameObject object = handler.getObjects().get(i);
 			if (object.getRole() == GameData.getSelectedCharacter()) {
 				if (key == KeyEvent.VK_W) {
-					if (!object.isJumping()) {
-						object.jump();
-						object.setJumping(true);
-						doubleJump = 1;
-					} else if (object.getRole() == Role.SARAH) {
-						if (!(doubleJump == 0)) {
+					if (!Main.DEV_MODE) {
+						if (!object.isJumping()) {
 							object.jump();
-							doubleJump = 0;
+							object.setJumping(true);
+							doubleJump = 1;
+						} else if (object.getRole() == Role.SARAH) {
+							if (!(doubleJump == 0)) {
+								object.jump();
+								doubleJump = 0;
+							}
 						}
 					}
 
@@ -46,19 +48,35 @@ public class KeyInput extends KeyAdapter {
 				}
 
 				if (key == KeyEvent.VK_A) {
-					object.setVelocity(-5);
+					if (!Main.DEV_MODE)
+						object.setVelocity(-5);
 				}
 				if (key == KeyEvent.VK_D) {
-					object.setVelocity(5);
-				}
-				if (key == KeyEvent.VK_F) {
-					Main.CAMERA.setZoom((Main.CAMERA.getZoom() + 0.1));
-				}
-				if (key == KeyEvent.VK_R) {
-					Main.CAMERA.setZoom((Main.CAMERA.getZoom() - 0.1));
+					if (!Main.DEV_MODE)
+						object.setVelocity(5);
 				}
 				break;
 			}
+		}
+		if (Main.DEV_MODE) {
+			if (key == KeyEvent.VK_W) {
+				Main.CAMERA.setYSpeed(-5);
+			}
+			if (key == KeyEvent.VK_A) {
+				Main.CAMERA.setXSpeed(-5);
+			}
+			if (key == KeyEvent.VK_D) {
+				Main.CAMERA.setXSpeed(5);
+			}
+			if (key == KeyEvent.VK_S) {
+				Main.CAMERA.setYSpeed(5);
+			}
+		}
+		if (key == KeyEvent.VK_F) {
+			Main.CAMERA.setZoom((Main.CAMERA.getZoom() + 0.1));
+		}
+		if (key == KeyEvent.VK_R) {
+			Main.CAMERA.setZoom((Main.CAMERA.getZoom() - 0.1));
 		}
 	}
 
@@ -79,11 +97,30 @@ public class KeyInput extends KeyAdapter {
 						object.setVelocity(0);
 				}
 
-				if (Main.CAMERA.getSpeed() != 0) {
-					Main.CAMERA.setSpeed(0);
-				}
 			} else
 				object.setVelocity(0);
+		}
+		if (Main.DEV_MODE) {
+			if (key == KeyEvent.VK_W) {
+				if (Main.CAMERA.getYSpeed() < 0) {
+					Main.CAMERA.setYSpeed(0);
+				}
+			}
+			if (key == KeyEvent.VK_S) {
+				if (Main.CAMERA.getYSpeed() > 0) {
+					Main.CAMERA.setYSpeed(0);
+				}
+			}
+			if (key == KeyEvent.VK_A) {
+				if (Main.CAMERA.getXSpeed() < 0) {
+					Main.CAMERA.setXSpeed(0);
+				}
+			}
+			if (key == KeyEvent.VK_D) {
+				if (Main.CAMERA.getXSpeed() > 0) {
+					Main.CAMERA.setXSpeed(0);
+				}
+			}
 		}
 	}
 }
