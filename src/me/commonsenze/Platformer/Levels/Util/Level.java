@@ -7,7 +7,7 @@ import me.commonsenze.Platformer.Util.Renderable;
 
 public abstract class Level implements Renderable {
 
-	private ArrayList<Block> blocks = new ArrayList<>();
+	protected ArrayList<Block> blocks = new ArrayList<>();
 	
 	public void add(Block block) {
 		blocks.add(block);
