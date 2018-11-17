@@ -20,6 +20,8 @@ public class Laura extends GameObject implements Renderable {
 		setX(Main.WIDTH/3+40); // Spawn Laura on the left third
 		setY(Main.HEIGHT/2); // Spawn Laura above the floor
 		rebuild();
+		
+		jump = 6;
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public class Laura extends GameObject implements Renderable {
 	@Override
 	public void gravity() {
 		// If James is not in the wall, jump is true and moves him to the floor by .5
-		setVertical(getVertical()-0.5F);
+		setVertical(getVertical()-getGravity());
 		setOnFloor(false);
 
 		int prevY = getIntY();
@@ -77,7 +79,7 @@ public class Laura extends GameObject implements Renderable {
 
 	// James' move speed up by 10 on the y-axis (jumps down)
 	public void jump() {
-		setVertical(6);
+		setVertical(jump);
 	}
 
 	public void special() {

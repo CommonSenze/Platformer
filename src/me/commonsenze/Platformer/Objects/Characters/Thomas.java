@@ -19,12 +19,13 @@ public class Thomas extends GameObject implements Renderable {
 		setX(Main.WIDTH/2);
 		setY(120);
 		rebuild();
+		jump = 10;
 	}
 
 	@Override
 	public void gravity() {
 		// If James is not in the wall, jump is true and moves him to the floor by .5
-		setVertical(getVertical()-0.5F);
+		setVertical(getVertical()-getGravity());
 		setOnFloor(false);
 
 		int prevY = getIntY();
@@ -75,6 +76,6 @@ public class Thomas extends GameObject implements Renderable {
 
 	// James' move speed up by 10 on the y-axis (jumps down)
 	public void jump() {
-		setVertical(10);
+		setVertical(jump);
 	}
 }

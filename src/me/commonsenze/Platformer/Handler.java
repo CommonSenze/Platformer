@@ -3,7 +3,9 @@ package me.commonsenze.Platformer;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import me.commonsenze.Platformer.Levels.Util.LevelManager;
 import me.commonsenze.Platformer.Objects.HitBox;
+import me.commonsenze.Platformer.Objects.Water;
 import me.commonsenze.Platformer.Objects.Characters.Chris;
 import me.commonsenze.Platformer.Objects.Characters.Claire;
 import me.commonsenze.Platformer.Objects.Characters.James;
@@ -13,6 +15,7 @@ import me.commonsenze.Platformer.Objects.Characters.Sarah;
 import me.commonsenze.Platformer.Objects.Characters.Thomas;
 import me.commonsenze.Platformer.Util.GameData;
 import me.commonsenze.Platformer.Util.GameObject;
+import me.commonsenze.Platformer.Util.Obstacles;
 import me.commonsenze.Platformer.Util.Renderable;
 
 public class Handler {
@@ -54,6 +57,14 @@ public class Handler {
 			Main.CAMERA.setX(Main.CAMERA.getPosition().x+Main.CAMERA.getXSpeed());
 			Main.CAMERA.setY(Main.CAMERA.getPosition().y+Main.CAMERA.getYSpeed());
 		}
+		for (Obstacles obs : LevelManager.getObstacles()) {
+			if (obs instanceof Water) {
+				Water water = (Water) obs;
+				water.setX(water.getIntX()-Main.CAMERA.getXSpeed());
+				water.setY(water.getIntY()-Main.CAMERA.getYSpeed());
+				water.rebuild();
+			}
+		}
 		for (Renderable renderable : renderables) {
 			renderable.tick();
 		}
@@ -61,6 +72,11 @@ public class Handler {
 
 	public void render(Graphics g) {
 		renderables.removeAll(removeRend);
+		for (Obstacles obs : LevelManager.getObstacles()) {
+			if (obs instanceof Water) {
+				obs.render(g);
+			}
+		}
 		for (Renderable renderable : renderables) {
 			renderable.render(g);
 		}

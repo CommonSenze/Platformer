@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import me.commonsenze.Platformer.Util.Renderable;
+import me.commonsenze.Platformer.Util.Obstacles;
 
-public class Block extends HitBox implements Renderable {
+public class Block extends HitBox implements Obstacles {
 	
 	public Block(int x, int y, int width, int height) {
 		this(new Rectangle(x,y,width,height));
@@ -25,7 +25,6 @@ public class Block extends HitBox implements Renderable {
 	public void render(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
-		
 	}
 
 	@Override

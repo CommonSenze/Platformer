@@ -2,12 +2,17 @@ package me.commonsenze.Platformer.Util;
 
 import java.awt.Point;
 
+import me.commonsenze.Platformer.Main;
+
 public class Camera {
 
 	private int positionX, positionY, speedX,speedY;
 	private double zoom;
 	
 	public Camera(int positionX, int positionY, int speedX, int speedY) {
+		if (Main.DEV_MODE) {
+			zoom = .8;
+		}
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.speedX = speedX;

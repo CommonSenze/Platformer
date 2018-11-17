@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Level;
 import me.commonsenze.Platformer.Objects.Block;
+import me.commonsenze.Platformer.Util.Obstacles;
 
 public class DevLevel extends Level {
 	
@@ -23,15 +24,15 @@ public class DevLevel extends Level {
 
 	@Override
 	public void tick() {
-		for (Block block : getBlocks()) {
-			block.tick();
+		for (Obstacles obs : getObstacles()) {
+			obs.tick();
 		}
 	}
 
 	@Override
 	public void render(Graphics g) {
-		for (Block block : getBlocks()) {
-			block.render(g);
+		for (Obstacles obs : getObstacles()) {
+			if (obs instanceof Block)obs.render(g);
 		}
 	}
 }

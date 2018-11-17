@@ -4,13 +4,14 @@ import java.awt.Rectangle;
 
 public abstract class HitBox {
 
-	private float x, y;
+	private float x, y, gravity;
 	private Rectangle character;
 	
 	public HitBox(Rectangle character) {
 		this.character = character;
 		this.y = character.y;
 		this.x = character.x;
+		this.gravity = 0.5F;
 	}
 	
 	/**
@@ -53,6 +54,20 @@ public abstract class HitBox {
 	 */
 	public void setY(float y) {
 		this.y = y;
+	}
+	
+	/**
+	 * This method returns the gravity value of the object.
+	 */
+	public float getGravity() {
+		return gravity;
+	}
+
+	/**
+	 * This method sets the gravity of the object.
+	 */
+	public void setGravity(float gravity) {
+		this.gravity = gravity;
 	}
 	
 	/**

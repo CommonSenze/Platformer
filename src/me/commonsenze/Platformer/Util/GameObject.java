@@ -14,6 +14,7 @@ public abstract class GameObject extends HitBox {
 	private Color color;
 	private float vertical, velocity = 0;
 	private boolean jumping, onFloor;
+	protected int jump;
 
 	public GameObject(Role role, Rectangle character, Color color) {
 		super(character);
@@ -67,6 +68,14 @@ public abstract class GameObject extends HitBox {
 
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
+	}
+	
+	public void setJump(int jump) {
+		this.jump = jump;
+	}
+	
+	public int getJump() {
+		return jump;
 	}
 
 	@Override
