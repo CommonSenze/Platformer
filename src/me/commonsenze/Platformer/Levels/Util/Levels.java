@@ -2,11 +2,13 @@ package me.commonsenze.Platformer.Levels.Util;
 
 import me.commonsenze.Platformer.Levels.DevLevel;
 import me.commonsenze.Platformer.Levels.Levels.LevelOne;
+import me.commonsenze.Platformer.Levels.Levels.LevelTwo;
 
 public enum Levels {
 
-	DEV(new DevLevel()),
-	ONE(new LevelOne());
+	ONE(new LevelOne()),
+	TWO(new LevelTwo()),
+	DEV(new DevLevel());
 	
 	private Level level;
 	
