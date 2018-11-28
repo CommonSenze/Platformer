@@ -4,16 +4,20 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import me.commonsenze.Platformer.Util.Obstacles;
+import me.commonsenze.Platformer.Levels.Util.Level;
+import me.commonsenze.Platformer.Util.Obstacle;
 
-public class Block extends HitBox implements Obstacles {
+public class Block extends HitBox implements Obstacle {
+
+	private Level level;
 	
-	public Block(int x, int y, int width, int height) {
-		this(new Rectangle(x,y,width,height));
+	public Block(int x, int y, int width, int height, Level level) {
+		this(new Rectangle(x,y,width,height), level);
 	}
 	
-	public Block(Rectangle character) {
+	public Block(Rectangle character, Level level) {
 		super(character);
+		this.level = level;
 	}
 	
 	@Override
@@ -25,6 +29,10 @@ public class Block extends HitBox implements Obstacles {
 	public void render(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
+	}
+	
+	public Level getLevel() {
+		return level;
 	}
 
 	@Override

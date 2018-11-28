@@ -5,22 +5,25 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import me.commonsenze.Platformer.Handler;
+import me.commonsenze.Platformer.Levels.Util.Level;
 import me.commonsenze.Platformer.Util.GameObject;
-import me.commonsenze.Platformer.Util.Obstacles;
+import me.commonsenze.Platformer.Util.Obstacle;
 
-public class Water implements Obstacles {
+public class Water implements Obstacle {
 
 	private float x, y;
 	private Rectangle character;
+	private Level level;
 
-	public Water(int x, int y, int width, int height) {
-		this(new Rectangle(x,y,width,height));
+	public Water(int x, int y, int width, int height, Level level) {
+		this(new Rectangle(x,y,width,height), level);
 	}
 
-	public Water(Rectangle character) {
+	public Water(Rectangle character, Level level) {
 		this.character = character;
 		this.x = getCharacter().x;
 		this.y = getCharacter().y;
+		this.level = level;
 	}
 
 	@Override
@@ -33,6 +36,10 @@ public class Water implements Obstacles {
 	public void render(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
+	}
+	
+	public Level getLevel() {
+		return level;
 	}
 
 	public void checkEntities() {

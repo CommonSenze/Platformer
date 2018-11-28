@@ -1,38 +1,44 @@
 package me.commonsenze.Platformer.Levels;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Level;
 import me.commonsenze.Platformer.Objects.Block;
-import me.commonsenze.Platformer.Util.Obstacles;
+import me.commonsenze.Platformer.Util.Obstacle;
 
 public class DevLevel extends Level {
 	
 	public DevLevel() {
 		// floor
-		add(new Block(0, Main.HEIGHT-100, Main.WIDTH+2000, 100));
+		add(new Block(0, Main.HEIGHT-100, Main.WIDTH+2000, 100, this));
 		// ceiling
-		add(new Block(0, 0, Main.WIDTH+2000, 70));
+		add(new Block(0, 0, Main.WIDTH+2000, 70, this));
 		// Left wall
-		add(new Block(-2, 0, 102, Main.HEIGHT));
+		add(new Block(-2, 0, 102, Main.HEIGHT, this));
 		
-		add(new Block(400, 150, 20, 20));
+		add(new Block(400, 150, 20, 20, this));
 		
-		add(new Block(Main.WIDTH+20, Main.HEIGHT-150, 200, 200));
+		add(new Block(Main.WIDTH+20, Main.HEIGHT-150, 200, 200, this));
 	}
 
 	@Override
 	public void tick() {
-		for (Obstacles obs : getObstacles()) {
+		for (Obstacle obs : getObstacles()) {
 			obs.tick();
 		}
 	}
 
 	@Override
 	public void render(Graphics g) {
-		for (Obstacles obs : getObstacles()) {
+		for (Obstacle obs : getObstacles()) {
 			if (obs instanceof Block)obs.render(g);
 		}
+	}
+	
+	@Override
+	public void loadFinishedSlots() {
+		addRectangle(new Rectangle(Main.WIDTH-200, Main.HEIGHT-200, 10,20));
 	}
 }

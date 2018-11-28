@@ -6,28 +6,28 @@ import java.util.ArrayList;
 import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.Block;
-import me.commonsenze.Platformer.Util.Obstacles;
+import me.commonsenze.Platformer.Util.Obstacle;
 import me.commonsenze.Platformer.Util.Renderable;
 
 public class LevelManager implements Renderable {
 
-	private Handler handler;
+	private static Handler handler;
 	
 	public LevelManager(Handler handler) {
-		this.handler = handler;
+		LevelManager.handler = handler;
 		start();
 		handler.addRenderable(this);
 	}
 	
 	public void start() {
 		Main.LEVEL = Levels.ONE;
-		for (Obstacles obs : Main.LEVEL.getLevel().getObstacles())
+		for (Obstacle obs : Main.LEVEL.getLevel().getObstacles())
 			if (obs instanceof Block) {
 				Handler.addHitBox((Block)obs);
 			}
 	}
 	
-	public static ArrayList<Obstacles> getObstacles(){
+	public static ArrayList<Obstacle> getObstacles(){
 		return Main.LEVEL.getLevel().getObstacles();
 	}
 	
@@ -35,10 +35,18 @@ public class LevelManager implements Renderable {
 		return Main.LEVEL;
 	}
 	
-	public void changeLevel(Levels currentLevel) {
+	public static void setLevel(Levels currentLevel) {
 		handler.removeRenderable(Main.LEVEL.getLevel());
+		for (Obstacle obs : Main.LEVEL.getLevel().getObstacles())
+			if (obs instanceof Block) {
+				Handler.removeHitBox((Block)obs);
+			}
 		Main.LEVEL = currentLevel;
 		handler.addRenderable(currentLevel.getLevel());
+		for (Obstacle obs : Main.LEVEL.getLevel().getObstacles())
+			if (obs instanceof Block) {
+				Handler.addHitBox((Block)obs);
+			}
 	}
 
 	@Override

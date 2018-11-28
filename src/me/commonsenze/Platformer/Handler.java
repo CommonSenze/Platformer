@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import me.commonsenze.Platformer.Levels.Util.LevelManager;
+import me.commonsenze.Platformer.Objects.Block;
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Objects.Water;
 import me.commonsenze.Platformer.Objects.Characters.Chris;
@@ -15,13 +16,13 @@ import me.commonsenze.Platformer.Objects.Characters.Sarah;
 import me.commonsenze.Platformer.Objects.Characters.Thomas;
 import me.commonsenze.Platformer.Util.GameData;
 import me.commonsenze.Platformer.Util.GameObject;
-import me.commonsenze.Platformer.Util.Obstacles;
+import me.commonsenze.Platformer.Util.Obstacle;
 import me.commonsenze.Platformer.Util.Renderable;
 
 public class Handler {
 
 	private ArrayList<GameObject> gameObjects = new ArrayList<>();
-	private static ArrayList<HitBox> hitBoxes = new ArrayList<>();
+	private static ArrayList<HitBox> hitBoxes = new ArrayList<>(), removeHit = new ArrayList<>();
 	private ArrayList<Renderable> renderables = new ArrayList<>(), removeRend = new ArrayList<>();
 
 	public Handler() {
@@ -46,10 +47,25 @@ public class Handler {
 	}
 
 	public void tick() {
-		for (HitBox hitBox : hitBoxes) {
+		ArrayList<Renderable> renders = new ArrayList<>(renderables);
+		ArrayList<HitBox> hits = new ArrayList<>(hitBoxes);
+		
+		for (Obstacle obs : LevelManager.getObstacles()) {
+			if (obs instanceof Water) {
+				Water water = (Water) obs;
+				if (water.getLevel() != Main.LEVEL.getLevel())continue;
+				water.setX(water.getIntX()-Main.CAMERA.getXSpeed());
+				water.setY(water.getIntY()-Main.CAMERA.getYSpeed());
+				water.rebuild();
+			}
+		}		
+		for (HitBox hitBox : hits) {
 			if (hitBox instanceof GameObject) {
 				GameObject object = (GameObject) hitBox;
 				if (object.getRole() == GameData.getSelectedCharacter())continue;
+			} else if (hitBox instanceof Block) {
+				Block block = (Block) hitBox;
+				if (block.getLevel() != Main.LEVEL.getLevel())continue;
 			}
 			hitBox.setX(hitBox.getX()-Main.CAMERA.getXSpeed());
 			hitBox.setY(hitBox.getY()-Main.CAMERA.getYSpeed());
@@ -57,29 +73,30 @@ public class Handler {
 			Main.CAMERA.setX(Main.CAMERA.getPosition().x+Main.CAMERA.getXSpeed());
 			Main.CAMERA.setY(Main.CAMERA.getPosition().y+Main.CAMERA.getYSpeed());
 		}
-		for (Obstacles obs : LevelManager.getObstacles()) {
-			if (obs instanceof Water) {
-				Water water = (Water) obs;
-				water.setX(water.getIntX()-Main.CAMERA.getXSpeed());
-				water.setY(water.getIntY()-Main.CAMERA.getYSpeed());
-				water.rebuild();
-			}
-		}
-		for (Renderable renderable : renderables) {
+		for (Renderable renderable : renders) {
 			renderable.tick();
 		}
+		
+		hitBoxes.removeAll(removeHit);
+		renderables.removeAll(removeRend);
+		removeHit.clear();
+		removeRend.clear();
 	}
 
 	public void render(Graphics g) {
-		renderables.removeAll(removeRend);
-		for (Obstacles obs : LevelManager.getObstacles()) {
+		ArrayList<Renderable> renders = new ArrayList<>(renderables);
+		
+		for (Obstacle obs : LevelManager.getObstacles()) {
 			if (obs instanceof Water) {
 				obs.render(g);
 			}
 		}
-		for (Renderable renderable : renderables) {
+		for (Renderable renderable : renders) {
 			renderable.render(g);
 		}
+		
+		renderables.removeAll(removeRend);
+		removeRend.clear();
 	}
 
 	public ArrayList<GameObject> getObjects(){
@@ -121,5 +138,9 @@ public class Handler {
 
 	public static void addHitBox(HitBox hitBox) {
 		hitBoxes.add(hitBox);
+	}
+	
+	public static void removeHitBox(HitBox hitBox) {
+		removeHit.add(hitBox);
 	}
 }

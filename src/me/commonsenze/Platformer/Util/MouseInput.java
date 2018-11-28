@@ -10,7 +10,7 @@ import me.commonsenze.Platformer.Main;
 
 public class MouseInput extends MouseAdapter {
 
-	private boolean clicked;
+	private static boolean clicked;
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -24,5 +24,9 @@ public class MouseInput extends MouseAdapter {
 			g.drawRect(Main.WIDTH/3, Main.HEIGHT*10/24, Main.WIDTH/3, Main.HEIGHT/6);
 			g.drawString("Click To Start", (Main.WIDTH/3)+((Main.WIDTH/3)/2)-95, (Main.HEIGHT*10/24)+55);
 		}
+	}
+	
+	public static void clicked() {
+		clicked = true;
 	}
 }

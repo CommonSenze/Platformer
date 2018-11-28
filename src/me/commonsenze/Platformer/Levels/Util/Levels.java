@@ -7,31 +7,45 @@ import me.commonsenze.Platformer.Levels.Levels.LevelTwo;
 
 public enum Levels {
 
-	ONE(new LevelOne()),
-	TWO(new LevelTwo()),
-	DEV(new DevLevel());
+	ONE(new LevelOne(), 1),
+	TWO(new LevelTwo(), 2),
+	DEV(new DevLevel(), 0);
 	
 	private Level level;
+	private int pointValue;
 	
-	private Levels(Level level) {
+	private Levels(Level level, int pointValue) {
 		this.level = level;
+		this.pointValue = pointValue;
 	}
 	
 	public Level getLevel() {
 		return level;
 	}
 	
-	public static Levels nextLevel() {
-		for (int i = 0; i < Levels.values().length; i++) {
-			if (Levels.values()[i] == Main.LEVEL)return Levels.values()[i+1];
-		}
-		return null;
+	public int getPointValue() {
+		return pointValue;
 	}
 	
-	public static Levels prevLevel() {
+	public static void nextLevel() {
 		for (int i = 0; i < Levels.values().length; i++) {
-			if (Levels.values()[i] == Main.LEVEL)return Levels.values()[i-1];
+			if (Levels.values()[i] == Main.LEVEL) {
+				int k = i+1;
+				if (k == Levels.values().length)k = 0;
+				LevelManager.setLevel(Levels.values()[k]);
+				break;
+			}
 		}
-		return null;
+	}
+	
+	public static void prevLevel() {
+		for (int i = 0; i < Levels.values().length; i++) {
+			if (Levels.values()[i] == Main.LEVEL){
+				int k = i-1;
+				if (k == -1)k = Levels.values().length-1;
+				LevelManager.setLevel(Levels.values()[k]);
+				break;
+			}
+		}
 	}
 }

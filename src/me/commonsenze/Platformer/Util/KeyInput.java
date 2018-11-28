@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Main;
+import me.commonsenze.Platformer.Levels.Util.Levels;
 import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class KeyInput extends KeyAdapter {
@@ -19,6 +20,7 @@ public class KeyInput extends KeyAdapter {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		MouseInput.clicked();
 		int key = e.getKeyCode();
 		for (int i = 0; i < handler.getObjects().size(); i++) {
 			GameObject object = handler.getObjects().get(i);
@@ -72,11 +74,11 @@ public class KeyInput extends KeyAdapter {
 				Main.CAMERA.setYSpeed(5);
 			}
 			if (key == KeyEvent.VK_Q) {
-				
+				Levels.prevLevel();
 			}
 
 			if (key == KeyEvent.VK_E) {
-				
+				Levels.nextLevel();
 			}
 		}
 		if (key == KeyEvent.VK_F) {
