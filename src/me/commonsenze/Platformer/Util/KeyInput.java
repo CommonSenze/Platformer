@@ -71,6 +71,13 @@ public class KeyInput extends KeyAdapter {
 			if (key == KeyEvent.VK_S) {
 				Main.CAMERA.setYSpeed(5);
 			}
+			if (key == KeyEvent.VK_Q) {
+				
+			}
+
+			if (key == KeyEvent.VK_E) {
+				
+			}
 		}
 		if (key == KeyEvent.VK_F) {
 			Main.CAMERA.setZoom((Main.CAMERA.getZoom() + 0.1));

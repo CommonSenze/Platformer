@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import me.commonsenze.Platformer.Levels.Util.LevelManager;
+import me.commonsenze.Platformer.Levels.Util.Levels;
 import me.commonsenze.Platformer.Util.Camera;
 import me.commonsenze.Platformer.Util.HUD;
 import me.commonsenze.Platformer.Util.KeyInput;
@@ -22,12 +23,14 @@ public class Main extends Canvas implements Runnable {
 
 	public static final int WIDTH = 1000, HEIGHT = WIDTH /16*9;
 	public static final boolean DEV_MODE = true;
+	public static boolean running = false;
+	public static final Camera CAMERA = new Camera(0, 0, 0, 0);
+	public static Levels LEVEL;
+	
 	private Thread thread;
 	private Handler handler;
 	private MouseInput mouse;
 	private HUD hud;
-	public static boolean running = false;
-	public static final Camera CAMERA = new Camera(0, 0, 0, 0);
 	
 	public Main() {
 		this.handler = new Handler();
