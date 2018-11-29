@@ -9,14 +9,14 @@ import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Renderable;
-import me.commonsenze.Platformer.Util.Enums.Role;
+import me.commonsenze.Platformer.Util.Enums.Classifier;
 
 
 public class Sarah extends GameObject implements Renderable {
 
 
 	public Sarah() {
-		super(Role.SARAH, new Rectangle(15, 20), new Color(128, 0, 128)); // Sarah's length == 50, height == 20
+		super(Classifier.SARAH, new Rectangle(15, 20), new Color(128, 0, 128)); // Sarah's length == 50, height == 20
 		setX(Main.WIDTH/3-50); // Spawn Sarah on the left third
 		setY(Main.HEIGHT/2); // Spawn Sarah above the floor
 		rebuild();

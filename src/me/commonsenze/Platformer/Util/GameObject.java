@@ -6,28 +6,28 @@ import java.awt.Rectangle;
 import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.HitBox;
-import me.commonsenze.Platformer.Util.Enums.Role;
+import me.commonsenze.Platformer.Util.Enums.Classifier;
 
 public abstract class GameObject extends HitBox {
 
-	private Role role;
+	private Classifier classifier;
 	private Color color;
 	private float vertical, velocity = 0;
 	private boolean jumping, onFloor;
 	protected int jump;
 
-	public GameObject(Role role, Rectangle character, Color color) {
+	public GameObject(Classifier classifier, Rectangle character, Color color) {
 		super(character);
 		this.color = color;
-		this.role = role;
+		this.classifier = classifier;
 	}
 
 	public String getName() {
-		return role.name().substring(0, 1) + role.name().substring(1, role.name().length()).toLowerCase();
+		return classifier.name().substring(0, 1) + classifier.name().substring(1, classifier.name().length()).toLowerCase();
 	}
 
-	public Role getRole() {
-		return role;
+	public Classifier getClassifier() {
+		return classifier;
 	}
 
 	public boolean isJumping() {
@@ -83,14 +83,14 @@ public abstract class GameObject extends HitBox {
 		int prevX = getIntX();
 
 		// Extended level movement
-		if (getX()+getWidth() >= 900&&getVelocity() >0&&getRole() == GameData.getSelectedCharacter()) {
+		if (getX()+getWidth() >= 900&&getVelocity() >0&&getClassifier() == GameData.getSelectedCharacter()) {
 			Main.CAMERA.setXSpeed(5);
-		} else if (getX() < 100&&getVelocity()<0&&getRole() == GameData.getSelectedCharacter()) {
+		} else if (getX() < 100&&getVelocity()<0&&getClassifier() == GameData.getSelectedCharacter()) {
 			Main.CAMERA.setXSpeed(-5);
 		} else {
 			// Renders James' x-axis movement to the JFrame
 			setX(getX()+getVelocity());
-			if(getRole() == GameData.getSelectedCharacter())Main.CAMERA.setXSpeed(0);
+			if(getClassifier() == GameData.getSelectedCharacter())Main.CAMERA.setXSpeed(0);
 		}
 
 		rebuild();
@@ -123,7 +123,7 @@ public abstract class GameObject extends HitBox {
 			}
 		}
 
-		if (getRole() == GameData.getSelectedCharacter()) {
+		if (getClassifier() == GameData.getSelectedCharacter()) {
 
 			for (HitBox hitBox : Handler.getHitBoxes()) {
 				if (!(hitBox instanceof GameObject)||hitBox == this)continue;

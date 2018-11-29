@@ -9,7 +9,7 @@ import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Renderable;
-import me.commonsenze.Platformer.Util.Enums.Role;
+import me.commonsenze.Platformer.Util.Enums.Classifier;
 
 public class Claire extends GameObject implements Renderable {
 
@@ -17,7 +17,7 @@ public class Claire extends GameObject implements Renderable {
 	public Claire() {
 		// This super constructor sets the Role of the character to individualize the class, set the rectangle of the character
 		// so we can render his body and hit box, and set the color of what we want the rectangle to be.
-		super(Role.CLAIRE, new Rectangle(60, 60), Color.CYAN);
+		super(Classifier.CLAIRE, new Rectangle(60, 60), Color.CYAN);
 		
 		// While in the constructor, we set the X and Y of the character as the starting positions
 		// Keep in mind, positive X is from left to right, positive Y is from TOP TO BOTTOM

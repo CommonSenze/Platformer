@@ -8,6 +8,7 @@ import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Level;
 import me.commonsenze.Platformer.Objects.Block;
 import me.commonsenze.Platformer.Util.Obstacle;
+import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class LevelOne extends Level {
 
@@ -43,23 +44,27 @@ public class LevelOne extends Level {
 		for (Obstacle obs : getObstacles()) {
 			obs.tick();
 		}
+		for (Rectangle rectangle : getFinishSlots()) {
+			rectangle.setBounds(rectangle.x-Main.CAMERA.getXSpeed(), rectangle.y-Main.CAMERA.getYSpeed(), rectangle.width, rectangle.height);
+		}
 	}
 
 	@Override
 	public void render(Graphics g) {
-		for (Obstacle obs : getObstacles()) {
-			if (obs instanceof Block)obs.render(g);
-		}
 		for (Rectangle rectangle : getFinishSlots()) {
 			g.setColor(Color.WHITE);
-			g.fillRect(rectangle.x-5, rectangle.y-5, rectangle.width+10, rectangle.height+10);
+			g.fillRect(rectangle.x-4, rectangle.y-4, rectangle.width+8, rectangle.height+8);
 			g.setColor(Color.BLACK);
 			g.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+		}
+		for (Obstacle obs : getObstacles()) {
+			if (obs instanceof Block)obs.render(g);
 		}
 	}
 
 	@Override
 	public void loadFinishedSlots() {
-		addRectangle(new Rectangle(Main.WIDTH-200, Main.HEIGHT-200, 10,20));
+		addRectangle(new Rectangle(Main.WIDTH-200, Main.HEIGHT-104-Role.THOMAS.getGameObject().getHeight(), Role.THOMAS.getGameObject().getWidth()
+				,Role.THOMAS.getGameObject().getHeight()));
 	}
 }

@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Levels;
-import me.commonsenze.Platformer.Util.Enums.Role;
+import me.commonsenze.Platformer.Util.Enums.Classifier;
 
 public class KeyInput extends KeyAdapter {
 	// setting a global double jump variable (maybe we can use it for challenges
@@ -24,14 +24,14 @@ public class KeyInput extends KeyAdapter {
 		int key = e.getKeyCode();
 		for (int i = 0; i < handler.getObjects().size(); i++) {
 			GameObject object = handler.getObjects().get(i);
-			if (object.getRole() == GameData.getSelectedCharacter()) {
+			if (object.getClassifier() == GameData.getSelectedCharacter()) {
 				if (key == KeyEvent.VK_W) {
 					if (!Main.DEV_MODE) {
 						if (!object.isJumping()) {
 							object.jump();
 							object.setJumping(true);
 							doubleJump = 1;
-						} else if (object.getRole() == Role.SARAH) {
+						} else if (object.getClassifier() == Classifier.SARAH) {
 							if (!(doubleJump == 0)) {
 								object.jump();
 								doubleJump = 0;
@@ -42,11 +42,11 @@ public class KeyInput extends KeyAdapter {
 				}
 
 				if (key == KeyEvent.VK_Q) {
-					GameData.setCharacter(handler.getObject(object.getIntX(), "Left").getRole());
+					GameData.setCharacter(handler.getObject(object.getIntX(), "Left").getClassifier());
 				}
 
 				if (key == KeyEvent.VK_E) {
-					GameData.setCharacter(handler.getObject(object.getIntX(), "Right").getRole());
+					GameData.setCharacter(handler.getObject(object.getIntX(), "Right").getClassifier());
 				}
 
 				if (key == KeyEvent.VK_A) {
@@ -95,7 +95,7 @@ public class KeyInput extends KeyAdapter {
 
 		for (int i = 0; i < handler.getObjects().size(); i++) {
 			GameObject object = handler.getObjects().get(i);
-			if (object.getRole() == GameData.getSelectedCharacter()) {
+			if (object.getClassifier() == GameData.getSelectedCharacter()) {
 
 				if (key == KeyEvent.VK_A) {
 					if (object.getVelocity() == -5)

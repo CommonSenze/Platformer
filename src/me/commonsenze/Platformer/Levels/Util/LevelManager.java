@@ -11,10 +11,8 @@ import me.commonsenze.Platformer.Util.Renderable;
 
 public class LevelManager implements Renderable {
 
-	private static Handler handler;
 	
 	public LevelManager(Handler handler) {
-		LevelManager.handler = handler;
 		start();
 		handler.addRenderable(this);
 	}
@@ -36,13 +34,11 @@ public class LevelManager implements Renderable {
 	}
 	
 	public static void setLevel(Levels currentLevel) {
-		handler.removeRenderable(Main.LEVEL.getLevel());
 		for (Obstacle obs : Main.LEVEL.getLevel().getObstacles())
 			if (obs instanceof Block) {
 				Handler.removeHitBox((Block)obs);
 			}
 		Main.LEVEL = currentLevel;
-		handler.addRenderable(currentLevel.getLevel());
 		for (Obstacle obs : Main.LEVEL.getLevel().getObstacles())
 			if (obs instanceof Block) {
 				Handler.addHitBox((Block)obs);

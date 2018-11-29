@@ -7,33 +7,23 @@ import me.commonsenze.Platformer.Levels.Util.LevelManager;
 import me.commonsenze.Platformer.Objects.Block;
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Objects.Water;
-import me.commonsenze.Platformer.Objects.Characters.Chris;
-import me.commonsenze.Platformer.Objects.Characters.Claire;
-import me.commonsenze.Platformer.Objects.Characters.James;
-import me.commonsenze.Platformer.Objects.Characters.John;
-import me.commonsenze.Platformer.Objects.Characters.Laura;
-import me.commonsenze.Platformer.Objects.Characters.Sarah;
-import me.commonsenze.Platformer.Objects.Characters.Thomas;
 import me.commonsenze.Platformer.Util.GameData;
 import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Obstacle;
 import me.commonsenze.Platformer.Util.Renderable;
+import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class Handler {
 
-	private ArrayList<GameObject> gameObjects = new ArrayList<>();
+	private static ArrayList<GameObject> gameObjects = new ArrayList<>();
 	private static ArrayList<HitBox> hitBoxes = new ArrayList<>(), removeHit = new ArrayList<>();
 	private ArrayList<Renderable> renderables = new ArrayList<>(), removeRend = new ArrayList<>();
 
 	public Handler() {
 		if (!Main.DEV_MODE) {
-			gameObjects.add(new Thomas());
-			gameObjects.add(new Laura());
-			gameObjects.add(new James());
-			gameObjects.add(new Chris());
-			gameObjects.add(new John());
-			gameObjects.add(new Claire());
-			gameObjects.add(new Sarah());
+			for (Role role : Role.values()) {
+				gameObjects.add(role.getGameObject());
+			}
 		}
 
 		for (GameObject gameObject : gameObjects) {
@@ -62,7 +52,7 @@ public class Handler {
 		for (HitBox hitBox : hits) {
 			if (hitBox instanceof GameObject) {
 				GameObject object = (GameObject) hitBox;
-				if (object.getRole() == GameData.getSelectedCharacter())continue;
+				if (object.getClassifier() == GameData.getSelectedCharacter())continue;
 			} else if (hitBox instanceof Block) {
 				Block block = (Block) hitBox;
 				if (block.getLevel() != Main.LEVEL.getLevel())continue;
@@ -103,7 +93,7 @@ public class Handler {
 		return gameObjects;
 	}
 
-	public void addGameObject(GameObject object) {
+	public static void addGameObject(GameObject object) {
 		gameObjects.add(object);
 	}
 
@@ -112,6 +102,7 @@ public class Handler {
 	}
 
 	public void addRenderable(Renderable renderable) {
+		if (renderables.contains(renderable))System.out.println("called "+renderable.getClass());
 		renderables.add(renderable);
 	}
 
@@ -130,7 +121,7 @@ public class Handler {
 			int slot = (right ? i+1:i-1);
 			if (slot == gameObjects.size())slot = 0;
 			if (slot == -1)slot = gameObjects.size()-1;
-			if (gameObjects.get(i).getRole() == GameData.getSelectedCharacter())return gameObjects.get(slot);
+			if (gameObjects.get(i).getClassifier() == GameData.getSelectedCharacter())return gameObjects.get(slot);
 		}
 
 		return null;

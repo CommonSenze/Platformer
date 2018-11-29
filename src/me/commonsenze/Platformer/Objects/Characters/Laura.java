@@ -9,18 +9,17 @@ import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Renderable;
-import me.commonsenze.Platformer.Util.Enums.Role;
+import me.commonsenze.Platformer.Util.Enums.Classifier;
 
 
 public class Laura extends GameObject implements Renderable {
 
 
 	public Laura() {
-		super(Role.LAURA, new Rectangle(70, 15), new Color(200, 150, 150)); // Laura's length == 50, height == 20
+		super(Classifier.LAURA, new Rectangle(70, 15), new Color(200, 150, 150)); // Laura's length == 50, height == 20
 		setX(Main.WIDTH/3+40); // Spawn Laura on the left third
 		setY(Main.HEIGHT/2); // Spawn Laura above the floor
 		rebuild();
-		
 		jump = 6;
 	}
 

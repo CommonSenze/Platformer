@@ -9,13 +9,13 @@ import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Renderable;
-import me.commonsenze.Platformer.Util.Enums.Role;
+import me.commonsenze.Platformer.Util.Enums.Classifier;
 
 public class Thomas extends GameObject implements Renderable {
 
 	// Constructor for James the character
 	public Thomas() {
-		super(Role.THOMAS, new Rectangle(20, 30), Color.RED);
+		super(Classifier.THOMAS, new Rectangle(20, 30), Color.RED);
 		setX(Main.WIDTH/2);
 		setY(120);
 		rebuild();
