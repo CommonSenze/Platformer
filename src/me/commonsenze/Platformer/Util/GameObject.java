@@ -15,6 +15,7 @@ public abstract class GameObject extends HitBox {
 	private float vertical, velocity = 0;
 	private boolean jumping, onFloor;
 	protected int jump;
+	private boolean finished;
 
 	public GameObject(Classifier classifier, Rectangle character, Color color) {
 		super(character);
@@ -36,6 +37,14 @@ public abstract class GameObject extends HitBox {
 
 	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
+	}
+	
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+	
+	public boolean isFinished() {
+		return finished;
 	}
 
 	public Color getColor() {

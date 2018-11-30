@@ -11,21 +11,35 @@ import me.commonsenze.Platformer.Util.GameObject;
 
 public enum Role {
 
-	THOMAS(new Thomas()),
-	CHRIS(new Chris()),
-	JOHN(new John()),
-	CLAIRE(new Claire()),
-	LAURA(new Laura()),
-	JAMES(new James()),
-	SARAH(new Sarah());
+	THOMAS(new Thomas(),1),
+	CHRIS(new Chris(),2),
+	JOHN(new John(),2),
+	CLAIRE(new Claire(),3),
+	LAURA(new Laura(),4),
+	JAMES(new James(),6),
+	SARAH(new Sarah(),8);
 
 	private GameObject object;
+	private int level;
 	
-	private Role(GameObject object) {
+	private Role(GameObject object, int level) {
 		this.object = object;
+		this.level = level;
 	}
 	
 	public GameObject getGameObject() {
 		return object;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public boolean isUnlocked(int level) {
+		return this.level <= level;
+	}
+	
+	public static Role getByClassifier(Classifier classifier) {
+		return Role.valueOf(classifier.name().toUpperCase());
 	}
 }

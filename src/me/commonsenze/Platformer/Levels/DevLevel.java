@@ -1,7 +1,6 @@
 package me.commonsenze.Platformer.Levels;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Level;
@@ -35,10 +34,5 @@ public class DevLevel extends Level {
 		for (Obstacle obs : getObstacles()) {
 			if (obs instanceof Block)obs.render(g);
 		}
-	}
-	
-	@Override
-	public void loadFinishedSlots() {
-		addRectangle(new Rectangle(Main.WIDTH-200, Main.HEIGHT-200, 10,20));
 	}
 }

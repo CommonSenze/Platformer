@@ -48,4 +48,11 @@ public enum Levels {
 			}
 		}
 	}
+	
+	public static Levels parseLevel(Level level) {
+		for (Levels levels : Levels.values()) {
+			if (levels.getLevel().equals(level))return levels;
+		}
+		return null;
+	}
 }

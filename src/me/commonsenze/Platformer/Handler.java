@@ -17,12 +17,13 @@ public class Handler {
 
 	private static ArrayList<GameObject> gameObjects = new ArrayList<>();
 	private static ArrayList<HitBox> hitBoxes = new ArrayList<>(), removeHit = new ArrayList<>();
-	private ArrayList<Renderable> renderables = new ArrayList<>(), removeRend = new ArrayList<>();
+	private static ArrayList<Renderable> renderables = new ArrayList<>(), removeRend = new ArrayList<>();
 
 	public Handler() {
 		if (!Main.DEV_MODE) {
 			for (Role role : Role.values()) {
-				gameObjects.add(role.getGameObject());
+				if (role.isUnlocked(Main.LEVEL.getPointValue()))
+					gameObjects.add(role.getGameObject());
 			}
 		}
 
@@ -39,7 +40,7 @@ public class Handler {
 	public void tick() {
 		ArrayList<Renderable> renders = new ArrayList<>(renderables);
 		ArrayList<HitBox> hits = new ArrayList<>(hitBoxes);
-		
+
 		for (Obstacle obs : LevelManager.getObstacles()) {
 			if (obs instanceof Water) {
 				Water water = (Water) obs;
@@ -66,7 +67,7 @@ public class Handler {
 		for (Renderable renderable : renders) {
 			renderable.tick();
 		}
-		
+
 		hitBoxes.removeAll(removeHit);
 		renderables.removeAll(removeRend);
 		removeHit.clear();
@@ -75,7 +76,7 @@ public class Handler {
 
 	public void render(Graphics g) {
 		ArrayList<Renderable> renders = new ArrayList<>(renderables);
-		
+
 		for (Obstacle obs : LevelManager.getObstacles()) {
 			if (obs instanceof Water) {
 				obs.render(g);
@@ -84,7 +85,7 @@ public class Handler {
 		for (Renderable renderable : renders) {
 			renderable.render(g);
 		}
-		
+
 		renderables.removeAll(removeRend);
 		removeRend.clear();
 	}
@@ -101,9 +102,11 @@ public class Handler {
 		gameObjects.remove(object);
 	}
 
-	public void addRenderable(Renderable renderable) {
-		if (renderables.contains(renderable))System.out.println("called "+renderable.getClass());
-		renderables.add(renderable);
+	public static void addRenderable(Renderable renderable) {
+		if (renderable instanceof LevelManager) {
+			renderables.add(0, renderable);
+		}
+		else renderables.add(renderable);
 	}
 
 	public void removeRenderable(Renderable renderable) {
@@ -130,7 +133,7 @@ public class Handler {
 	public static void addHitBox(HitBox hitBox) {
 		hitBoxes.add(hitBox);
 	}
-	
+
 	public static void removeHitBox(HitBox hitBox) {
 		removeHit.add(hitBox);
 	}

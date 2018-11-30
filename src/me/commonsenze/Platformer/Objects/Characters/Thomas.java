@@ -66,7 +66,8 @@ public class Thomas extends GameObject implements Renderable {
 	@Override
 	public void render(Graphics g) {
 		// Claire' color set to green and creates his rectangle
-		g.setColor(getColor());
+		if (isFinished())g.setColor(Color.WHITE);
+		else g.setColor(getColor());
 		g.fillRect(getIntX(), getIntY(), getCharacter().width, getCharacter().height);
 	}
 	
