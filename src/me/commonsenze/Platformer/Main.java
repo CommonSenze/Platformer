@@ -39,7 +39,7 @@ public class Main extends Canvas implements Runnable {
 		this.hud = new HUD(handler);
 		new LevelManager();
 		
-		this.gameData = new GameData(handler);
+		Main.gameData = new GameData(handler);
 		
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(mouse = new MouseInput());
@@ -83,6 +83,10 @@ public class Main extends Canvas implements Runnable {
 				render();
 		}
 		stop();
+	}
+	
+	public GameData getGameData() {
+		return gameData;
 	}
 	
 	private void tick() {

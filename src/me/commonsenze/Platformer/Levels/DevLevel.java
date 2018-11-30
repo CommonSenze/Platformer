@@ -11,7 +11,7 @@ public class DevLevel extends Level {
 	
 	public DevLevel() {
 		// floor
-		add(new Block(0, Main.HEIGHT-100, Main.WIDTH+2000, 100, this));
+		addFloor(new Block(0, Main.HEIGHT-100, Main.WIDTH+2000, 100, this));
 		// ceiling
 		add(new Block(0, 0, Main.WIDTH+2000, 70, this));
 		// Left wall
@@ -34,5 +34,17 @@ public class DevLevel extends Level {
 		for (Obstacle obs : getObstacles()) {
 			if (obs instanceof Block)obs.render(g);
 		}
+	}
+
+	@Override
+	public int getFinishedXPlace() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getFinishedYPlace() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

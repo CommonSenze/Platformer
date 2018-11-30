@@ -26,7 +26,7 @@ public class LevelManager implements Renderable {
 			if (obs instanceof Block) {
 				Handler.addHitBox((Block)obs);
 			}
-		reloadFinishedSlots();
+		reloadFinishedSlots(Main.LEVEL.getLevel().getFinishedXPlace(), Main.LEVEL.getLevel().getFinishedYPlace());
 	}
 	
 	public static ArrayList<Obstacle> getObstacles(){
@@ -47,7 +47,7 @@ public class LevelManager implements Renderable {
 			if (obs instanceof Block) {
 				Handler.addHitBox((Block)obs);
 			}
-		reloadFinishedSlots();
+		reloadFinishedSlots(Main.LEVEL.getLevel().getFinishedXPlace(), Main.LEVEL.getLevel().getFinishedYPlace());
 	}
 
 	@Override
@@ -80,11 +80,12 @@ public class LevelManager implements Renderable {
 		return finishedSlots;
 	}
 	
-	public static void reloadFinishedSlots() {
+	public static void reloadFinishedSlots(int x, int y) {
 		finishedSlots.clear();
 		for (Role role : Role.values()) {
 			if (role.isUnlocked(Main.LEVEL.getPointValue())) {
-				finishedSlots.add(new Silhouette(Main.WIDTH-100, Main.HEIGHT-100-role.getGameObject().getHeight(),role));
+				finishedSlots.add(new Silhouette(x, y-role.getGameObject().getHeight(),role));
+				x+=role.getGameObject().getWidth()+10;
 			}
 		}
 	}

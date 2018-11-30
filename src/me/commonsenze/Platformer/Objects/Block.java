@@ -40,4 +40,9 @@ public class Block extends HitBox implements Obstacle {
 
 	@Override
 	public void walk() {}
+	
+	@Override
+	public Rectangle getObsticale() {
+		return getCharacter();
+	}
 }

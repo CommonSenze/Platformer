@@ -59,6 +59,11 @@ public class Water implements Obstacle {
 		}
 	}
 
+	@Override
+	public Rectangle getObsticale() {
+		return getCharacter();
+	}
+	
 	public Rectangle getCharacter() {
 		return character;
 	}

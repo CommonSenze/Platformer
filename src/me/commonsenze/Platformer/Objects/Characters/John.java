@@ -69,7 +69,8 @@ public class John extends GameObject implements Renderable {
 	@Override
 	public void render(Graphics g) {
 		// James' color set to green and creates his rectangle
-		g.setColor(getColor());
+		if (isFinished())g.setColor(Color.WHITE);
+		else g.setColor(getColor());
 		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
 	}
 	

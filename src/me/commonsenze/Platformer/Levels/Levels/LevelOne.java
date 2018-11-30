@@ -8,9 +8,9 @@ import me.commonsenze.Platformer.Objects.Block;
 import me.commonsenze.Platformer.Util.Obstacle;
 
 public class LevelOne extends Level {
-
+	
 	public LevelOne() {
-		int x = floor();
+		floor();
 		// ceiling
 		ceiling();
 
@@ -18,15 +18,12 @@ public class LevelOne extends Level {
 		add(new Block(-2, 0, 102, Main.HEIGHT, this));
 
 		// Right wall
-		add(new Block(x, 0, 100, Main.HEIGHT, this));
+		add(new Block(getWidth(), 0, 100, Main.HEIGHT, this));
 	}
 
-	private int floor() {
-		int x = 0;
+	private void floor() {
 		// X = 0 to 1000
-		add(new Block(x, Main.HEIGHT-100, Main.WIDTH, 100, this));
-		x += Main.WIDTH;
-		return x;
+		addFloor(new Block(getWidth(), Main.HEIGHT-100, Main.WIDTH, 100, this));
 	}
 
 	private void ceiling() {
@@ -46,5 +43,13 @@ public class LevelOne extends Level {
 		for (Obstacle obs : getObstacles()) {
 			if (obs instanceof Block)obs.render(g);
 		}
+	}
+	
+	public int getFinishedXPlace() {
+		return getWidth()-100;
+	}
+	
+	public int getFinishedYPlace() {
+		return getHieght();
 	}
 }

@@ -13,9 +13,9 @@ public enum Role {
 
 	THOMAS(new Thomas(),1),
 	CHRIS(new Chris(),2),
-	JOHN(new John(),2),
-	CLAIRE(new Claire(),3),
-	LAURA(new Laura(),4),
+	JOHN(new John(),5),
+	CLAIRE(new Claire(),4),
+	LAURA(new Laura(),3),
 	JAMES(new James(),6),
 	SARAH(new Sarah(),8);
 

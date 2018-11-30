@@ -9,9 +9,9 @@ import me.commonsenze.Platformer.Objects.Water;
 import me.commonsenze.Platformer.Util.Obstacle;
 
 public class LevelTwo extends Level {
-
+	
 	public LevelTwo() {
-		int x = floor();
+		floor();
 		// ceiling
 		ceiling();
 
@@ -19,32 +19,24 @@ public class LevelTwo extends Level {
 		add(new Block(-2, 0, 102, Main.HEIGHT, this));
 
 		// Right wall
-		add(new Block(x, 0, 100, Main.HEIGHT, this));
+		add(new Block(getWidth(), 0, 100, Main.HEIGHT, this));
 	}
 
-	private int floor() {
-		int x = 0;
+	private void floor() {
 		// X = 0 to 1000
-		add(new Block(x, Main.HEIGHT-100, Main.WIDTH, 100, this));
-		x += Main.WIDTH;
+		addFloor(new Block(getWidth(), Main.HEIGHT-100, Main.WIDTH, 100, this));
 		// X = 1000 to 1200
-		add(new Block(x, Main.HEIGHT-150, 200, 150, this));
-		x += 200;
+		addFloor(new Block(getWidth(), Main.HEIGHT-150, 200, 150, this));
 		// X = 1200 to 1400
-		add(new Block(x, Main.HEIGHT-300, 200, 300, this));
-		x += 200;
+		addFloor(new Block(getWidth(), Main.HEIGHT-300, 200, 300, this));
 		// X = 1400 to 1650
-		add(new Block(x, Main.HEIGHT-50, 250, 50, this));
+		addFloor(new Block(getWidth(), Main.HEIGHT-50, 250, 50, this));
 		// Water
-		add(new Water(x, Main.HEIGHT-270, 250, 220, this));
-		x += 250;
-		// X = 1600 to 1700
-		add(new Block(x, Main.HEIGHT-300, 100, 300, this));
-		x += 100;
-		// X = 1700 to 1800
-		add(new Block(x, Main.HEIGHT-100, 500, 100, this));
-		x += 500;
-		return x;
+		addFloor(new Water(getWidth(), Main.HEIGHT-270, 250, 220, this));
+		// X = 1650 to 1750
+		addFloor(new Block(getWidth(), Main.HEIGHT-300, 100, 300, this));
+		// X = 1750 to 1850
+		addFloor(new Block(getWidth(), Main.HEIGHT-100, 500, 100, this));
 	}
 
 	private void ceiling() {
@@ -76,5 +68,15 @@ public class LevelTwo extends Level {
 		for (Obstacle obs : getObstacles()) {
 			if (obs instanceof Block)obs.render(g);
 		}
+	}
+
+	@Override
+	public int getFinishedXPlace() {
+		return getWidth()-100;
+	}
+
+	@Override
+	public int getFinishedYPlace() {
+		return getHieght();
 	}
 }
