@@ -1,10 +1,17 @@
 package me.commonsenze.Platformer.Util;
 
+import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
 
+import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Main;
+import me.commonsenze.Platformer.Levels.Util.LevelManager;
+import me.commonsenze.Platformer.Objects.Block;
+import me.commonsenze.Platformer.Objects.HitBox;
+import me.commonsenze.Platformer.Objects.Water;
 
-public class Camera {
+public class Camera implements Renderable {
 
 	private int positionX, positionY, speedX,speedY;
 	private double zoom;
@@ -58,5 +65,43 @@ public class Camera {
 
 	public void setZoom(double zoom) {
 		this.zoom = zoom;
+	}
+
+	@Override
+	public void tick() {
+		if (recenter != 0)calculateCenterSpeed();
+		
+		ArrayList<HitBox> hits = new ArrayList<>(Handler.getHitBoxes());
+		
+		for (Obstacle obs : LevelManager.getObstacles()) {
+			if (obs instanceof Water) {
+				Water water = (Water) obs;
+				if (water.getLevel() != Main.LEVEL.getLevel())continue;
+				water.setX(water.getIntX()-Main.CAMERA.getXSpeed());
+				water.setY(water.getIntY()-Main.CAMERA.getYSpeed());
+				water.rebuild();
+			}
+		}
+		for (HitBox hitBox : hits) {
+			if (hitBox instanceof GameObject) {
+				GameObject object = (GameObject) hitBox;
+				if (object.getClassifier() == GameData.getSelectedCharacter())continue;
+			} else if (hitBox instanceof Block) {
+				Block block = (Block) hitBox;
+				if (block.getLevel() != Main.LEVEL.getLevel())continue;
+			}
+			hitBox.setX(hitBox.getX()-Main.CAMERA.getXSpeed());
+			hitBox.setY(hitBox.getY()-Main.CAMERA.getYSpeed());
+			hitBox.rebuild();
+			Main.CAMERA.setX(Main.CAMERA.getPosition().x+Main.CAMERA.getXSpeed());
+			Main.CAMERA.setY(Main.CAMERA.getPosition().y+Main.CAMERA.getYSpeed());
+		}
+	}
+
+	@Override
+	public void render(Graphics g) {}
+	
+	public void calculateCenterSpeed(int distance) {
+		setXSpeed((distance/distance)*(distance/));
 	}
 }

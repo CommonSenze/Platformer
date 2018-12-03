@@ -29,10 +29,10 @@ public class LevelTwo extends Level {
 		addFloor(new Block(getWidth(), Main.HEIGHT-150, 200, 150, this));
 		// X = 1200 to 1400
 		addFloor(new Block(getWidth(), Main.HEIGHT-300, 200, 300, this));
+		// Water
+		add(new Water(getWidth(), Main.HEIGHT-270, 250, 220, this));
 		// X = 1400 to 1650
 		addFloor(new Block(getWidth(), Main.HEIGHT-50, 250, 50, this));
-		// Water
-		addFloor(new Water(getWidth(), Main.HEIGHT-270, 250, 220, this));
 		// X = 1650 to 1750
 		addFloor(new Block(getWidth(), Main.HEIGHT-300, 100, 300, this));
 		// X = 1750 to 1850

@@ -39,31 +39,7 @@ public class Handler {
 
 	public void tick() {
 		ArrayList<Renderable> renders = new ArrayList<>(renderables);
-		ArrayList<HitBox> hits = new ArrayList<>(hitBoxes);
 
-		for (Obstacle obs : LevelManager.getObstacles()) {
-			if (obs instanceof Water) {
-				Water water = (Water) obs;
-				if (water.getLevel() != Main.LEVEL.getLevel())continue;
-				water.setX(water.getIntX()-Main.CAMERA.getXSpeed());
-				water.setY(water.getIntY()-Main.CAMERA.getYSpeed());
-				water.rebuild();
-			}
-		}		
-		for (HitBox hitBox : hits) {
-			if (hitBox instanceof GameObject) {
-				GameObject object = (GameObject) hitBox;
-				if (object.getClassifier() == GameData.getSelectedCharacter())continue;
-			} else if (hitBox instanceof Block) {
-				Block block = (Block) hitBox;
-				if (block.getLevel() != Main.LEVEL.getLevel())continue;
-			}
-			hitBox.setX(hitBox.getX()-Main.CAMERA.getXSpeed());
-			hitBox.setY(hitBox.getY()-Main.CAMERA.getYSpeed());
-			hitBox.rebuild();
-			Main.CAMERA.setX(Main.CAMERA.getPosition().x+Main.CAMERA.getXSpeed());
-			Main.CAMERA.setY(Main.CAMERA.getPosition().y+Main.CAMERA.getYSpeed());
-		}
 		for (Renderable renderable : renders) {
 			renderable.tick();
 		}
