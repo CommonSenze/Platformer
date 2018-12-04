@@ -91,4 +91,12 @@ public class Water implements Obstacle {
 	public void setX(float x) {
 		this.x = x;
 	}
+
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
 }

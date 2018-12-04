@@ -21,7 +21,7 @@ public class LevelManager implements Renderable {
 	}
 
 	public void start() {
-		Main.LEVEL = Levels.ONE;
+		Main.LEVEL = Levels.DEV;
 		for (Obstacle obs : Main.LEVEL.getLevel().getObstacles())
 			if (obs instanceof Block) {
 				Handler.addHitBox((Block)obs);

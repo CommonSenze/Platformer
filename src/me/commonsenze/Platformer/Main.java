@@ -23,10 +23,10 @@ public class Main extends Canvas implements Runnable {
 	private static final long serialVersionUID = 2197924032874913024L;
 
 	public static final int WIDTH = 1000, HEIGHT = WIDTH /16*9;
-	public static final boolean DEV_MODE = true;
+	public static final boolean DEV_MODE = false;
 	public static boolean running = false;
 	public static final Camera CAMERA = new Camera(0, 0, 0, 0);
-	public static Levels LEVEL = Levels.ONE;
+	public static Levels LEVEL = Levels.DEV;
 	
 	private Thread thread;
 	private Handler handler;

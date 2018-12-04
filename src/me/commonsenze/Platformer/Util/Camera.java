@@ -13,8 +13,10 @@ import me.commonsenze.Platformer.Objects.Water;
 
 public class Camera implements Renderable {
 
-	private int positionX, positionY, speedX,speedY;
+	private int positionX, positionY;
+	private float speedX,speedY;
 	private double zoom;
+	private Distance distance;
 	
 	public Camera(int positionX, int positionY, int speedX, int speedY) {
 		if (Main.DEV_MODE) {
@@ -43,19 +45,19 @@ public class Camera implements Renderable {
 		this.positionY = y;
 	}
 
-	public int getXSpeed() {
+	public float getXSpeed() {
 		return speedX;
 	}
 
-	public void setXSpeed(int speedX) {
+	public void setXSpeed(float speedX) {
 		this.speedX = speedX;
 	}
 	
-	public int getYSpeed() {
+	public float getYSpeed() {
 		return speedY;
 	}
 
-	public void setYSpeed(int speedY) {
+	public void setYSpeed(float speedY) {
 		this.speedY = speedY;
 	}
 	
@@ -66,10 +68,18 @@ public class Camera implements Renderable {
 	public void setZoom(double zoom) {
 		this.zoom = zoom;
 	}
+	
+	public void setDistance(Distance distance) {
+		this.distance = distance;
+	}
 
 	@Override
 	public void tick() {
-		if (recenter != 0)calculateCenterSpeed();
+		if (distance != null) {
+			setXSpeed(distance.getSpeed());
+			if (distance.isFinished())distance = null;
+			distance.subtractDistance(getXSpeed());
+		}
 		
 		ArrayList<HitBox> hits = new ArrayList<>(Handler.getHitBoxes());
 		
@@ -77,8 +87,8 @@ public class Camera implements Renderable {
 			if (obs instanceof Water) {
 				Water water = (Water) obs;
 				if (water.getLevel() != Main.LEVEL.getLevel())continue;
-				water.setX(water.getIntX()-Main.CAMERA.getXSpeed());
-				water.setY(water.getIntY()-Main.CAMERA.getYSpeed());
+				water.setX(water.getX()-Main.CAMERA.getXSpeed());
+				water.setY(water.getY()-Main.CAMERA.getYSpeed());
 				water.rebuild();
 			}
 		}
@@ -93,15 +103,15 @@ public class Camera implements Renderable {
 			hitBox.setX(hitBox.getX()-Main.CAMERA.getXSpeed());
 			hitBox.setY(hitBox.getY()-Main.CAMERA.getYSpeed());
 			hitBox.rebuild();
-			Main.CAMERA.setX(Main.CAMERA.getPosition().x+Main.CAMERA.getXSpeed());
-			Main.CAMERA.setY(Main.CAMERA.getPosition().y+Main.CAMERA.getYSpeed());
+			Main.CAMERA.setX((int) (Main.CAMERA.getPosition().x+Main.CAMERA.getXSpeed()));
+			Main.CAMERA.setY((int) (Main.CAMERA.getPosition().y+Main.CAMERA.getYSpeed()));
 		}
 	}
 
 	@Override
 	public void render(Graphics g) {}
 	
-	public void calculateCenterSpeed(int distance) {
-		setXSpeed((distance/distance)*(distance/));
-	}
+//	public void calculateCenterSpeed(int distance) {
+//		setXSpeed((distance/distance)*(distance/));
+//	}
 }

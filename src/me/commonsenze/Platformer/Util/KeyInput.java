@@ -7,6 +7,7 @@ import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Levels;
 import me.commonsenze.Platformer.Util.Enums.Classifier;
+import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class KeyInput extends KeyAdapter {
 	// setting a global double jump variable (maybe we can use it for challenges
@@ -43,10 +44,18 @@ public class KeyInput extends KeyAdapter {
 
 				if (key == KeyEvent.VK_Q) {
 					GameData.setCharacter(handler.getObject(object.getIntX(), "Left").getClassifier());
+					GameObject obj = Role.getByClassifier(GameData.getSelectedCharacter()).getGameObject();
+					int distance = (obj.getIntX() - object.getIntX());
+					Distance dist = new Distance(distance);
+					Main.CAMERA.setDistance(dist);
 				}
 
 				if (key == KeyEvent.VK_E) {
 					GameData.setCharacter(handler.getObject(object.getIntX(), "Right").getClassifier());
+					GameObject obj = Role.getByClassifier(GameData.getSelectedCharacter()).getGameObject();
+					int distance = (obj.getIntX() - object.getIntX());
+					Distance dist = new Distance(distance);
+					Main.CAMERA.setDistance(dist);
 				}
 
 				if (key == KeyEvent.VK_A) {

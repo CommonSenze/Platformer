@@ -46,11 +46,11 @@ public class Silhouette implements Renderable {
 		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
 	}
 	
-	public void changeX(int x) {
-		this.x -= x;
+	public void changeX(float f) {
+		this.x -= f;
 	}
 	
-	public void changeY(int y) {
+	public void changeY(float y) {
 		this.y -= y;
 	}
 	
