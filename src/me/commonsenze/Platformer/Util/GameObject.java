@@ -39,6 +39,11 @@ public abstract class GameObject extends HitBox {
 		this.jumping = jumping;
 	}
 	
+	public boolean isOnScreen() {
+		System.out.println(getClass().getSimpleName() + " "+(getX() > Main.CAMERA.getPosition().x&&getX()<Main.CAMERA.getPosition().x+Main.WIDTH));
+		return getX() > Main.CAMERA.getPosition().x&&getX()<Main.CAMERA.getPosition().x+Main.WIDTH;
+	}
+	
 	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}

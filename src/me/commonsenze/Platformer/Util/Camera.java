@@ -72,13 +72,17 @@ public class Camera implements Renderable {
 	public void setDistance(Distance distance) {
 		this.distance = distance;
 	}
+	
+	public boolean hasDistance() {
+		return distance != null;
+	}
 
 	@Override
 	public void tick() {
 		if (distance != null) {
 			setXSpeed(distance.getSpeed());
 			if (distance.isFinished())distance = null;
-			distance.subtractDistance(getXSpeed());
+			else distance.subtractDistance(getXSpeed());
 		}
 		
 		ArrayList<HitBox> hits = new ArrayList<>(Handler.getHitBoxes());
@@ -95,7 +99,7 @@ public class Camera implements Renderable {
 		for (HitBox hitBox : hits) {
 			if (hitBox instanceof GameObject) {
 				GameObject object = (GameObject) hitBox;
-				if (object.getClassifier() == GameData.getSelectedCharacter())continue;
+				if (object.getClassifier() == GameData.getSelectedCharacter()&&!hasDistance())continue;
 			} else if (hitBox instanceof Block) {
 				Block block = (Block) hitBox;
 				if (block.getLevel() != Main.LEVEL.getLevel())continue;

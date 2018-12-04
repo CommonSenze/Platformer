@@ -45,17 +45,24 @@ public class KeyInput extends KeyAdapter {
 				if (key == KeyEvent.VK_Q) {
 					GameData.setCharacter(handler.getObject(object.getIntX(), "Left").getClassifier());
 					GameObject obj = Role.getByClassifier(GameData.getSelectedCharacter()).getGameObject();
-					int distance = (obj.getIntX() - object.getIntX());
-					Distance dist = new Distance(distance);
-					Main.CAMERA.setDistance(dist);
+					if (!obj.isOnScreen()) {
+						int distance = ((obj.getIntX()-(Main.WIDTH/2-obj.getWidth())) - Main.CAMERA.getPosition().x);
+						if (Main.CAMERA.getPosition().x - distance <= 0) {
+							distance = Main.CAMERA.getPosition().x;
+						}
+						Distance dist = new Distance(distance);
+						Main.CAMERA.setDistance(dist);
+					}
 				}
 
 				if (key == KeyEvent.VK_E) {
 					GameData.setCharacter(handler.getObject(object.getIntX(), "Right").getClassifier());
 					GameObject obj = Role.getByClassifier(GameData.getSelectedCharacter()).getGameObject();
-					int distance = (obj.getIntX() - object.getIntX());
-					Distance dist = new Distance(distance);
-					Main.CAMERA.setDistance(dist);
+					if (!obj.isOnScreen()) {
+						int distance = (obj.getIntX()-Main.CAMERA.getPosition().x) -;
+						Distance dist = new Distance(distance);
+						Main.CAMERA.setDistance(dist);
+					}
 				}
 
 				if (key == KeyEvent.VK_A) {
