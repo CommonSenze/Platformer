@@ -12,7 +12,7 @@ public abstract class GameObject extends HitBox {
 
 	private Classifier classifier;
 	private Color color;
-	private float vertical, velocity = 0, screenX, screenY;
+	private float vertical, velocity = 0, gameX, gameY;
 	private boolean jumping, onFloor;
 	protected int jump;
 	private boolean finished;
@@ -91,20 +91,20 @@ public abstract class GameObject extends HitBox {
 		return jump;
 	}
 
-	public float getScreenX() {
-		return screenX;
+	public float getGameX() {
+		return gameX;
 	}
 
-	public void setScreenX(float screenX) {
-		this.screenX = screenX;
+	public void setGameX(float screenX) {
+		this.gameX = screenX;
 	}
 
-	public float getScreenY() {
-		return screenY;
+	public float getGameY() {
+		return gameY;
 	}
 
-	public void setScreenY(float screenY) {
-		this.screenY = screenY;
+	public void setGameY(float gameY) {
+		this.gameY = gameY;
 	}
 
 	@Override
@@ -114,12 +114,14 @@ public abstract class GameObject extends HitBox {
 		// Extended level movement
 		if (getX()+getWidth() >= 900&&getVelocity() >0&&getClassifier() == GameData.getSelectedCharacter()) {
 			Main.CAMERA.setXSpeed(5);
+			setGameX(getGameX()+5);
 		} else if (getX() < 100&&getVelocity()<0&&getClassifier() == GameData.getSelectedCharacter()) {
 			Main.CAMERA.setXSpeed(-5);
+			setGameX(getGameX()-5);
 		} else {
 			// Renders James' x-axis movement to the JFrame
 			setX(getX()+getVelocity());
-			setScreenX(getScreenX()+getVelocity());
+			setGameX(getGameX()+getVelocity());
 			if(getClassifier() == GameData.getSelectedCharacter())Main.CAMERA.setXSpeed(0);
 		}
 
@@ -133,24 +135,24 @@ public abstract class GameObject extends HitBox {
 			if (hitBox.insideBlock(getCharacter())) {
 				if (Main.CAMERA.getXSpeed() != 0) {
 					if (prevX+5 >= hitBox.getIntX()+hitBox.getWidth()) {
-						setX(hitBox.getX()+hitBox.getWidth());
-						setScreenX((int)(hitBox.getX()+getWidth()));
+						setX(hitBox.getIntX()+hitBox.getWidth());
+						setGameX((int)(hitBox.getX()+getWidth()));
 						Main.CAMERA.setXSpeed(0);
 						collide = true;
 					} else if (prevX+getWidth()-5 <= hitBox.getIntX()) {
-						setX(hitBox.getX()-getWidth());
-						setScreenX((int)(hitBox.getX()-getWidth()));
+						setX(hitBox.getIntX()-getWidth());
+						setGameX((int)(hitBox.getX()-getWidth()));
 						Main.CAMERA.setXSpeed(0);
 						collide = true;
 					}
 				} else {
 					if (prevX >= hitBox.getIntX()+hitBox.getWidth()) {
 						setX(hitBox.getX()+hitBox.getWidth());
-						setScreenX((int)(hitBox.getX()+hitBox.getWidth()));
+						setGameX((int)(hitBox.getX()+hitBox.getWidth()));
 						collide = true;
 					} else if (prevX+getWidth() <= hitBox.getIntX()) {
 						setX(hitBox.getX()-getWidth());
-						setScreenX((int)(hitBox.getX()-getWidth()));
+						setGameX((int)(hitBox.getX()-getWidth()));
 						collide = true;
 					}
 				}

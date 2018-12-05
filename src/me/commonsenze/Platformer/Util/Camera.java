@@ -80,7 +80,7 @@ public class Camera implements Renderable {
 	@Override
 	public void tick() {
 		if (distance != null) {
-			setXSpeed(distance.getSpeed());
+			setXSpeed((float) distance.getSpeed());
 			if (distance.isFinished())distance = null;
 		}
 		

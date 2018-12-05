@@ -24,8 +24,8 @@ public class Chris extends GameObject implements Renderable {
 		setX(Main.WIDTH/2-30);
 		setY(80);
 		
-		this.setScreenX(getX()%Main.WIDTH);
-		this.setScreenY(getY()%Main.HEIGHT);
+		this.setGameX(getX()%Main.WIDTH);
+		this.setGameY(getY()%Main.HEIGHT);
 		
 		jump = 6;
 		

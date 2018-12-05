@@ -1,7 +1,6 @@
 package me.commonsenze.Platformer.Util;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import me.commonsenze.Platformer.Main;
 
 public class Distance {
 
@@ -12,22 +11,26 @@ public class Distance {
 		this.distance = distance;
 	}
 	
-	public float getSpeed() {
-		double dist = distance / 20.0;
+	public double getSpeed() {
 		if (distance > 0) {
+			double dist = Math.ceil(distance / 20.0);
 			distance -= dist;
-			if (distance < 1) {
+			if (distance <= 0) {
 				finished = true;
 				distance = 0;
+				System.out.println(Main.CAMERA.getPosition().x);
 			}
+			return dist;
 		} else {
+			double dist = Math.floor(distance / 20.0);
 			distance -= dist;
-			if (distance > -1) {
+			if (distance >= 0) {
 				finished = true;
 				distance = 0;
+				System.out.println(Main.CAMERA.getPosition().x);
 			}
+			return dist;
 		}
-		return new BigDecimal(dist).setScale(1, RoundingMode.HALF_UP).floatValue();
 	}
 	
 	public boolean isFinished() {

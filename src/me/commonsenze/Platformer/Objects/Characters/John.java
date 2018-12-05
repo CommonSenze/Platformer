@@ -19,8 +19,8 @@ public class John extends GameObject implements Renderable {
 		setX(Main.WIDTH/3-10);
 		setY(20);
 		
-		this.setScreenX(getX()%Main.WIDTH);
-		this.setScreenY(getY()%Main.HEIGHT);
+		this.setGameX(getX()%Main.WIDTH);
+		this.setGameY(getY()%Main.HEIGHT);
 		
 		jump = 12;
 		

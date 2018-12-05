@@ -20,8 +20,8 @@ public class Sarah extends GameObject implements Renderable {
 		setX(Main.WIDTH/3-50); // Spawn Sarah on the left third
 		setY(Main.HEIGHT/2); // Spawn Sarah above the floor
 		
-		this.setScreenX(getX()%Main.WIDTH);
-		this.setScreenY(getY()%Main.HEIGHT);
+		this.setGameX(getX()%Main.WIDTH);
+		this.setGameY(getY()%Main.HEIGHT);
 		
 		rebuild();
 		

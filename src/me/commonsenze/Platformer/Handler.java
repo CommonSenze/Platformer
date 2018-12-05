@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import me.commonsenze.Platformer.Levels.Util.LevelManager;
-import me.commonsenze.Platformer.Objects.Block;
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Objects.Water;
 import me.commonsenze.Platformer.Util.GameData;
@@ -38,6 +37,7 @@ public class Handler {
 	}
 
 	public void tick() {
+		reorganize(Role.getByClassifier(GameData.getSelectedCharacter()).getGameObject());
 		ArrayList<Renderable> renders = new ArrayList<>(renderables);
 
 		for (Renderable renderable : renders) {
@@ -68,6 +68,12 @@ public class Handler {
 
 	public ArrayList<GameObject> getObjects(){
 		return gameObjects;
+	}
+	
+	public void reorganize(GameObject mainCharacter) {
+		if (renderables.get(0) == mainCharacter)return;
+		renderables.remove((Renderable)mainCharacter);
+		renderables.add(0, (Renderable) mainCharacter);
 	}
 
 	public static void addGameObject(GameObject object) {

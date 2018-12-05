@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import me.commonsenze.Platformer.Handler;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Objects.HitBox;
+import me.commonsenze.Platformer.Util.GameData;
 import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Renderable;
 import me.commonsenze.Platformer.Util.Enums.Classifier;
@@ -19,8 +20,8 @@ public class Thomas extends GameObject implements Renderable {
 		setX(Main.WIDTH/2);
 		setY(120);
 		
-		this.setScreenX(getX()%Main.WIDTH);
-		this.setScreenY(getY()%Main.HEIGHT);
+		this.setGameX(getX()%Main.WIDTH);
+		this.setGameY(getY()%Main.HEIGHT);
 		
 		rebuild();
 		jump = 10;
@@ -64,7 +65,6 @@ public class Thomas extends GameObject implements Renderable {
 	public void tick() {
 		walk();
 		gravity();
-//		System.out.println(getIntX() + " " + getIntY());
 	}
 
 	@Override
