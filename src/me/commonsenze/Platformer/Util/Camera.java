@@ -82,7 +82,6 @@ public class Camera implements Renderable {
 		if (distance != null) {
 			setXSpeed(distance.getSpeed());
 			if (distance.isFinished())distance = null;
-			else distance.subtractDistance(getXSpeed());
 		}
 		
 		ArrayList<HitBox> hits = new ArrayList<>(Handler.getHitBoxes());
@@ -107,9 +106,9 @@ public class Camera implements Renderable {
 			hitBox.setX(hitBox.getX()-Main.CAMERA.getXSpeed());
 			hitBox.setY(hitBox.getY()-Main.CAMERA.getYSpeed());
 			hitBox.rebuild();
-			Main.CAMERA.setX((int) (Main.CAMERA.getPosition().x+Main.CAMERA.getXSpeed()));
-			Main.CAMERA.setY((int) (Main.CAMERA.getPosition().y+Main.CAMERA.getYSpeed()));
 		}
+		Main.CAMERA.setX((int) (Main.CAMERA.getPosition().x+Main.CAMERA.getXSpeed()));
+		Main.CAMERA.setY((int) (Main.CAMERA.getPosition().y+Main.CAMERA.getYSpeed()));
 	}
 
 	@Override

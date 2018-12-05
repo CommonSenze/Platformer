@@ -24,6 +24,9 @@ public class Chris extends GameObject implements Renderable {
 		setX(Main.WIDTH/2-30);
 		setY(80);
 		
+		this.setScreenX(getX()%Main.WIDTH);
+		this.setScreenY(getY()%Main.HEIGHT);
+		
 		jump = 6;
 		
 		// After we set the location, we rebuild the character

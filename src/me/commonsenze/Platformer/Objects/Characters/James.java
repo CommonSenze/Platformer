@@ -23,6 +23,9 @@ public class James extends GameObject implements Renderable {
 		// Keep in mind, positive X is from left to right, positive Y is from TOP TO BOTTOM
 		setX(Main.WIDTH/2);
 		setY(80);
+
+		this.setScreenX(getX()%Main.WIDTH);
+		this.setScreenY(getY()%Main.HEIGHT);
 		
 		jump = 10;
 		

@@ -19,6 +19,9 @@ public class Laura extends GameObject implements Renderable {
 		super(Classifier.LAURA, new Rectangle(70, 15), new Color(200, 150, 150)); // Laura's length == 50, height == 20
 		setX(Main.WIDTH/3+40); // Spawn Laura on the left third
 		setY(Main.HEIGHT/2); // Spawn Laura above the floor
+		
+		this.setScreenX(getX()%Main.WIDTH);
+		this.setScreenY(getY()%Main.HEIGHT);
 		rebuild();
 		jump = 6;
 	}

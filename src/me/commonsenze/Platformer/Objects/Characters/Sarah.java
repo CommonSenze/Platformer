@@ -19,6 +19,10 @@ public class Sarah extends GameObject implements Renderable {
 		super(Classifier.SARAH, new Rectangle(15, 20), new Color(128, 0, 128)); // Sarah's length == 50, height == 20
 		setX(Main.WIDTH/3-50); // Spawn Sarah on the left third
 		setY(Main.HEIGHT/2); // Spawn Sarah above the floor
+		
+		this.setScreenX(getX()%Main.WIDTH);
+		this.setScreenY(getY()%Main.HEIGHT);
+		
 		rebuild();
 		
 		jump = 10;

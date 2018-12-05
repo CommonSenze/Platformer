@@ -12,7 +12,7 @@ public abstract class GameObject extends HitBox {
 
 	private Classifier classifier;
 	private Color color;
-	private float vertical, velocity = 0;
+	private float vertical, velocity = 0, screenX, screenY;
 	private boolean jumping, onFloor;
 	protected int jump;
 	private boolean finished;
@@ -40,8 +40,7 @@ public abstract class GameObject extends HitBox {
 	}
 	
 	public boolean isOnScreen() {
-		System.out.println(getClass().getSimpleName() + " "+(getX() > Main.CAMERA.getPosition().x&&getX()<Main.CAMERA.getPosition().x+Main.WIDTH));
-		return getX() > Main.CAMERA.getPosition().x&&getX()<Main.CAMERA.getPosition().x+Main.WIDTH;
+		return getX() > Main.CAMERA.getPosition().x+100&&getX()<Main.CAMERA.getPosition().x+Main.WIDTH-100;
 	}
 	
 	public void setFinished(boolean finished) {
@@ -92,6 +91,22 @@ public abstract class GameObject extends HitBox {
 		return jump;
 	}
 
+	public float getScreenX() {
+		return screenX;
+	}
+
+	public void setScreenX(float screenX) {
+		this.screenX = screenX;
+	}
+
+	public float getScreenY() {
+		return screenY;
+	}
+
+	public void setScreenY(float screenY) {
+		this.screenY = screenY;
+	}
+
 	@Override
 	public void walk() {
 		int prevX = getIntX();
@@ -104,6 +119,7 @@ public abstract class GameObject extends HitBox {
 		} else {
 			// Renders James' x-axis movement to the JFrame
 			setX(getX()+getVelocity());
+			setScreenX(getScreenX()+getVelocity());
 			if(getClassifier() == GameData.getSelectedCharacter())Main.CAMERA.setXSpeed(0);
 		}
 
@@ -118,19 +134,23 @@ public abstract class GameObject extends HitBox {
 				if (Main.CAMERA.getXSpeed() != 0) {
 					if (prevX+5 >= hitBox.getIntX()+hitBox.getWidth()) {
 						setX(hitBox.getX()+hitBox.getWidth());
+						setScreenX((int)(hitBox.getX()+getWidth()));
 						Main.CAMERA.setXSpeed(0);
 						collide = true;
 					} else if (prevX+getWidth()-5 <= hitBox.getIntX()) {
 						setX(hitBox.getX()-getWidth());
+						setScreenX((int)(hitBox.getX()-getWidth()));
 						Main.CAMERA.setXSpeed(0);
 						collide = true;
 					}
 				} else {
 					if (prevX >= hitBox.getIntX()+hitBox.getWidth()) {
 						setX(hitBox.getX()+hitBox.getWidth());
+						setScreenX((int)(hitBox.getX()+hitBox.getWidth()));
 						collide = true;
 					} else if (prevX+getWidth() <= hitBox.getIntX()) {
 						setX(hitBox.getX()-getWidth());
+						setScreenX((int)(hitBox.getX()-getWidth()));
 						collide = true;
 					}
 				}

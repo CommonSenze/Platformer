@@ -18,6 +18,10 @@ public class Thomas extends GameObject implements Renderable {
 		super(Classifier.THOMAS, new Rectangle(20, 30), Color.RED);
 		setX(Main.WIDTH/2);
 		setY(120);
+		
+		this.setScreenX(getX()%Main.WIDTH);
+		this.setScreenY(getY()%Main.HEIGHT);
+		
 		rebuild();
 		jump = 10;
 	}
