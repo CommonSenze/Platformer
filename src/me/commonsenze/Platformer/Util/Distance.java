@@ -1,7 +1,5 @@
 package me.commonsenze.Platformer.Util;
 
-import me.commonsenze.Platformer.Main;
-
 public class Distance {
 
 	private int distance;
@@ -18,7 +16,6 @@ public class Distance {
 			if (distance <= 0) {
 				finished = true;
 				distance = 0;
-				System.out.println(Main.CAMERA.getPosition().x);
 			}
 			return dist;
 		} else {
@@ -27,7 +24,6 @@ public class Distance {
 			if (distance >= 0) {
 				finished = true;
 				distance = 0;
-				System.out.println(Main.CAMERA.getPosition().x);
 			}
 			return dist;
 		}

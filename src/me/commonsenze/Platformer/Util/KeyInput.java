@@ -45,29 +45,25 @@ public class KeyInput extends KeyAdapter {
 				if (key == KeyEvent.VK_Q) {
 					GameData.setCharacter(handler.getObject(object.getIntX(), "Left").getClassifier());
 					GameObject obj = Role.getByClassifier(GameData.getSelectedCharacter()).getGameObject();
-					if (!obj.isOnScreen()) {
-						int distance = (int) (obj.getX()-Main.CAMERA.getPosition().x) - ((Main.WIDTH/2)-obj.getWidth());
-						System.out.println(obj.getX());
-						if (Main.CAMERA.getPosition().x + distance <= 0) {
-							distance = -Main.CAMERA.getPosition().x;
-						}
-						Distance dist = new Distance(distance);
-						Main.CAMERA.setDistance(dist);
+					int distance = (int) (obj.getGameX()-Main.CAMERA.getPosition().x) - ((Main.WIDTH/2)-obj.getWidth());
+					Main.CAMERA.setXSpeed(0);
+					if (Main.CAMERA.getPosition().x + distance <= 0) {
+						distance = -Main.CAMERA.getPosition().x;
 					}
+					Distance dist = new Distance(distance);
+					Main.CAMERA.setDistance(dist);
 				}
 
 				if (key == KeyEvent.VK_E) {
 					GameData.setCharacter(handler.getObject(object.getIntX(), "Right").getClassifier());
 					GameObject obj = Role.getByClassifier(GameData.getSelectedCharacter()).getGameObject();
-					if (!obj.isOnScreen()) {
-						int distance = (int) (obj.getGameX()-Main.CAMERA.getPosition().x) - ((Main.WIDTH/2)-obj.getWidth());
-						System.out.println(Main.CAMERA.getPosition().x +" "+distance);
-						if (Main.CAMERA.getPosition().x + distance <= 0) {
-							distance = -Main.CAMERA.getPosition().x;
-						}
-						Distance dist = new Distance(distance);
-						Main.CAMERA.setDistance(dist);
+					int distance = (int) (obj.getGameX()-Main.CAMERA.getPosition().x) - ((Main.WIDTH/2)-obj.getWidth());
+					Main.CAMERA.setXSpeed(0);
+					if (Main.CAMERA.getPosition().x + distance <= 0) {
+						distance = -Main.CAMERA.getPosition().x;
 					}
+					Distance dist = new Distance(distance);
+					Main.CAMERA.setDistance(dist);
 				}
 
 				if (key == KeyEvent.VK_A) {
