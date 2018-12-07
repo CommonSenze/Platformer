@@ -30,6 +30,7 @@ public class Sarah extends GameObject implements Renderable {
 
 	@Override
 	public void tick() {
+		if (Main.FINISHED)return;
 		walk();
 		gravity();
 	}

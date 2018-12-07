@@ -3,6 +3,7 @@ package me.commonsenze.Platformer;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import me.commonsenze.Platformer.Effects.FinishedAnimation;
 import me.commonsenze.Platformer.Levels.Util.LevelManager;
 import me.commonsenze.Platformer.Objects.HitBox;
 import me.commonsenze.Platformer.Objects.Water;
@@ -39,10 +40,18 @@ public class Handler {
 	public void tick() {
 		reorganize(Role.getByClassifier(GameData.getSelectedCharacter()).getGameObject());
 		ArrayList<Renderable> renders = new ArrayList<>(renderables);
+		if (Main.FINISHED) {
+			for (Renderable renderable : renders) {
+				renderable.tick();
+			}
+			return;
+		}
 
 		for (Renderable renderable : renders) {
 			renderable.tick();
 		}
+		
+		checkFinsihed();
 
 		hitBoxes.removeAll(removeHit);
 		renderables.removeAll(removeRend);
@@ -70,10 +79,21 @@ public class Handler {
 		return gameObjects;
 	}
 	
-	public void reorganize(GameObject mainCharacter) {
-		if (renderables.get(0) == mainCharacter)return;
+	private void reorganize(GameObject mainCharacter) {
+		if (renderables.get(1) == mainCharacter)return;
 		renderables.remove((Renderable)mainCharacter);
-		renderables.add(0, (Renderable) mainCharacter);
+		renderables.add(1, (Renderable) mainCharacter);
+	}
+	
+	private void checkFinsihed() {
+		for (GameObject object : gameObjects) {
+			if (!object.isFinished())return;
+		}
+		
+		Main.FINISHED = true;
+		FinishedAnimation animation = new FinishedAnimation(gameObjects);
+		
+		renderables.add(animation);
 	}
 
 	public static void addGameObject(GameObject object) {

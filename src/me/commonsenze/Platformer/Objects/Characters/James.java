@@ -70,6 +70,7 @@ public class James extends GameObject implements Renderable {
 
 	@Override
 	public void tick() {
+		if (Main.FINISHED)return;
 		gravity();
 		walk();
 	}

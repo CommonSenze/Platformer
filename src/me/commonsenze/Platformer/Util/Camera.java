@@ -9,6 +9,7 @@ import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.LevelManager;
 import me.commonsenze.Platformer.Objects.Block;
 import me.commonsenze.Platformer.Objects.HitBox;
+import me.commonsenze.Platformer.Objects.Silhouette;
 import me.commonsenze.Platformer.Objects.Water;
 
 public class Camera implements Renderable {
@@ -83,8 +84,16 @@ public class Camera implements Renderable {
 			setXSpeed((float) distance.getSpeed());
 			if (distance.isFinished())distance = null;
 		}
+		if (Main.FINISHED)setXSpeed(0);
 		
 		ArrayList<HitBox> hits = new ArrayList<>(Handler.getHitBoxes());
+		ArrayList<Silhouette> silhouettes = new ArrayList<>(LevelManager.getFinishSlots());
+		
+		for (Silhouette silhouette : silhouettes) {
+			silhouette.changeX(Main.CAMERA.getXSpeed());
+			silhouette.changeY(Main.CAMERA.getYSpeed());
+			silhouette.rebuild();
+		}
 		
 		for (Obstacle obs : LevelManager.getObstacles()) {
 			if (obs instanceof Water) {

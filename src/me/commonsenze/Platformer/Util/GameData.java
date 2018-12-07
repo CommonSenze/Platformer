@@ -6,10 +6,10 @@ import me.commonsenze.Platformer.Util.Enums.Classifier;
 public class GameData {
 
 	private static Classifier selectedCharacter = Classifier.THOMAS;
-	private Handler handler;
+//	private Handler handler;
 	
 	public GameData(Handler handler) {
-		this.handler = handler;
+//		this.handler = handler;
 	}
 	
 	public static void setCharacter(Classifier character) {

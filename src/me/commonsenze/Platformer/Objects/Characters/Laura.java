@@ -28,6 +28,7 @@ public class Laura extends GameObject implements Renderable {
 
 	@Override
 	public void tick() {
+		if (Main.FINISHED)return;
 		walk();
 		gravity();
 		special();

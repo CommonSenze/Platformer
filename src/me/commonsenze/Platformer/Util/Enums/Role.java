@@ -16,7 +16,7 @@ public enum Role {
 	JOHN(new John(),0),
 	CLAIRE(new Claire(),0),
 	LAURA(new Laura(),0),
-	JAMES(new James(),0),
+	JAMES(new James(),2),
 	SARAH(new Sarah(),0);
 
 	private GameObject object;

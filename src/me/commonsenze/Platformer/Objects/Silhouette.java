@@ -26,10 +26,8 @@ public class Silhouette implements Renderable {
 	@Override
 	public void tick() {
 		if (Main.DEV_MODE)return;
-		changeX(Main.CAMERA.getXSpeed());
-		changeY(Main.CAMERA.getYSpeed());
-		rebuild();
 		if (!role.isUnlocked(Main.LEVEL.getPointValue()))return;
+		rebuild();
 		if (role.getGameObject().getCharacter().intersects(character)) {
 			role.getGameObject().setFinished(true);
 		} else {

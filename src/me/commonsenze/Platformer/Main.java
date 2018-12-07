@@ -24,9 +24,9 @@ public class Main extends Canvas implements Runnable {
 
 	public static final int WIDTH = 1000, HEIGHT = WIDTH /16*9;
 	public static final boolean DEV_MODE = false;
-	public static boolean running = false;
+	public static boolean running = false, FINISHED = false;
 	public static final Camera CAMERA = new Camera(0, 0, 0, 0);
-	public static Levels LEVEL = Levels.DEV;
+	public static Levels LEVEL = Levels.ONE;
 	
 	private Thread thread;
 	private Handler handler;
