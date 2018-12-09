@@ -174,6 +174,14 @@ public abstract class GameObject extends HitBox {
 		// Realigns getCharacter()'s x and y to GameObject's x and y.
 		rebuild();
 	}
+	
+	protected boolean withInXBounds(HitBox hitBox) {
+		int x = getIntX()-1;
+		int xWidth = x+getWidth();
+		int otherX = hitBox.getIntX();
+		int otherXWidth = otherX + hitBox.getWidth();
+		return (x < otherX && otherX < xWidth)||(x < otherXWidth && otherXWidth < xWidth)||(x > otherX && xWidth < otherXWidth);
+	}
 
 	public abstract int getFeet();
 

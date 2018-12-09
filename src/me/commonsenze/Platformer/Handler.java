@@ -1,5 +1,6 @@
 package me.commonsenze.Platformer;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -20,21 +21,7 @@ public class Handler {
 	private static ArrayList<Renderable> renderables = new ArrayList<>(), removeRend = new ArrayList<>();
 
 	public Handler() {
-		if (!Main.DEV_MODE) {
-			for (Role role : Role.values()) {
-				if (role.isUnlocked(Main.LEVEL.getPointValue()))
-					gameObjects.add(role.getGameObject());
-			}
-		}
-
-		for (GameObject gameObject : gameObjects) {
-			if (gameObject instanceof Renderable) {
-				renderables.add((Renderable)gameObject);
-			}
-			if (gameObject instanceof HitBox) {
-				hitBoxes.add((HitBox)gameObject);
-			}
-		}
+		reset();
 	}
 
 	public void tick() {
@@ -70,9 +57,28 @@ public class Handler {
 		for (Renderable renderable : renders) {
 			renderable.render(g);
 		}
+		
+		renderCurrentCharacterArrow(g);
 
 		renderables.removeAll(removeRend);
 		removeRend.clear();
+	}
+
+	private void renderCurrentCharacterArrow(Graphics g) {
+		if (Main.FINISHED)return;
+		g.setColor(Color.WHITE);
+		for (Role role : Role.values()) {
+			if (GameData.getSelectedCharacter() == role.getGameObject().getClassifier()) {
+				int triangleBase = 15;
+				int spacing = Math.abs(triangleBase - role.getGameObject().getWidth())/2;
+				int pointOne = role.getGameObject().getIntX() + triangleBase + spacing;
+				int pointTwo = role.getGameObject().getIntX() + spacing;
+				int pointThree = role.getGameObject().getIntX() +(pointOne - pointTwo)/2+spacing;
+				int[] xPoints = {pointOne, pointThree,pointTwo};
+				int[] yPoints = {role.getGameObject().getIntY()-10, role.getGameObject().getIntY()-3, role.getGameObject().getIntY()-10};
+				g.fillPolygon(xPoints, yPoints, 3);
+			}
+		}
 	}
 
 	public ArrayList<GameObject> getObjects(){
@@ -91,9 +97,47 @@ public class Handler {
 		}
 		
 		Main.FINISHED = true;
-		FinishedAnimation animation = new FinishedAnimation(gameObjects);
+		FinishedAnimation animation = new FinishedAnimation(this);
 		
 		renderables.add(animation);
+	}
+	
+	public void reset() {
+		FinishedAnimation animation = null;
+		for (Renderable renderable : renderables) {
+			if (renderable instanceof FinishedAnimation) {
+				animation = (FinishedAnimation) renderable;
+			}
+		}
+		renderables.remove(animation);
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject instanceof Renderable) {
+				renderables.remove((Renderable)gameObject);
+			}
+			if (gameObject instanceof HitBox) {
+				hitBoxes.remove((HitBox)gameObject);
+			}
+		}
+		gameObjects.clear();
+		if (!Main.DEV_MODE) {
+			for (Role role : Role.values()) {
+				if (role.isUnlocked(Main.LEVEL.getPointValue()))
+					gameObjects.add(role.getGameObject());
+			}
+		}
+
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject instanceof Renderable) {
+				renderables.add((Renderable)gameObject);
+			}
+			if (gameObject instanceof HitBox) {
+				hitBoxes.add((HitBox)gameObject);
+			}
+		}
+		
+		if (animation != null) {
+			renderables.add(animation);
+		}
 	}
 
 	public static void addGameObject(GameObject object) {

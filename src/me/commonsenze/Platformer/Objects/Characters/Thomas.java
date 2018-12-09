@@ -43,15 +43,18 @@ public class Thomas extends GameObject implements Renderable {
 		for (HitBox hitBox : Handler.getHitBoxes()) {
 			if (hitBox == this)continue;
 			// If James is in the wall, he will move out until he isn't in the wall anymore
+			if (!withInXBounds(hitBox))continue;
 			if (hitBox.insideBlock(getCharacter())) {
-				if (prevY+getHeight() <= hitBox.getIntY()) {
-					setVertical(-1);
-					setY(hitBox.getY()-getHeight());
+				if (prevY >= hitBox.getIntY()) {
+					setVertical(0);
+					setY(hitBox.getIntY()+hitBox.getHeight());
+				} else if (prevY+getHeight() <= hitBox.getIntY()) {
+					setVertical(0);
+					setY(hitBox.getIntY()-getHeight());
 					setOnFloor(true);
 					setJumping(false);
-				} else if (prevY > hitBox.getIntY()) {
-					setVertical(-1);
-					setY(hitBox.getIntY()+hitBox.getHeight());
+				} else {
+					setY(prevY);
 				}
 			}
 		}

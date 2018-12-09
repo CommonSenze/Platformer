@@ -5,7 +5,10 @@ import java.awt.Graphics;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Level;
 import me.commonsenze.Platformer.Objects.Block;
+import me.commonsenze.Platformer.Objects.Silhouette;
+import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Obstacle;
+import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class LevelOne extends Level {
 	
@@ -19,6 +22,16 @@ public class LevelOne extends Level {
 
 		// Right wall
 		add(new Block(getWidth(), 0, 100, Main.HEIGHT, this));
+		
+		spawnSilhouettes();
+	}
+
+	public void relocateCharacters() {
+		GameObject thomas = Role.THOMAS.getGameObject();
+		thomas.setX(100);
+		thomas.setY(150);
+		thomas.setGameX(thomas.getX());
+		thomas.setGameY(thomas.getY());
 	}
 
 	private void floor() {
@@ -47,7 +60,6 @@ public class LevelOne extends Level {
 
 	@Override
 	public void spawnSilhouettes() {
-		// TODO Auto-generated method stub
-		
+		add(new Silhouette(getWidth()-200, getHieght(), Role.THOMAS));
 	}
 }

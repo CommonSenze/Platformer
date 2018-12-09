@@ -5,7 +5,9 @@ import java.awt.Graphics;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Level;
 import me.commonsenze.Platformer.Objects.Block;
+import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Obstacle;
+import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class DevLevel extends Level {
 	
@@ -20,6 +22,19 @@ public class DevLevel extends Level {
 		add(new Block(400, 150, 20, 20, this));
 		
 		add(new Block(Main.WIDTH+20, Main.HEIGHT-150, 200, 200, this));
+	}
+	
+	public void relocateCharacters() {
+		GameObject thomas = Role.THOMAS.getGameObject();
+		thomas.setX(110);
+		thomas.setY(150);
+		thomas.setGameX(thomas.getX());
+		thomas.setGameY(thomas.getY());
+		GameObject chris = Role.CHRIS.getGameObject();
+		chris.setX(140);
+		chris.setY(150);
+		chris.setGameX(chris.getX());
+		chris.setGameY(chris.getY());
 	}
 
 	@Override

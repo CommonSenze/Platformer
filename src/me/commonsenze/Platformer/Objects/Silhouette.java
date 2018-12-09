@@ -18,7 +18,7 @@ public class Silhouette implements Renderable {
 		this.character = new Rectangle(role.getGameObject().getCharacter());
 		this.role = role;
 		this.x = x;
-		this.y = y;
+		this.y = y-role.getGameObject().getHeight();
 		
 		this.character.setLocation(x, y);
 	}

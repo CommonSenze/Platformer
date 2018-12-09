@@ -12,8 +12,6 @@ import me.commonsenze.Platformer.Util.Renderable;
 
 public class LevelManager implements Renderable {
 
-	private static ArrayList<Silhouette> finishedSlots = new ArrayList<>();
-
 	public LevelManager() {
 		start();
 		Handler.addRenderable(this);
@@ -29,6 +27,12 @@ public class LevelManager implements Renderable {
 	public static ArrayList<Obstacle> getObstacles(){
 		return Main.LEVEL.getLevel().getObstacles();
 	}
+	
+	public static Obstacle getObstacleAt(int x, int y) {
+		for (Obstacle obs : Main.LEVEL.getLevel().getObstacles())
+			if (obs.getObsticale().contains(x,y))return obs;
+		return null;
+	}
 
 	public static void setLevel(Levels currentLevel) {
 		for (Obstacle obs : Main.LEVEL.getLevel().getObstacles())
@@ -40,11 +44,12 @@ public class LevelManager implements Renderable {
 			if (obs instanceof Block) {
 				Handler.addHitBox((Block)obs);
 			}
+		Main.LEVEL.getLevel().relocateCharacters();
 	}
 
 	@Override
 	public void tick() {
-		ArrayList<Silhouette> silhouettes = new ArrayList<>(getFinishSlots());
+		ArrayList<Silhouette> silhouettes = new ArrayList<>(Main.LEVEL.getLevel().getSilhouettes());
 		for (Silhouette silhouette : silhouettes) {
 			silhouette.tick();
 		}
@@ -53,22 +58,10 @@ public class LevelManager implements Renderable {
 
 	@Override
 	public void render(Graphics g) {
-		ArrayList<Silhouette> silhouettes = new ArrayList<>(getFinishSlots());
+		ArrayList<Silhouette> silhouettes = new ArrayList<>(Main.LEVEL.getLevel().getSilhouettes());
 		for (Silhouette silhouette : silhouettes) {
 			silhouette.render(g);
 		}
 		Main.LEVEL.getLevel().render(g);
-	}
-
-	public void addSilhouette(Silhouette silhouette) {
-		finishedSlots.add(silhouette);
-	}
-
-	public void removeSilhouette(Silhouette silhouette) {
-		finishedSlots.remove(silhouette);
-	}
-
-	public static ArrayList<Silhouette> getFinishSlots() {
-		return finishedSlots;
 	}
 }

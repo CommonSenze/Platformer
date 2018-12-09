@@ -5,8 +5,11 @@ import java.awt.Graphics;
 import me.commonsenze.Platformer.Main;
 import me.commonsenze.Platformer.Levels.Util.Level;
 import me.commonsenze.Platformer.Objects.Block;
+import me.commonsenze.Platformer.Objects.Silhouette;
 import me.commonsenze.Platformer.Objects.Water;
+import me.commonsenze.Platformer.Util.GameObject;
 import me.commonsenze.Platformer.Util.Obstacle;
+import me.commonsenze.Platformer.Util.Enums.Role;
 
 public class LevelTwo extends Level {
 	
@@ -20,6 +23,20 @@ public class LevelTwo extends Level {
 
 		// Right wall
 		add(new Block(getWidth(), 0, 100, Main.HEIGHT, this));
+	}
+	
+	public void relocateCharacters() {
+		GameObject thomas = Role.THOMAS.getGameObject();
+		thomas.setX(110);
+		thomas.setY(150);
+		thomas.setGameX(thomas.getX());
+		thomas.setGameY(thomas.getY());
+		
+		GameObject chris = Role.CHRIS.getGameObject();
+		chris.setX(140);
+		chris.setY(150);
+		chris.setGameX(chris.getX());
+		chris.setGameY(chris.getY());
 	}
 
 	private void floor() {
@@ -43,7 +60,7 @@ public class LevelTwo extends Level {
 		// X = 0 to 700
 		add(new Block(0, 0, Main.WIDTH-300, 70, this));
 		// X = 600 to 1300
-		add(new Block(Main.WIDTH-400, -50, Main.WIDTH-300, 70, this));
+		add(new Block(Main.WIDTH-400, -500, Main.WIDTH-300, 70, this));
 		// X = 400 to 420
 		add(new Block(400, 150, 20, 20, this));
 		// X = 1250 to 1300
@@ -72,7 +89,7 @@ public class LevelTwo extends Level {
 
 	@Override
 	public void spawnSilhouettes() {
-		// TODO Auto-generated method stub
-		
+		add(new Silhouette(getWidth()-200, getHieght(), Role.THOMAS));
+		add(new Silhouette(getWidth()-160, getHieght(), Role.CHRIS));
 	}
 }
