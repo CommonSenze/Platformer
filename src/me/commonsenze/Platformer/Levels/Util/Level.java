@@ -36,7 +36,5 @@ public abstract class Level implements Renderable {
 		return obstacles;
 	}
 	
-	public abstract int getFinishedXPlace();
-	
-	public abstract int getFinishedYPlace();
+	public abstract void spawnSilhouettes();
 }

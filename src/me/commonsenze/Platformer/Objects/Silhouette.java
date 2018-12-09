@@ -39,9 +39,8 @@ public class Silhouette implements Renderable {
 	public void render(Graphics g) {
 		if (Main.DEV_MODE)return;
 		g.setColor(Color.WHITE);
-		g.fillRoundRect(getCharacter().x-2, getCharacter().y-2, getCharacter().width+4, getCharacter().height+4, 5, 5);
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(getCharacter().x, getCharacter().y, getCharacter().width, getCharacter().height);
+		g.drawRect(getCharacter().x-1, getCharacter().y-1, getCharacter().width+1, getCharacter().height+1);
+		g.drawRect(getCharacter().x-2, getCharacter().y-2, getCharacter().width+3, getCharacter().height+2);
 	}
 	
 	public void changeX(float f) {

@@ -81,13 +81,13 @@ public class FinishedAnimation implements Renderable {
 				finishedShrinking = true;
 				continue;
 			}
-			double height = realDimensions.get(object.getClassifier())[1]-decrementationHeightAmount.get(object.getClassifier());
-			double width = realDimensions.get(object.getClassifier())[0]-decrementationWidthAmount.get(object.getClassifier());
+			double height = realDimensions.get(object.getClassifier())[1]-(decrementationHeightAmount.get(object.getClassifier())*2);
+			double width = realDimensions.get(object.getClassifier())[0]-(decrementationWidthAmount.get(object.getClassifier())*2);
 			Double[] array = {width, height};
 			realDimensions.put(object.getClassifier(), array);
 			object.getCharacter().setSize((int)width, (int)height);
 			object.setX((float) (object.getX()+decrementationWidthAmount.get(object.getClassifier())));
-			object.setY((float) (object.getX()+decrementationHeightAmount.get(object.getClassifier())));
+			object.setY((float) (object.getY()+decrementationHeightAmount.get(object.getClassifier())));
 			object.rebuild();
 		}
 	}

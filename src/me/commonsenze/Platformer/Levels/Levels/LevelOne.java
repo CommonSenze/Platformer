@@ -44,12 +44,10 @@ public class LevelOne extends Level {
 			if (obs instanceof Block)obs.render(g);
 		}
 	}
-	
-	public int getFinishedXPlace() {
-		return getWidth()-100;
-	}
-	
-	public int getFinishedYPlace() {
-		return getHieght();
+
+	@Override
+	public void spawnSilhouettes() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -37,14 +37,8 @@ public class DevLevel extends Level {
 	}
 
 	@Override
-	public int getFinishedXPlace() {
+	public void spawnSilhouettes() {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getFinishedYPlace() {
-		// TODO Auto-generated method stub
-		return 0;
+		
 	}
 }

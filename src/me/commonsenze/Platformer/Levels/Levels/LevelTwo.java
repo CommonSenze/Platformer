@@ -71,12 +71,8 @@ public class LevelTwo extends Level {
 	}
 
 	@Override
-	public int getFinishedXPlace() {
-		return getWidth()-100;
-	}
-
-	@Override
-	public int getFinishedYPlace() {
-		return getHieght();
+	public void spawnSilhouettes() {
+		// TODO Auto-generated method stub
+		
 	}
 }
