@@ -117,12 +117,15 @@ public class Camera implements Renderable {
 		for (HitBox hitBox : hits) {
 			if (hitBox instanceof GameObject) {
 				GameObject object = (GameObject) hitBox;
-				if (object.getClassifier() == GameData.getSelectedCharacter()&&!hasDistance()) continue;
+				if (!(object.getClassifier() == GameData.getSelectedCharacter()&&!hasDistance())) {
+					hitBox.setX(hitBox.getX()-Main.CAMERA.getXSpeed());
+				}
 			} else if (hitBox instanceof Block) {
 				Block block = (Block) hitBox;
 				if (block.getLevel() != Main.LEVEL.getLevel())continue;
+				hitBox.setX(hitBox.getX()-Main.CAMERA.getXSpeed());
 			}
-			hitBox.setX(hitBox.getX()-Main.CAMERA.getXSpeed());
+			
 			hitBox.setY(hitBox.getY()-Main.CAMERA.getYSpeed());
 			hitBox.rebuild();
 		}
@@ -134,8 +137,11 @@ public class Camera implements Renderable {
 		for (int y = main.getIntY(); y > -100000; y--) {
 			Obstacle obstacle = LevelManager.getObstacleAt(main.getIntX(), y);
 			if (obstacle != null) {
-				if (obstacle.getObsticale().y < 0)
-				zoomOut(obstacle.getObsticale().y);
+				if (obstacle.getObsticale().width <= 30)continue;
+				if (obstacle.getObsticale().y < getPosition().y)
+					zoomOut();
+				else if (obstacle.getObsticale().y > getPosition().y)
+					zoomIn();
 				else if (getYSpeed() == -1) {
 					setYSpeed(0);
 				}
@@ -144,9 +150,14 @@ public class Camera implements Renderable {
 		}
 	}
 	
-	private void zoomOut(int y) {
+	private void zoomOut() {
 		setYSpeed(-1);
-		setZoom(getZoom()+0.002);
+		setZoom(getZoom()+0.0019);
+	}
+	
+	private void zoomIn() {
+		setYSpeed(1);
+		setZoom(getZoom()-0.002);
 	}
 
 	@Override
