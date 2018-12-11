@@ -135,24 +135,28 @@ public abstract class GameObject extends HitBox {
 			if (hitBox.insideBlock(getCharacter())) {
 				if (Main.CAMERA.getXSpeed() != 0) {
 					if (prevX+5 >= hitBox.getIntX()+hitBox.getWidth()) {
+						float difference = hitBox.getX() - getX();
 						setX(hitBox.getIntX()+hitBox.getWidth());
-						setGameX((int)(hitBox.getX()+getWidth()));
+						setGameX(getGameX()+difference);
 						Main.CAMERA.setXSpeed(0);
 						collide = true;
 					} else if (prevX+getWidth()-5 <= hitBox.getIntX()) {
+						float difference = hitBox.getX() - getX();
 						setX(hitBox.getIntX()-getWidth());
-						setGameX((int)(hitBox.getX()-getWidth()));
+						setGameX(getGameX()+difference);
 						Main.CAMERA.setXSpeed(0);
 						collide = true;
 					}
 				} else {
 					if (prevX >= hitBox.getIntX()+hitBox.getWidth()) {
+						float difference = hitBox.getX() - getX();
 						setX(hitBox.getX()+hitBox.getWidth());
-						setGameX((int)(hitBox.getX()+hitBox.getWidth()));
+						setGameX(getGameX()+difference);
 						collide = true;
 					} else if (prevX+getWidth() <= hitBox.getIntX()) {
+						float difference = hitBox.getX() - getX();
 						setX(hitBox.getX()-getWidth());
-						setGameX((int)(hitBox.getX()-getWidth()));
+						setGameX(getGameX()+difference);
 						collide = true;
 					}
 				}

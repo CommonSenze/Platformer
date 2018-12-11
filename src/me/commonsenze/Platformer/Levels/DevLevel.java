@@ -13,15 +13,15 @@ public class DevLevel extends Level {
 	
 	public DevLevel() {
 		// floor
-		addFloor(new Block(0, Main.HEIGHT-100, Main.WIDTH+2000, 100, this));
+		addFloor(new Block(0, Main.HEIGHT-100, Main.WIDTH+2000, 100, this, false));
 		// ceiling
-		add(new Block(0, 0, Main.WIDTH+2000, 70, this));
+		add(new Block(0, 0, Main.WIDTH+2000, 70, this, true));
 		// Left wall
-		add(new Block(-2, 0, 102, Main.HEIGHT, this));
+		add(new Block(-2, 0, 102, Main.HEIGHT, this, false));
 		
-		add(new Block(400, 150, 20, 20, this));
+		add(new Block(400, 150, 20, 20, this, false));
 		
-		add(new Block(Main.WIDTH+20, Main.HEIGHT-150, 200, 200, this));
+		add(new Block(Main.WIDTH+20, Main.HEIGHT-150, 200, 200, this, false));
 	}
 	
 	public void relocateCharacters() {

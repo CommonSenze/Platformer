@@ -19,10 +19,12 @@ public class LevelTwo extends Level {
 		ceiling();
 
 		// Left wall
-		add(new Block(-2, 0, 102, Main.HEIGHT, this));
+		add(new Block(-2, 0, 102, Main.HEIGHT, this, false));
 
 		// Right wall
-		add(new Block(getWidth(), 0, 100, Main.HEIGHT, this));
+		add(new Block(getWidth(), 0, 100, Main.HEIGHT, this, false));
+		
+		spawnSilhouettes();
 	}
 	
 	public void relocateCharacters() {
@@ -41,36 +43,38 @@ public class LevelTwo extends Level {
 
 	private void floor() {
 		// X = 0 to 1000
-		addFloor(new Block(getWidth(), Main.HEIGHT-100, Main.WIDTH, 100, this));
-		// X = 1000 to 1200
-		addFloor(new Block(getWidth(), Main.HEIGHT-150, 200, 150, this));
+		addFloor(new Block(getWidth(), Main.HEIGHT-100, Main.WIDTH, 100, this, false));
+		// X = 1000 to 1100
+		addFloor(new Block(getWidth(), Main.HEIGHT-150, 100, 150, this, false));
+		// X = 1100 to 1200
+		addFloor(new Block(getWidth(), Main.HEIGHT-225, 100, 255, this, false));
 		// X = 1200 to 1400
-		addFloor(new Block(getWidth(), Main.HEIGHT-300, 200, 300, this));
+		addFloor(new Block(getWidth(), Main.HEIGHT-300, 200, 300, this, false));
 		// Water
 		add(new Water(getWidth(), Main.HEIGHT-270, 250, 220, this));
 		// X = 1400 to 1650
-		addFloor(new Block(getWidth(), Main.HEIGHT-50, 250, 50, this));
+		addFloor(new Block(getWidth(), Main.HEIGHT-50, 250, 50, this, false));
 		// X = 1650 to 1750
-		addFloor(new Block(getWidth(), Main.HEIGHT-300, 100, 300, this));
+		addFloor(new Block(getWidth(), Main.HEIGHT-300, 100, 300, this, false));
 		// X = 1750 to 1850
-		addFloor(new Block(getWidth(), Main.HEIGHT-100, 500, 100, this));
+		addFloor(new Block(getWidth(), Main.HEIGHT-100, 500, 100, this, false));
 	}
 
 	private void ceiling() {
 		// X = 0 to 700
-		add(new Block(0, 0, Main.WIDTH-300, 70, this));
+		add(new Block(0, 0, Main.WIDTH-300, 70, this, true));
 		// X = 600 to 1300
-		add(new Block(Main.WIDTH-400, -500, Main.WIDTH-300, 70, this));
-		// X = 400 to 420
-		add(new Block(400, 150, 20, 20, this));
+		add(new Block(Main.WIDTH-400, -50, Main.WIDTH-300, 70, this, true));
+		// X = 400 to 420 TEST BLOCK
+		add(new Block(400, 150, 20, 20, this, false));
 		// X = 1250 to 1300
-		add(new Block(Main.WIDTH+250, -200, 50, 200, this));
+		add(new Block(Main.WIDTH+250, -200, 50, 200, this, true));
 		// X = 1300 to 1800
-		add(new Block(1300, -200, 500, 50, this));
+		add(new Block(1300, -200, 500, 50, this, true));
 		// X = 1800 to 1750
-		add(new Block(1800, -200, 50, 200, this));
+		add(new Block(1800, -200, 50, 200, this, true));
 		// X = 1800 to 2300
-		add(new Block(1800, 0, 500, 50, this));
+		add(new Block(1800, 0, 500, 50, this, true));
 	}
 
 	@Override
@@ -89,6 +93,7 @@ public class LevelTwo extends Level {
 
 	@Override
 	public void spawnSilhouettes() {
+		System.out.println(getHieght());
 		add(new Silhouette(getWidth()-200, getHieght(), Role.THOMAS));
 		add(new Silhouette(getWidth()-160, getHieght(), Role.CHRIS));
 	}

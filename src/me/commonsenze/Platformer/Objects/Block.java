@@ -10,14 +10,16 @@ import me.commonsenze.Platformer.Util.Obstacle;
 public class Block extends HitBox implements Obstacle {
 
 	private Level level;
+	private boolean ceiling;
 	
-	public Block(int x, int y, int width, int height, Level level) {
-		this(new Rectangle(x,y,width,height), level);
+	public Block(int x, int y, int width, int height, Level level, boolean ceiling) {
+		this(new Rectangle(x,y,width,height), level, ceiling);
 	}
 	
-	public Block(Rectangle character, Level level) {
+	public Block(Rectangle character, Level level, boolean ceiling) {
 		super(character);
 		this.level = level;
+		this.ceiling = ceiling;
 	}
 	
 	@Override
@@ -33,6 +35,10 @@ public class Block extends HitBox implements Obstacle {
 	
 	public Level getLevel() {
 		return level;
+	}
+	
+	public boolean isCeiling() {
+		return ceiling;
 	}
 
 	@Override

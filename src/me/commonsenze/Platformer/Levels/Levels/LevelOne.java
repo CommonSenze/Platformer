@@ -18,10 +18,10 @@ public class LevelOne extends Level {
 		ceiling();
 
 		// Left wall
-		add(new Block(-2, 0, 102, Main.HEIGHT, this));
+		add(new Block(-2, 0, 102, Main.HEIGHT, this, false));
 
 		// Right wall
-		add(new Block(getWidth(), 0, 100, Main.HEIGHT, this));
+		add(new Block(getWidth(), 0, 100, Main.HEIGHT, this, false));
 		
 		spawnSilhouettes();
 	}
@@ -36,12 +36,12 @@ public class LevelOne extends Level {
 
 	private void floor() {
 		// X = 0 to 1000
-		addFloor(new Block(getWidth(), Main.HEIGHT-100, Main.WIDTH, 100, this));
+		addFloor(new Block(getWidth(), Main.HEIGHT-100, Main.WIDTH, 100, this, false));
 	}
 
 	private void ceiling() {
 		// X = 0 to 1000
-		add(new Block(0, 0, Main.WIDTH, 100, this));
+		add(new Block(0, 0, Main.WIDTH, 100, this, true));
 	}
 
 	@Override
