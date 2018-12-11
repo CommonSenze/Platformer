@@ -11,13 +11,13 @@ import me.commonsenze.Platformer.Util.GameObject;
 
 public enum Role {
 
-	THOMAS(new Thomas(),0),
-	CHRIS(new Chris(),2),
-	JOHN(new John(),5),
-	CLAIRE(new Claire(),4),
+	THOMAS(new Thomas(),1),
+	CHRIS(new Chris(),3),
+	JOHN(new John(),3),
+	CLAIRE(new Claire(),3),
 	LAURA(new Laura(),3),
-	JAMES(new James(),3),
-	SARAH(new Sarah(),3);
+	JAMES(new James(),5),
+	SARAH(new Sarah(),4);
 
 	private GameObject object;
 	private int level;

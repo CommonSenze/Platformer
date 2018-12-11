@@ -121,13 +121,10 @@ public abstract class GameObject extends HitBox {
 		} else {
 			// Renders James' x-axis movement to the JFrame
 			setX(getX()+getVelocity());
-			setGameX(getGameX()+getVelocity());
 			if(getClassifier() == GameData.getSelectedCharacter())Main.CAMERA.setXSpeed(0);
 		}
 
 		rebuild();
-
-		float difference = getX();
 		
 		boolean collide = false;
 
@@ -157,9 +154,9 @@ public abstract class GameObject extends HitBox {
 			}
 		}
 		
-		difference -= getX();
-		
-		setGameX(getGameX());
+		float difference = getX()-prevX;
+
+		setGameX(getGameX()+difference);
 
 		if (getClassifier() == GameData.getSelectedCharacter()) {
 

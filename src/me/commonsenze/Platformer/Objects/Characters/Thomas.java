@@ -66,7 +66,6 @@ public class Thomas extends GameObject implements Renderable {
 	@Override
 	public void tick() {
 		if (Main.FINISHED)return;
-		System.out.println(getGameX());
 		walk();
 		gravity();
 	}

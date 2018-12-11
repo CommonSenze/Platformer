@@ -86,12 +86,14 @@ public class Handler {
 	}
 	
 	private void reorganize(GameObject mainCharacter) {
+		if (Main.DEV_MODE)return;
 		if (renderables.get(1) == mainCharacter)return;
 		renderables.remove((Renderable)mainCharacter);
 		renderables.add(1, (Renderable) mainCharacter);
 	}
 	
 	private void checkFinsihed() {
+		if (Main.DEV_MODE)return;
 		for (GameObject object : gameObjects) {
 			if (!object.isFinished())return;
 		}
